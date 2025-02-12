@@ -4,25 +4,41 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] float mouseSensitivity = 100f;
-    [SerializeField] Transform playerBody;
+    [SerializeField] int sens;
+    [SerializeField] int lockVertMin;
+    [SerializeField] int lockVertMax;
+    [SerializeField] bool invertY;
 
-    float xRotation = 0f;
+    float rotX;
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    // Update is called once per frame
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        // get input
+        float mouseX = Input.GetAxis("Mouse X") * sens * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * sens * Time.deltaTime;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        // tie the mouseY to rotate the camera's X - look up and down
+        if (invertY)
+            rotX += mouseY;
+        else
+            rotX -= mouseY;
 
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        playerBody.Rotate(Vector3.up * mouseX);
+        // clamp the camera on the x-axis
+        rotX = Mathf.Clamp(rotX, lockVertMin, lockVertMax);
+
+        // rotate the camera on the x-axis
+        transform.localRotation = Quaternion.Euler(rotX, 0, 0);
+
+        // rotate the player on the y-axis - look left and right
+        transform.parent.Rotate(Vector3.up * mouseX);
+
     }
 }
