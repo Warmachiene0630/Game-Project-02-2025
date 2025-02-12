@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
         movement();
         sprint();
-    }
+    } 
 
     void movement()
     {
@@ -69,34 +69,15 @@ public class PlayerController : MonoBehaviour, IDamage
     }
     void sprint()
     {
-        if (controller.isGrounded)
+        if (Input.GetButtonDown("Sprint"))
         {
-            if (Input.GetButtonDown("Sprint"))
-            {
-                speed *= sprintMod;
-                isSprinting = true;
-            }
-            else if (Input.GetButtonUp("Sprint") && isSprinting)
-            {
-                speed /= sprintMod;
-                isSprinting = false;
-            }
+            speed *= sprintMod;
+            isSprinting = true;
         }
-        else if (!controller.isGrounded)
+        else if (Input.GetButtonUp("Sprint") && isSprinting)
         {
-            if (Input.GetButtonDown("Sprint"))
-            {
-                speed *= sprintMod;
-                isSprinting = true;
-                StartCoroutine(WaitForTime(0.5f));
-                speed /= sprintMod;
-                isSprinting = false;
-            }
-            else if (Input.GetButtonUp("Sprint") && isSprinting)
-            {
-                speed /= sprintMod;
-                isSprinting = false;
-            }
+            speed /= sprintMod;
+            isSprinting = false;
         }
     }
 
@@ -107,6 +88,10 @@ public class PlayerController : MonoBehaviour, IDamage
             jumpCount++;
             playerVel.y = jumpSpeed;
         }
+        else if (Input.GetButtonDown("Jump"))
+        {
+            StartCoroutine(dash());
+        }    
     }
 
     void shoot()
@@ -138,12 +123,40 @@ public class PlayerController : MonoBehaviour, IDamage
             GameManager.instance.youLose();
         }
     }
+    public bool gainHealth(int amount)
+    {
+        if (HP != HPOrig) 
+        {
+            HP += amount;
+
+            if (HP >= HPOrig)
+            {
+                HP = HPOrig;
+            }
+            
+            StartCoroutine(flashHealthScreen());
+
+            updatePlayerUI();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     IEnumerator flashDamageScreen()
     {
         GameManager.instance.playerDamageScreen.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        GameManager.instance.playerDamageScreen.SetActive(true);
+        GameManager.instance.playerDamageScreen.SetActive(false);
+    }
+
+    IEnumerator flashHealthScreen()
+    {
+        GameManager.instance.playerHealthScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        GameManager.instance.playerHealthScreen.SetActive(false);
     }
 
     void updatePlayerUI()
@@ -151,8 +164,10 @@ public class PlayerController : MonoBehaviour, IDamage
         GameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
     }
 
-    IEnumerator WaitForTime(float seconds)
+    IEnumerator dash()
     {
-        yield return new WaitForSeconds(seconds);
+        speed *= sprintMod;
+        yield return new WaitForSeconds(0.5f);
+        speed /= sprintMod;
     }
 }
