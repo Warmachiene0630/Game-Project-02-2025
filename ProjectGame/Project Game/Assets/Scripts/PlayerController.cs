@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] LayerMask ignoreLayer;
 
     [SerializeField] int HP;
-    [SerializeField] int speed;
-    [SerializeField] int sprintMod;
+    [SerializeField] float speed;
+    [SerializeField] float sprintMod;
     [SerializeField] int jumpSpeed;
     [SerializeField] int jumpMax;
     [SerializeField] int gravity;
@@ -52,8 +52,6 @@ public class PlayerController : MonoBehaviour, IDamage
             jumpCount = 0;
             playerVel = Vector3.zero;
         }
-        //moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        //transform.position += moveDir * speed * Time.deltaTime;
 
         moveDir = (Input.GetAxis("Horizontal") * transform.right) +
             (Input.GetAxis("Vertical") * transform.forward);
@@ -71,13 +69,34 @@ public class PlayerController : MonoBehaviour, IDamage
     }
     void sprint()
     {
-        if (Input.GetButtonDown("Sprint"))
+        if (controller.isGrounded)
         {
-            speed *= sprintMod;
+            if (Input.GetButtonDown("Sprint"))
+            {
+                speed *= sprintMod;
+                isSprinting = true;
+            }
+            else if (Input.GetButtonUp("Sprint") && isSprinting)
+            {
+                speed /= sprintMod;
+                isSprinting = false;
+            }
         }
-        else if (Input.GetButtonUp("Sprint"))
+        else if (!controller.isGrounded)
         {
-            speed /= sprintMod;
+            if (Input.GetButtonDown("Sprint"))
+            {
+                speed *= sprintMod;
+                isSprinting = true;
+                StartCoroutine(WaitForTime(0.5f));
+                speed /= sprintMod;
+                isSprinting = false;
+            }
+            else if (Input.GetButtonUp("Sprint") && isSprinting)
+            {
+                speed /= sprintMod;
+                isSprinting = false;
+            }
         }
     }
 
@@ -130,5 +149,10 @@ public class PlayerController : MonoBehaviour, IDamage
     void updatePlayerUI()
     {
         GameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+    }
+
+    IEnumerator WaitForTime(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
     }
 }
