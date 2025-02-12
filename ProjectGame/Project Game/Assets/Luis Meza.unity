@@ -310,7 +310,7 @@ Transform:
   m_GameObject: {fileID: 1068970238}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.01, y: 2, z: -21.52}
+  m_LocalPosition: {x: -2.77, y: 2, z: 16.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -998,7 +998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   rb: {fileID: 493984008123941899}
-  trapRate: 1
+  trapRate: 4
   shootPos: {fileID: 438549310}
   cannonBall: {fileID: 1211931467510239383, guid: 99cb8a16225a1124f902dd3959b97de9, type: 3}
   trapTrigger: 1
