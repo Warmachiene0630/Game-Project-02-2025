@@ -32,6 +32,9 @@ public class MovableWall : MonoBehaviour
         if((playerDistance.y <= trapTrigger || playerDistance.x <= trapTrigger || playerDistance.z <= trapTrigger))
         {
             moveTrap();
+
+
+
         }
 
     }
