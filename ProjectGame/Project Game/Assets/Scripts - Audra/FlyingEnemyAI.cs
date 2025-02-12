@@ -44,7 +44,7 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
 
         if (playerInRange && canSeePlayer())
         {
-
+            shoot();
         }
     }
 
@@ -99,6 +99,7 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
     {
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, playerDir.y, playerDir.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
+        shootPos.rotation = Quaternion.Lerp(shootPos.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
 
     public void takeDamage(int amount)
