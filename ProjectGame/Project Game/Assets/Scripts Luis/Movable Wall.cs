@@ -7,13 +7,17 @@ public class MovableWall : MonoBehaviour
     [SerializeField] Rigidbody rb;
 
     private float trapTimer;
-    [SerializeField] int trapRate;
-    [SerializeField] int trapDelay;
+
+    //timer count
+    [SerializeField] float trapRate;
+    //speed wall moves
     [SerializeField] int trapSpeed;
 
     private Vector3 playerDistance;
     private bool trapMoved;
     [SerializeField] int trapTrigger;
+
+    Vector3 trapVel;
 
     Vector3 trapStart;
 
@@ -29,29 +33,25 @@ public class MovableWall : MonoBehaviour
     {
         playerDistance = transform.position;
 
-        if((playerDistance.y <= trapTrigger || playerDistance.x <= trapTrigger || playerDistance.z <= trapTrigger))
-        {
-            moveTrap();
+        trapTimer += Time.deltaTime;
 
-        }
+        moveTrap();
+
 
     }
 
     private void moveTrap()
     {
-        if (trapMoved == false && trapTimer >= trapRate)
+        if (trapTimer <= trapRate)
         {
-            Quaternion rot = Quaternion.LookRotation(new Vector3(transform.position.x + 3, 0, 0));
-            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * trapSpeed);
-            trapMoved = !trapMoved;
+            trapVel.x = trapSpeed;
         }
         else
         {
-            Quaternion rot = Quaternion.LookRotation(new Vector3(transform.position.x - 3, 0, 0));
-            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * trapSpeed);
-            if (transform.position == trapStart)
+            trapVel.x = -trapSpeed;
+            if (trapTimer == 2 * trapRate)
             {
-                trapMoved = !trapMoved;
+                trapTimer = 0;
             }
         }
     }

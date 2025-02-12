@@ -195,8 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 740557486}
-  trapRate: 2
-  trapDelay: 4
+  trapRate: 4
   trapSpeed: 1
   trapTrigger: 1
 --- !u!4 &967242366 stripped
@@ -310,7 +309,7 @@ Transform:
   m_GameObject: {fileID: 1068970238}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.77, y: 2, z: 16.71}
+  m_LocalPosition: {x: -2.77, y: 1.61, z: 16.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
