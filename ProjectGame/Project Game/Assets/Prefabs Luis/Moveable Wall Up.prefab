@@ -50,9 +50,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1348844932187452779}
   type: 1
-  trapRate: 0
-  trapSpeed: 0
+  trapDelay: 2
+  trapRate: 2
   trapTrigger: 0
+  trapSpeed: 2
 --- !u!33 &4405284574326810374
 MeshFilter:
   m_ObjectHideFlags: 0
