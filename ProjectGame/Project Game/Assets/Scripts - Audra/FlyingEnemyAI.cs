@@ -128,4 +128,9 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
 
         Instantiate(bullet, shootPos.position,shootPos.rotation);
     }
+
+    bool gainHealth(int amount)
+    {
+        return true;
+    }
 }
