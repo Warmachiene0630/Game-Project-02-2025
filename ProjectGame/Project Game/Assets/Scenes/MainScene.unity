@@ -1891,6 +1891,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fe6037a636439c4984e8e279ef70df8, type: 3}
+--- !u!1001 &705451112
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7315098934323713031, guid: 13fe789dde39ad346b47143164f00dbc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512136266328261514, guid: 13fe789dde39ad346b47143164f00dbc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 117.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512136266328261514, guid: 13fe789dde39ad346b47143164f00dbc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512136266328261514, guid: 13fe789dde39ad346b47143164f00dbc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 28.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512136266328261514, guid: 13fe789dde39ad346b47143164f00dbc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512136266328261514, guid: 13fe789dde39ad346b47143164f00dbc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512136266328261514, guid: 13fe789dde39ad346b47143164f00dbc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512136266328261514, guid: 13fe789dde39ad346b47143164f00dbc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512136266328261514, guid: 13fe789dde39ad346b47143164f00dbc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512136266328261514, guid: 13fe789dde39ad346b47143164f00dbc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512136266328261514, guid: 13fe789dde39ad346b47143164f00dbc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681370861753823563, guid: 13fe789dde39ad346b47143164f00dbc, type: 3}
+      propertyPath: m_Name
+      value: Lava Pit
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 13fe789dde39ad346b47143164f00dbc, type: 3}
 --- !u!1 &792503491
 GameObject:
   m_ObjectHideFlags: 0
@@ -2251,14 +2312,8 @@ Transform:
   m_Children:
   - {fileID: 879077237}
   - {fileID: 54873147}
-  - {fileID: 1088628068}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1088628068 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7512136266328261514, guid: 810fd2a55c872294088e44dcf657f9f1, type: 3}
-  m_PrefabInstance: {fileID: 1319024268}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1090633983
 GameObject:
   m_ObjectHideFlags: 0
@@ -2843,63 +2898,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1319024268
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 948234635}
-    m_Modifications:
-    - target: {fileID: 7512136266328261514, guid: 810fd2a55c872294088e44dcf657f9f1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 117.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 7512136266328261514, guid: 810fd2a55c872294088e44dcf657f9f1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7512136266328261514, guid: 810fd2a55c872294088e44dcf657f9f1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 28.34
-      objectReference: {fileID: 0}
-    - target: {fileID: 7512136266328261514, guid: 810fd2a55c872294088e44dcf657f9f1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7512136266328261514, guid: 810fd2a55c872294088e44dcf657f9f1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7512136266328261514, guid: 810fd2a55c872294088e44dcf657f9f1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7512136266328261514, guid: 810fd2a55c872294088e44dcf657f9f1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7512136266328261514, guid: 810fd2a55c872294088e44dcf657f9f1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7512136266328261514, guid: 810fd2a55c872294088e44dcf657f9f1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7512136266328261514, guid: 810fd2a55c872294088e44dcf657f9f1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8681370861753823563, guid: 810fd2a55c872294088e44dcf657f9f1, type: 3}
-      propertyPath: m_Name
-      value: Lava Pit
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 810fd2a55c872294088e44dcf657f9f1, type: 3}
 --- !u!1 &1347835546
 GameObject:
   m_ObjectHideFlags: 0
@@ -3735,3 +3733,4 @@ SceneRoots:
   - {fileID: 1982957751}
   - {fileID: 671957770}
   - {fileID: 1144959911}
+  - {fileID: 705451112}
