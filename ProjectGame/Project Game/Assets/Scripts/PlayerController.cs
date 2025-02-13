@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] int shootDist;
 
     int jumpCount;
+    int dashCount;
     int HPOrig;
 
     float shootTimer;
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour, IDamage
         if (controller.isGrounded)
         {
             jumpCount = 0;
+            dashCount = 0;
             playerVel = Vector3.zero;
         }
 
@@ -88,8 +90,9 @@ public class PlayerController : MonoBehaviour, IDamage
             jumpCount++;
             playerVel.y = jumpSpeed;
         }
-        else if (Input.GetButtonDown("Jump"))
+        else if (Input.GetButtonDown("Jump") && dashCount == 0)
         {
+            dashCount++;
             StartCoroutine(dash());
         }    
     }
