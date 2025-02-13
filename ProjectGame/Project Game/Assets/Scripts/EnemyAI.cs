@@ -132,4 +132,10 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
+
+    public bool gainHealth(int amount)
+    {
+        HP += amount;
+        return true;
+    }
 }
