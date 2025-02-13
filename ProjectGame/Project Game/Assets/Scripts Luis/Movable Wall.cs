@@ -23,7 +23,8 @@ public class MovableWall : MonoBehaviour
     //speed wall moves
     [SerializeField] int trapSpeed;
     private bool trapMoved;
-    [SerializeField] bool active;
+    private bool active;
+    [SerializeField] bool moveTrapOnce;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -43,15 +44,24 @@ public class MovableWall : MonoBehaviour
             active = true;
             if (type == wallType.forward)
             {
-                moveTrapFor();
-                if (trapTimer == 0)
+
+                if (trapMoved == false)
                 {
-                    active = false;
+                    moveTrapFor();
+                }
+                else
+                {
+                    if (trapTimer >= trapDelay)
+                    {
+                        trapMoved = false;
+                        trapTimer = 0;
+                    }
                 }
 
             } else if (type == wallType.up)
             {
-                if (trapMoved == false) {
+                if (trapMoved == false)
+                {
                     moveTrapUp();
                 }
                 else
@@ -74,11 +84,22 @@ public class MovableWall : MonoBehaviour
        }
        else
        {
-           rb.linearVelocity = transform.forward * -trapSpeed;
-           if (trapTimer >= (2 * trapRate))
-           {
-               trapTimer = 0;
-           }
+            if (moveTrapOnce == false)
+            {
+
+           
+                rb.linearVelocity = transform.forward * -trapSpeed;
+                if (trapTimer >= (2 * trapRate))
+                {
+                    trapTimer = 0;
+
+
+                }
+            }
+            else
+            {
+                rb.linearVelocity = transform.forward * 0;
+            }
        }
     }
 
