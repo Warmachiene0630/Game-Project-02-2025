@@ -22,7 +22,7 @@ public class HealthPack : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            IDamage dmg = other.GetComponent<IDamage>();
+            IPickUp dmg = other.GetComponent<IPickUp>();
             if (dmg != null)
             {
                 if (dmg.gainHealth(5))

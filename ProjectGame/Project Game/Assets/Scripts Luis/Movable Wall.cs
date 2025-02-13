@@ -1,4 +1,6 @@
-
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,54 +11,69 @@ public class MovableWall : MonoBehaviour
     [SerializeField] Rigidbody rb;
     [SerializeField] wallType type;
 
-    [SerializeField] float trapTimer;
+    private float trapTimer;
     [SerializeField] float trapDelay;
 
     //timer count
     [SerializeField] float trapRate;
+    private float xPos;
+    private float zPos;
+
+    [SerializeField] float trapTrigger; 
     //speed wall moves
     [SerializeField] int trapSpeed;
-
-    private Vector3 playerDistance;
-    bool trapMoved; 
-    [SerializeField] int trapTrigger;
-
-    Vector3 trapVel;
-
+    private bool trapMoved;
     private bool active;
+    [SerializeField] bool moveTrapOnce;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        trapMoved = false;
+        active = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerDistance = transform.position;
+       
+        xPos = transform.position.x - GameManager.instance.player.transform.position.x;
+        zPos = transform.position.z - GameManager.instance.player.transform.position.z;
 
-        trapTimer += Time.deltaTime;
-        if (type == wallType.forward)
-        {
-            moveTrapFor();
-        }else if (type == wallType.up)
-        {
-            if (trapMoved == false) {
-                moveTrapUp();
-            }
-            else
+        if (((xPos >= -trapTrigger && zPos >= -trapTrigger) && (xPos <= trapTrigger && zPos <= trapTrigger)) || active == true) {
+            trapTimer += Time.deltaTime;
+            active = true;
+            if (type == wallType.forward)
             {
-                if (trapTimer >= trapDelay)
+
+                if (trapMoved == false)
                 {
-                    trapMoved = false;
-                    trapTimer = 0;
+                    moveTrapFor();
+                }
+                else
+                {
+                    if (trapTimer >= trapDelay)
+                    {
+                        trapMoved = false;
+                        trapTimer = 0;
+                    }
+                }
+
+            } else if (type == wallType.up)
+            {
+                if (trapMoved == false)
+                {
+                    moveTrapUp();
+                }
+                else
+                {
+                    if (trapTimer >= trapDelay)
+                    {
+                        trapMoved = false;
+                        trapTimer = 0;
+                    }
                 }
             }
         }
-       
-
-        
-
     }
 
     private void moveTrapFor()
@@ -67,11 +84,22 @@ public class MovableWall : MonoBehaviour
        }
        else
        {
-           rb.linearVelocity = transform.forward * -trapSpeed;
-           if (trapTimer >= (2 * trapRate))
-           {
-               trapTimer = 0;
-           }
+            if (moveTrapOnce == false)
+            {
+
+           
+                rb.linearVelocity = transform.forward * -trapSpeed;
+                if (trapTimer >= (2 * trapRate))
+                {
+                    trapTimer = 0;
+
+
+                }
+            }
+            else
+            {
+                rb.linearVelocity = transform.forward * 0;
+            }
        }
     }
 
@@ -96,8 +124,9 @@ public class MovableWall : MonoBehaviour
            else if(trapTimer <= (5 * trapRate))
            {
                 trapTimer = 0;
-                trapMoved = true;                    
-           }
+                active = false;
+                trapMoved = true;
+            }
        }
     }
 

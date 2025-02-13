@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDamage
+public class PlayerController : MonoBehaviour, IDamage, IPickUp
 {
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
