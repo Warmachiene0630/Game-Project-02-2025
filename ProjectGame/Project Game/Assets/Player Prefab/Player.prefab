@@ -169,9 +169,9 @@ GameObject:
   - component: {fileID: 6591741351167900140}
   - component: {fileID: 7976401438984722490}
   - component: {fileID: 6693305409086346723}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -340,6 +340,7 @@ MonoBehaviour:
   sensSlider: {fileID: 0}
   playerHPBar: {fileID: 0}
   playerDamageScreen: {fileID: 0}
+  playerHealthScreen: {fileID: 0}
   isPaused: 0
   player: {fileID: 2070277504269525963}
   playerScript: {fileID: 6591741351167900140}
