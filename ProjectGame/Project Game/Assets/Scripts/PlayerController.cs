@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         GameManager.instance.playerDamageScreen.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        GameManager.instance.playerDamageScreen.SetActive(true);
+        GameManager.instance.playerDamageScreen.SetActive(false);
     }
 
     void updatePlayerUI()
