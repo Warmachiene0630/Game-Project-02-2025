@@ -6856,7 +6856,7 @@ GameObject:
   - component: {fileID: 1826624293}
   - component: {fileID: 1826624292}
   - component: {fileID: 1826624291}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7622,7 +7622,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f727f3e72f5e5124880ae1d0f34ca727, type: 2}
+  - {fileID: 2100000, guid: b977d1404aa91754d93d32a56a91b59a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -29,7 +29,6 @@ public class CatAI : MonoBehaviour, IDamage
     void Start()
     {
         colorOrig = model.material.color;
-        GameManager.instance.updateGameGoal(1);
     }
 
     // Update is called once per frame

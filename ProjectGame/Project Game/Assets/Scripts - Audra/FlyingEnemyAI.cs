@@ -44,7 +44,7 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
 
         if (playerInRange && canSeePlayer())
         {
-            shoot();
+            
         }
     }
 
@@ -126,6 +126,6 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
     {
         shootTimer = 0;
 
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        Instantiate(bullet, shootPos.position,shootPos.rotation);
     }
 }
