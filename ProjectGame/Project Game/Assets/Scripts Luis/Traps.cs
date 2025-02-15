@@ -1,24 +1,22 @@
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Traps : MonoBehaviour
 {
-    enum trapType {Stationary, Shooter}
-    [SerializeField] trapType type;
     [SerializeField] Rigidbody rb;
+
+
 
     private float trapTimer;
     [SerializeField] float trapRate;
 
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject cannonBall;
-
-    private Vector3 playerDistance;
     [SerializeField] int trapTrigger;
 
     [SerializeField] int damageAmount;
 
-    Vector3 trapStart;
 
     private bool active;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -26,10 +24,13 @@ public class Traps : MonoBehaviour
     private void Update()
     {
         trapTimer += Time.deltaTime;
+
+
         if (trapTimer >= trapRate)
         {
             shoot();
         }
+        
     }
   
 
@@ -38,18 +39,12 @@ public class Traps : MonoBehaviour
     {
         IDamage dmg = other.GetComponent<IDamage>();
 
-        if (dmg != null)
-        {
-            dmg.takeDamage(damageAmount);
-        }
 
-        if (type == trapType.Shooter)
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
+   
 
-
+    
     void shoot()
     {
         trapTimer = 0;

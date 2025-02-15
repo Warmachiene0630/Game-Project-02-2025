@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class MovableWall : MonoBehaviour
 {
-    enum wallType {forward, up }
+    enum wallType {forward, up}
 
     [SerializeField] Rigidbody rb;
     [SerializeField] wallType type;
@@ -16,10 +16,8 @@ public class MovableWall : MonoBehaviour
 
     //timer count
     [SerializeField] float trapRate;
-    [SerializeField] float xPos;
-    [SerializeField] float zPos;
+    private bool playerInRange; 
 
-    [SerializeField] float trapTrigger; 
     //speed wall moves
     [SerializeField] int trapSpeed;
     private bool trapMoved;
@@ -35,11 +33,8 @@ public class MovableWall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-        xPos = transform.position.x - GameManager.instance.player.transform.position.x;
-        zPos = transform.position.z - GameManager.instance.player.transform.position.z;
 
-        if (((xPos >= -trapTrigger && zPos >= -trapTrigger) && (xPos <= trapTrigger && zPos <= trapTrigger)) || active == true) {
+        if (playerInRange || active == true) {
             trapTimer += Time.deltaTime;
             active = true;
             if (type == wallType.forward)
@@ -128,6 +123,21 @@ public class MovableWall : MonoBehaviour
                 trapMoved = true;
             }
        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
     }
 
 }

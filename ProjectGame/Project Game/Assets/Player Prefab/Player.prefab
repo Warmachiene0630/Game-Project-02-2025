@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1948154003897116092}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.3460083, y: -0.33999997, z: -15.729291}
+  m_LocalPosition: {x: 0, y: 1.03, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -168,10 +168,9 @@ GameObject:
   - component: {fileID: 1467388755200440996}
   - component: {fileID: 6591741351167900140}
   - component: {fileID: 7976401438984722490}
-  - component: {fileID: 6693305409086346723}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -318,28 +317,3 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6693305409086346723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070277504269525963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c1271bb996094f4ca239c3315aab122, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menuActive: {fileID: 0}
-  menuPause: {fileID: 0}
-  menuWin: {fileID: 0}
-  menuLose: {fileID: 0}
-  menuSettings: {fileID: 0}
-  menuSens: {fileID: 0}
-  goalCountText: {fileID: 0}
-  sensSlider: {fileID: 0}
-  playerHPBar: {fileID: 0}
-  playerDamageScreen: {fileID: 0}
-  isPaused: 0
-  player: {fileID: 2070277504269525963}
-  playerScript: {fileID: 6591741351167900140}

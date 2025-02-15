@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7691962365255967914}
-  - component: {fileID: 2916044721602677177}
   - component: {fileID: 8859300887796601080}
+  - component: {fileID: 1616028515042098353}
   - component: {fileID: 5956467945224340865}
   - component: {fileID: 8754103863466631250}
   - component: {fileID: 4286271440603437769}
@@ -36,23 +36,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2916044721602677177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1358545810414125305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00fc9cd46127b704c9ff9ad6f13c9750, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
-  rb: {fileID: 4286271440603437769}
-  damageAmount: 1
-  speed: 0
-  destroyTime: 0
 --- !u!33 &8859300887796601080
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -61,6 +44,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1358545810414125305}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1616028515042098353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358545810414125305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59cf7f60d7a14a14aa78fd5357a0793c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 4286271440603437769}
+  damageAmount: 1
 --- !u!23 &5956467945224340865
 MeshRenderer:
   m_ObjectHideFlags: 0
