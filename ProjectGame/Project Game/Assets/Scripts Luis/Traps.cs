@@ -13,7 +13,6 @@ public class Traps : MonoBehaviour
 
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject cannonBall;
-    [SerializeField] int trapTrigger;
 
     [SerializeField] int damageAmount;
 
