@@ -4883,7 +4883,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5118,7 +5117,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4722236510932744}
-  - component: {fileID: 8138880279213053620}
   - component: {fileID: 5079000749700552387}
   m_Layer: 0
   m_Name: Turret
@@ -5144,26 +5142,6 @@ Transform:
   - {fileID: 4914773783399600}
   m_Father: {fileID: 4595654756050798}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8138880279213053620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1543343654471068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1090f6d076d18eb4aa60f0611795ce30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
-  rb: {fileID: 5079000749700552387}
-  takingDmg: 0
-  trapRate: 1
-  shootPos: {fileID: 4703932692914808}
-  cannonBall: {fileID: 1627521441993660, guid: 12ea0a574b594264685afffd52fff036, type: 3}
-  trapTrigger: 15
-  damageAmount: 2
 --- !u!54 &5079000749700552387
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5186,7 +5164,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -5259,14 +5237,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1090f6d076d18eb4aa60f0611795ce30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  rb: {fileID: 0}
-  takingDmg: 0
-  trapRate: 0
+  followPlayer: 1
+  collider: {fileID: 4222580272182917319}
+  turret: {fileID: 1543343654471068}
+  barrel: {fileID: 1454602631919742}
+  facePlayerSpeed: 2
+  FOV: 10
+  trapRate: 1
+  trapDelay: 3
+  bulletsFire: 5
   shootPos: {fileID: 4703932692914808}
   cannonBall: {fileID: 1627521441993660, guid: 12ea0a574b594264685afffd52fff036, type: 3}
-  trapTrigger: 0
-  damageAmount: 0
 --- !u!1 &1931211189434318
 GameObject:
   m_ObjectHideFlags: 0

@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 4940591295711036}
   - component: {fileID: 8878417100846699549}
   - component: {fileID: 4177969955736735422}
+  - component: {fileID: 3745980796897209354}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -165,13 +166,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1090f6d076d18eb4aa60f0611795ce30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
-  rb: {fileID: 4177969955736735422}
-  trapRate: 4
+  followPlayer: 0
+  collider: {fileID: 3745980796897209354}
+  turret: {fileID: 1393367149455902}
+  barrel: {fileID: 1658705116820196}
+  trapRate: 1
   shootPos: {fileID: 4411725851834284}
   cannonBall: {fileID: 1211931467510239383, guid: 99cb8a16225a1124f902dd3959b97de9, type: 3}
-  trapTrigger: 0
-  damageAmount: 2
 --- !u!54 &4177969955736735422
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -199,6 +200,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &3745980796897209354
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393367149455902}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 25
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1561768652258066
 GameObject:
   m_ObjectHideFlags: 0
