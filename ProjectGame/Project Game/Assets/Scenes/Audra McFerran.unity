@@ -3399,6 +3399,7 @@ MonoBehaviour:
   sensSlider: {fileID: 4256630020175792316}
   playerHPBar: {fileID: 5022612716936783042}
   playerDamageScreen: {fileID: 3031107164741716504}
+  playerHealthScreen: {fileID: 0}
   isPaused: 0
   player: {fileID: 90838171776137782}
   playerScript: {fileID: 6924389011915554006}
@@ -3668,6 +3669,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8211350892933394807, guid: cef4f156dd026d04ea7e4e0e6ae943ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5fca0f0e572ffe5439330cd560be596b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
