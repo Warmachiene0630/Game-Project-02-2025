@@ -25,7 +25,7 @@ public class Traps : MonoBehaviour
 
     private void Update()
     {
-        trapTimer += Time.deltaTime;
+          trapTimer += Time.deltaTime;
         if (trapTimer >= trapRate)
         {
             shoot();

@@ -113,6 +113,10 @@ public class CatAI : MonoBehaviour, IDamage
         model.material.color = colorOrig;
     }
 
+    bool gainHealth(int amount)
+    {
+        return true;
+    }
 
 }
 

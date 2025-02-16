@@ -21,4 +21,9 @@ public class Key : MonoBehaviour, IDamage
             GameManager.instance.updateGameGoal(-1);
         }
     }
+
+    public bool gainHealth(int amount)
+    {
+        return false;
+    }
 }

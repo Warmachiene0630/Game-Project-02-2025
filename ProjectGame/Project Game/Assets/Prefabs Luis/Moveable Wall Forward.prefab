@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -50,10 +50,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 2626273716325597036}
   type: 0
-  trapDelay: 2
-  trapRate: 2
+  trapRate: 0
+  trapSpeed: 0
   trapTrigger: 0
-  trapSpeed: 2
 --- !u!33 &697072176616061075
 MeshFilter:
   m_ObjectHideFlags: 0

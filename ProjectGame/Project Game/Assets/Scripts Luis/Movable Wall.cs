@@ -16,8 +16,8 @@ public class MovableWall : MonoBehaviour
 
     //timer count
     [SerializeField] float trapRate;
-    [SerializeField] float xPos;
-    [SerializeField] float zPos;
+    private float xPos;
+    private float zPos;
 
     [SerializeField] float trapTrigger; 
     //speed wall moves
