@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class Teleporter : MonoBehaviour
+public class TeleporterTrap : MonoBehaviour
 {
-    [SerializeField] Transform originPoint;
+    //[SerializeField] Transform originPoint;
     [SerializeField] Transform teleportPoint;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -26,10 +26,10 @@ public class Teleporter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.isTrigger)
-        {
-            return;
-        }
+        //if (other.isTrigger)
+        //{
+        //    return;
+       // }
         if (other.CompareTag("Player"))
         {
         //Doesn't work if key is pressed
