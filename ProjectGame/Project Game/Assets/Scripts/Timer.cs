@@ -1,48 +1,45 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
-public class Timer : MonoBehaviour
+public class LevelTimer : MonoBehaviour
 {
-    [SerializeField] private float startTime = 60f; // Set this per level in the Inspector
-    [SerializeField] private TextMeshProUGUI timerText;
-    [SerializeField] private GameObject youLoseScreen; // Assign the "You Lose" UI panel in Inspector
+    [SerializeField] private float timeLimit = 60f; // Editable per level in Unity
+    private float currentTime;
+    private bool timerRunning = true;
 
-    private float timeRemaining;
-    private bool isRunning = true;
+    public Text timerText; // Assign in the Unity Inspector
 
     void Start()
     {
-        timeRemaining = startTime; // Initialize the timer
-        UpdateTimerUI();
-        youLoseScreen.SetActive(false); // Hide "You Lose" screen at start
+        ResetTimer();
     }
 
     void Update()
     {
-        if (isRunning)
+        if (timerRunning)
         {
-            timeRemaining -= Time.deltaTime;
-            UpdateTimerUI();
-
-            if (timeRemaining <= 0)
+            currentTime -= Time.deltaTime;
+            if (currentTime <= 0)
             {
-                EndTimer();
+                currentTime = 0;
+                timerRunning = false;
+
+                // Use GameManager to trigger the "You Lose" screen
+                GameManager.instance.youLose();
+                Debug.Log("Time's up! Player loses.");
+            }
+
+            if (timerText != null)
+            {
+                // Display countdown timer, rounded down to an integer
+                timerText.text = Mathf.Floor(currentTime).ToString();
             }
         }
     }
 
-    private void UpdateTimerUI()
+    public void ResetTimer()
     {
-        int minutes = Mathf.FloorToInt(timeRemaining / 60);
-        int seconds = Mathf.FloorToInt(timeRemaining % 60);
-        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
-
-    private void EndTimer()
-    {
-        timeRemaining = 0;
-        isRunning = false;
-        Time.timeScale = 0f; // Pause the game
-        youLoseScreen.SetActive(true); // "You Lose" screen
+        currentTime = timeLimit;
+        timerRunning = true;
     }
 }

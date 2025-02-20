@@ -1,0 +1,140 @@
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+
+public class playerController : MonoBehaviour, IDamage
+{
+    [SerializeField] CharacterController controller;
+    [SerializeField] LayerMask ignoreLayer;
+
+    [SerializeField] int HP;
+    [SerializeField] int speed;
+    [SerializeField] int sprintMod;
+
+    [SerializeField] int jumpSpeed;
+    [SerializeField] int jumpMax;   //comparing this against the jump count is how we can enable / disable double jump
+    [SerializeField] int gravity;
+
+    [SerializeField] int shootDamage;
+    [SerializeField] float shootRate;
+    [SerializeField] int shootDistance;
+
+    int jumpCount;
+    int HPOriginal;
+
+    float shootTimer;
+
+    Vector3 moveDirection;
+    Vector3 playerVelocity;
+
+    bool isSprinting;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        HPOriginal = HP;
+        updatePlayerUI();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
+
+        movement();
+        sprint();
+    }
+
+    void movement()
+    {
+        if (controller.isGrounded)
+        {
+            jumpCount = 0;
+            playerVelocity = Vector3.zero;
+        }
+        // moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+        // Below will allow you to create basic motion but no collision
+        // transform.position += moveDirection * speed * Time.deltaTime;   //multiplying by time ensures that your movement is not based on framerate
+
+        // move the player relative to the direction the camera is looking
+        moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
+                        (Input.GetAxis("Vertical") * transform.forward);
+        controller.Move(moveDirection * speed * Time.deltaTime);
+
+        jump();
+        controller.Move(playerVelocity * Time.deltaTime);
+        playerVelocity.y -= gravity * Time.deltaTime;
+
+        shootTimer += Time.deltaTime;
+
+        if (Input.GetButton("Fire1") && shootTimer >= shootRate)
+        {
+            shoot();
+        }
+    }
+
+    void sprint()
+    {
+        if (Input.GetButtonDown("Sprint"))
+        {
+            speed *= sprintMod;
+        }
+        else if (Input.GetButtonUp("Sprint"))
+        {
+            speed /= sprintMod;
+        }
+    }
+
+    void jump()
+    {
+        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        {
+            jumpCount++;
+            playerVelocity.y = jumpSpeed;
+        }
+    }
+
+    void shoot()
+    {
+        shootTimer = 0;
+
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance, ~ignoreLayer))
+        {
+            Debug.Log(hit.collider.name);
+
+            IDamage dmg = hit.collider.GetComponent<IDamage>();
+            if (dmg != null)
+            {
+                dmg.takeDamage(shootDamage);
+            }
+        }
+    }
+
+    public void takeDamage(int amount)
+    {
+        HP -= amount;
+        StartCoroutine(flashDamageScreen());
+
+        updatePlayerUI();
+
+        if (HP <= 0)
+        {
+            gamemanager.instance.youLose();
+        }
+    }
+
+    IEnumerator flashDamageScreen()
+    {
+        gamemanager.instance.playerDamageScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gamemanager.instance.playerDamageScreen.SetActive(false);
+    }
+
+    void updatePlayerUI()
+    {
+        gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
+    }
+}
