@@ -4962,11 +4962,11 @@ Transform:
   m_GameObject: {fileID: 1437313607789798}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.1999999, z: 0}
+  m_LocalPosition: {x: 0, y: 1.1999999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4722236510932744}
+  m_Father: {fileID: 4595654756050798}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33557720888194326
 MeshFilter:
@@ -5139,7 +5139,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4597034265451690}
-  - {fileID: 4914773783399600}
   m_Father: {fileID: 4595654756050798}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5079000749700552387
@@ -5201,6 +5200,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4722236510932744}
+  - {fileID: 4914773783399600}
   - {fileID: 4779222424309044}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5239,12 +5239,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followPlayer: 1
   collider: {fileID: 4222580272182917319}
-  turret: {fileID: 1543343654471068}
+  turret: {fileID: 1437313607789798}
   barrel: {fileID: 1454602631919742}
   facePlayerSpeed: 2
   FOV: 10
-  trapRate: 1
-  trapDelay: 3
+  trapRate: 5
+  trapDelay: 0
   bulletsFire: 5
   shootPos: {fileID: 4703932692914808}
   cannonBall: {fileID: 1627521441993660, guid: 12ea0a574b594264685afffd52fff036, type: 3}

@@ -21,9 +21,11 @@ public class Traps : MonoBehaviour
 
     private float trapTimer;
     private bool shooting;
+    private bool trapShot;
     [SerializeField] float trapRate;
     [SerializeField] float trapDelay;
     [SerializeField] float bulletsFire;
+    private float bulletsShot;
 
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject cannonBall;
@@ -39,37 +41,50 @@ public class Traps : MonoBehaviour
 
     private void Update()
     {
+
         trapTimer += Time.deltaTime;
+
+
 
         Debug.DrawLine(shootPos.position, barrel.transform.forward * collider.radius, Color.blue);
         if (followPlayer == true && canSeePlayer() == true && shooting == true)
         {
             moveTurret();
+            moveBarrel();
         }
-
-        if (followPlayer == false) {
-            if (trapTimer >= trapRate && shooting == true)
+        angleToPlayer = Vector3.Angle(playerDir, transform.forward);
+        if (trapShot == false)
+        {
+            if (followPlayer == false)
             {
-                shoot();
+                if (trapTimer >= trapRate && shooting == true)
+                {
+                    shoot();
+                }
+            }
+            else
+            {
+                if (trapTimer >= trapRate && shooting == true)
+                {
+                    if (angleToPlayer <= FOV)
+                    {
+                        shoot();
+                    }
+                }
             }
         }
         else
         {
-            if (trapTimer >= trapRate && shooting == true)
+            if (trapTimer >= trapDelay)
             {
-                if (angleToPlayer <= FOV)
-                {
-                    shoot();
-                } 
+                trapShot = false;
             }
         }
-        
     }
 
     private bool canSeePlayer()
     {
         playerDir = GameManager.instance.player.transform.position - shootPos.position;
-        angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
         RaycastHit hit;
         if (Physics.Raycast(shootPos.position, playerDir, out hit))
@@ -80,12 +95,7 @@ public class Traps : MonoBehaviour
             }
         }
         return false;
-
-        
-
     }
-
-
   
 
     // Update is called once per frame
@@ -110,15 +120,14 @@ public class Traps : MonoBehaviour
 
     void moveTurret()
     {
-       
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
         turret.transform.rotation = Quaternion.Lerp(turret.transform.rotation, rot, Time.deltaTime * facePlayerSpeed);
-        moveBarrel();
+    
     }
 
     void moveBarrel()
     {
-        Quaternion rot = Quaternion.LookRotation(new Vector3(0, playerDir.y, 0));
+        Quaternion rot = Quaternion.LookRotation(playerDir);
         barrel.transform.rotation = Quaternion.Lerp(barrel.transform.rotation, rot, Time.deltaTime * facePlayerSpeed);
     }
 
@@ -127,6 +136,12 @@ public class Traps : MonoBehaviour
         trapTimer = 0;
 
         Instantiate(cannonBall, shootPos.position, transform.rotation);
+        bulletsShot += 1;
+
+        if (bulletsShot >= bulletsFire)
+        {
+            trapShot = true;
+        }
 
     }
 }

@@ -15,6 +15,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int animTransSpeed;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int FOV;
+    public bool trackingBullets;
 
 
     [SerializeField] GameObject bullet;
@@ -129,7 +130,13 @@ public class EnemyAI : MonoBehaviour, IDamage
     void shoot()
     {
         shootTimer = 0;
-
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        if (trackingBullets == false)
+        {
+            Instantiate(bullet, shootPos.position, transform.rotation);
+        }
+        else
+        {
+            Instantiate(bullet, shootPos.position, GameManager.instance.player.transform.rotation);
+        }
     }
 }
