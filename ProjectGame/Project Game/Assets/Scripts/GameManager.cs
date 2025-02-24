@@ -22,8 +22,12 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     public GameObject player;
     public PlayerController playerScript;
+    
+    public GameObject teleportPopup;
+
 
     private int goalCount;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()

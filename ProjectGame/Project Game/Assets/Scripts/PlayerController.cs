@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage, IPickUp
 {
-    //disabled bool used to troubleshoot teleportation
-    public bool disabled = false;
 
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
@@ -17,6 +15,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     [SerializeField] int jumpMax;
     [SerializeField] int gravity;
 
+    [SerializeField] GameObject gunModel;
     [SerializeField] int shootDamage;
     [SerializeField] float shootRate;
     [SerializeField] int shootDist;
@@ -45,13 +44,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         //if disabled is false, then movement is allowed
         
-        if (!disabled)
-        {
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.red);
 
             movement();
             sprint();
-        }
 
     } 
 
