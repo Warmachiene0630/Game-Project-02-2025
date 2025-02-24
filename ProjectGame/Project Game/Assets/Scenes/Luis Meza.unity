@@ -428,7 +428,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8547824139444108421, guid: 7191a0df8b6695d449a0f18a361bc311, type: 3}
       propertyPath: trapRate
-      value: 2
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547824139444108421, guid: 7191a0df8b6695d449a0f18a361bc311, type: 3}
+      propertyPath: trapDelay
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -721,7 +725,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1188314462425012434, guid: df5043fd3c46de2488c1e7b7e64708b3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.14
+      value: -14.99
       objectReference: {fileID: 0}
     - target: {fileID: 1188314462425012434, guid: df5043fd3c46de2488c1e7b7e64708b3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -729,7 +733,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1188314462425012434, guid: df5043fd3c46de2488c1e7b7e64708b3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.83
+      value: -7.54
       objectReference: {fileID: 0}
     - target: {fileID: 1188314462425012434, guid: df5043fd3c46de2488c1e7b7e64708b3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1007,6 +1011,76 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c50564668071814d9413ab7d55561fa, type: 3}
+--- !u!1001 &6088655873307329349
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 972801873672854157, guid: ea73386129aa4694190705561eff1c62, type: 3}
+      propertyPath: slowTrap
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566778269940671832, guid: ea73386129aa4694190705561eff1c62, type: 3}
+      propertyPath: bulletsFire
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920027444351770457, guid: ea73386129aa4694190705561eff1c62, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -47.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920027444351770457, guid: ea73386129aa4694190705561eff1c62, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920027444351770457, guid: ea73386129aa4694190705561eff1c62, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920027444351770457, guid: ea73386129aa4694190705561eff1c62, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920027444351770457, guid: ea73386129aa4694190705561eff1c62, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920027444351770457, guid: ea73386129aa4694190705561eff1c62, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920027444351770457, guid: ea73386129aa4694190705561eff1c62, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920027444351770457, guid: ea73386129aa4694190705561eff1c62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920027444351770457, guid: ea73386129aa4694190705561eff1c62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920027444351770457, guid: ea73386129aa4694190705561eff1c62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923212087365858583, guid: ea73386129aa4694190705561eff1c62, type: 3}
+      propertyPath: m_Name
+      value: ShootPointSlow
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923466763064217155, guid: ea73386129aa4694190705561eff1c62, type: 3}
+      propertyPath: m_Name
+      value: FattyMortarG02 Slow
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4566778269940671832, guid: ea73386129aa4694190705561eff1c62, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ea73386129aa4694190705561eff1c62, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1022,3 +1096,4 @@ SceneRoots:
   - {fileID: 2909393353897345669}
   - {fileID: 263332379}
   - {fileID: 5558426559453726192}
+  - {fileID: 6088655873307329349}

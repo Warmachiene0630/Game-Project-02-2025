@@ -15,8 +15,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int animTransSpeed;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int FOV;
-    public bool trackingBullets;
-
+    [SerializeField] bool trackingBullets;
 
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;

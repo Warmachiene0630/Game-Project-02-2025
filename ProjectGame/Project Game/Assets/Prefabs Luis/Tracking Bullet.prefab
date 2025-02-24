@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3314018802078829056}
   - component: {fileID: 2092087122638227904}
   - component: {fileID: 3850745730311289616}
+  - component: {fileID: -79069714183564115}
   m_Layer: 0
   m_Name: Tracking Bullet
   m_TagString: Untagged
@@ -66,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 411572573190f4041a986aa1774cf4d0, type: 2}
+  - {fileID: 2100000, guid: 066f026557e981a49baaed03655e3719, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,3 +137,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-79069714183564115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211931467510239383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40a12248245b7f4990a18aa2bb3b025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 3850745730311289616}
+  slowTimer: 2
+  speed: 2
+  destroyTime: 10
+  facePlayerSpeed: 4

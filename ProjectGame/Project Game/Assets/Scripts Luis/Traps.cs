@@ -1,7 +1,6 @@
 using JetBrains.Annotations;
 using Unity.Collections;
 using Unity.VisualScripting;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,6 +16,7 @@ public class Traps : MonoBehaviour
     [SerializeField] int FOV;
     Vector3 playerDir;
     private float angleToPlayer;
+    public bool slowTrap;
     
 
     private float trapTimer;
@@ -26,6 +26,7 @@ public class Traps : MonoBehaviour
     [SerializeField] float trapDelay;
     [SerializeField] float bulletsFire;
     private float bulletsShot;
+
 
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject cannonBall;
@@ -46,13 +47,13 @@ public class Traps : MonoBehaviour
 
 
 
-        Debug.DrawLine(shootPos.position, barrel.transform.forward * collider.radius, Color.blue);
+        Debug.DrawLine(shootPos.position, transform.forward * 10, Color.blue);
         if (followPlayer == true && canSeePlayer() == true && shooting == true)
         {
             moveTurret();
             moveBarrel();
         }
-        angleToPlayer = Vector3.Angle(playerDir, transform.forward);
+        angleToPlayer = Vector3.Angle(playerDir, shootPos.transform.forward);
         if (trapShot == false)
         {
             if (followPlayer == false)
@@ -78,6 +79,7 @@ public class Traps : MonoBehaviour
             if (trapTimer >= trapDelay)
             {
                 trapShot = false;
+                bulletsShot = 0;
             }
         }
     }
@@ -134,10 +136,14 @@ public class Traps : MonoBehaviour
     void shoot()
     {
         trapTimer = 0;
+        if (slowTrap == true)
+        {
+            cannonBall.
 
-        Instantiate(cannonBall, shootPos.position, transform.rotation);
+        }
+
+        Instantiate(cannonBall, shootPos.position, shootPos.transform.rotation);
         bulletsShot += 1;
-
         if (bulletsShot >= bulletsFire)
         {
             trapShot = true;

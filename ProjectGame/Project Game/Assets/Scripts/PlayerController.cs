@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage
@@ -18,6 +19,9 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float shootRate;
     [SerializeField] int shootDist;
 
+    float slowTimer;
+    float slowDur;
+
     int jumpCount;
     int HPOrig;
 
@@ -28,6 +32,7 @@ public class PlayerController : MonoBehaviour, IDamage
     Vector3 playerVel;
 
     bool isSprinting;
+    bool isSlowed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,6 +48,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
         movement();
         sprint();
+
+        checkSlowed();
     }
 
     void movement()
@@ -131,4 +138,33 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         GameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
     }
+    void checkSlowed()
+    {
+        if (isSlowed == true) {
+            slowTimer += Time.deltaTime;
+            if (slowTimer >= slowDur)
+            {
+                normalSpeed();
+            } 
+        }
+    }
+
+
+    public void slowSpeed(int slow)
+    {
+        if (isSlowed != true)
+        {
+            slowDur = slow;
+            speed = speed / 2;
+            isSlowed = true;
+        } 
+    }
+
+    public void normalSpeed() {
+        speed = speed * 2;
+        isSlowed = false;
+        slowDur = 0;
+        slowTimer = 0;
+    }
+
 }
