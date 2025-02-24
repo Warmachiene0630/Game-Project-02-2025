@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuSens;
+    [SerializeField] GameObject menuMerchant;
     [SerializeField] TMP_Text goalCountText;
     [SerializeField] TMP_Text coinCountText;
     [SerializeField] Slider sensSlider;
@@ -29,6 +30,9 @@ public class GameManager : MonoBehaviour
 
     private int goalCount;
     public int coinCount;
+    public int healthPrice;
+    public int ammoPrice;
+    public int speedBoostPrice;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
