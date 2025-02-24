@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -116,6 +117,8 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             Destroy(gameObject);
             GameManager.instance.updateGameGoal(-1);
+            //coin drop on defeat
+            GameManager.instance.updateCoinCount(Random.Range(0, 50));
         }
     }
 

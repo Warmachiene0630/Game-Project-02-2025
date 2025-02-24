@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuSens;
     [SerializeField] TMP_Text goalCountText;
+    [SerializeField] TMP_Text coinCountText;
     [SerializeField] Slider sensSlider;
 
     public Image playerHPBar;
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
 
 
     private int goalCount;
+    public int coinCount;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -113,5 +115,11 @@ public class GameManager : MonoBehaviour
     public float getNewSens()
     {
         return sensSlider.normalizedValue;
+    }
+
+    public void updateCoinCount(int amount)
+    {
+        coinCount += amount;
+        coinCountText.text = coinCount.ToString("F0");
     }
 }
