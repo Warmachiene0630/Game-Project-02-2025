@@ -62,5 +62,26 @@ public class ButtonFunctions : MonoBehaviour
     }
 
     //make harder levels, load by difficulty
+
+    public void buyHealth()
+    {
+        GameManager.instance.buyHealth();
+    }
+
+
+    public void buyAmmo()
+    {
+        GameManager.instance.buyAmmo();
+    }
+
+    public void buySpeedBoost()
+    {
+        GameManager.instance.buySpeedBoost();
+    }
+
+    public void leaveStore()
+    {
+        GameManager.instance.exitStore();
+    }
 }
 

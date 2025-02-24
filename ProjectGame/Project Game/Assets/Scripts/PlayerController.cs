@@ -19,18 +19,22 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     [SerializeField] int shootDamage;
     [SerializeField] float shootRate;
     [SerializeField] int shootDist;
+    [SerializeField] float speedBoostTime;
 
     int jumpCount;
     int dashCount;
     int HPOrig;
 
     float shootTimer;
+    float speedBoostTimer;
 
     Vector3 moveDir;
 
     Vector3 playerVel;
 
     bool isSprinting;
+    public bool isBoosted;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,7 +52,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
             movement();
             sprint();
-
     } 
 
     void movement()
@@ -68,6 +71,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         playerVel.y -= gravity * Time.deltaTime;
 
         shootTimer += Time.deltaTime;
+        speedBoostTimer -= Time.deltaTime;
+
+        if(isBoosted && speedBoostTimer <= 0)
+        {
+            isBoosted = false;
+            speed = speed / sprintMod;
+        }
 
         if (Input.GetButton("Fire1") && shootTimer >= shootRate)
         {
@@ -167,7 +177,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         GameManager.instance.playerHealthScreen.SetActive(false);
     }
 
-    void updatePlayerUI()
+    public void updatePlayerUI()
     {
         GameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
     }
@@ -177,5 +187,29 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         speed *= sprintMod;
         yield return new WaitForSeconds(0.5f);
         speed /= sprintMod;
+    }
+
+    public void fillHealth()
+    {
+        HP = HPOrig;
+    }
+
+    public bool isHPFull()
+    {
+        if(HP == HPOrig)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void speedBoost()
+    {
+        isBoosted = true;
+        speed = speed * sprintMod;
+        speedBoostTimer = speedBoostTime;
     }
 }

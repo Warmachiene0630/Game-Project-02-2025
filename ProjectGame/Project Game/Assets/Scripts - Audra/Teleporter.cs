@@ -6,7 +6,7 @@ public class Teleporter : MonoBehaviour
     [SerializeField] Transform teleportPos;
 
     [SerializeField] bool isTrap;
-    bool canTeleport;
+    public bool canTeleport;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

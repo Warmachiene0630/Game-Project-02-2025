@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +18,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuMerchant;
     [SerializeField] TMP_Text goalCountText;
     [SerializeField] TMP_Text coinCountText;
+    [SerializeField] TMP_Text healthPriceText;
+    [SerializeField] TMP_Text ammoPriceText;
+    [SerializeField] TMP_Text speedBoostPriceText;
     [SerializeField] Slider sensSlider;
 
     public Image playerHPBar;
@@ -24,15 +29,22 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     public GameObject player;
     public PlayerController playerScript;
-    
-    public GameObject teleportPopup;
 
+    public GameObject teleportPopup;
+    public GameObject merchantPopup;
+    public GameObject notEnoughCoinsPopup;
+    public GameObject purchaseSuccessfulPopup;
+    public GameObject alreadyFullPopup;
+    public GameObject alreadyAppliedPopup;
 
     private int goalCount;
     public int coinCount;
     public int healthPrice;
     public int ammoPrice;
     public int speedBoostPrice;
+
+    bool boughtBoost;
+    bool isBoosted = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -77,7 +89,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
-
+        resetStorePopups();
     }
 
     public void updateGameGoal(int amount)
@@ -125,5 +137,114 @@ public class GameManager : MonoBehaviour
     {
         coinCount += amount;
         coinCountText.text = coinCount.ToString("F0");
+    }
+
+    public void updateMerchantPrices()
+    {
+        healthPriceText.text = healthPrice.ToString("F0");
+        ammoPriceText.text = ammoPrice.ToString("F0");
+        speedBoostPriceText.text = speedBoostPrice.ToString("F0");
+    }
+
+    public void enterStore()
+    {
+        //merchantPopup.SetActive(false);
+        updateMerchantPrices();
+        statePause();
+        menuActive = menuMerchant;
+        menuActive.SetActive(true);
+    }
+
+    //popups all remain on screen, even after leaving menu
+    public void buyHealth()
+    {
+        bool isHPFull = playerScript.isHPFull();
+        if (coinCount >= healthPrice)
+        {
+            if (isHPFull)
+            {
+                resetStorePopups();
+                alreadyFullPopup.SetActive(true);
+            }
+            else
+            {
+                resetStorePopups();
+                purchaseSuccessfulPopup.SetActive(true);
+                playerScript.fillHealth();
+                playerScript.updatePlayerUI();
+                updateCoinCount(-(healthPrice));
+            }
+            
+        }
+        else
+        {
+            resetStorePopups();
+            notEnoughCoinsPopup.SetActive(true);
+        }
+    }
+
+
+    public void buyAmmo()
+    {
+        if (coinCount >= ammoPrice)
+        {
+            resetStorePopups();
+            purchaseSuccessfulPopup.SetActive(true);
+            //fill ammo
+            coinCount -= ammoPrice;
+            playerScript.updatePlayerUI();
+            updateCoinCount(-(ammoPrice));
+            
+        }
+        else
+        {
+            resetStorePopups();
+            notEnoughCoinsPopup.SetActive(true);
+        }
+    }
+
+    public void buySpeedBoost()
+    {
+        if (coinCount >= speedBoostPrice)
+        {
+            if (isBoosted || instance.playerScript.isBoosted)
+            {
+                resetStorePopups();
+                alreadyAppliedPopup.SetActive(true);
+            }
+            else
+            {
+                resetStorePopups();
+                purchaseSuccessfulPopup.SetActive(true);
+                //double speed (need new public method with timer/countdown in player contorller)
+                coinCount -= speedBoostPrice;
+                updateCoinCount(-(speedBoostPrice));
+                boughtBoost = true;
+                isBoosted = true;
+            }
+        }
+        else
+        {
+            resetStorePopups();
+            notEnoughCoinsPopup.SetActive(true);
+        }
+    }
+
+    void resetStorePopups()
+    {
+        notEnoughCoinsPopup.SetActive(false);
+        purchaseSuccessfulPopup.SetActive(false);
+        alreadyAppliedPopup.SetActive(false);
+        alreadyFullPopup.SetActive(false);
+    }
+
+    public void exitStore()
+    {
+        if (boughtBoost)
+        {
+            instance.playerScript.speedBoost();
+        }
+        boughtBoost = false;
+        stateUnpause();
     }
 }
