@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     int jumpCount;
     int dashCount;
     int HPOrig;
-    
 
     float shootTimer;
     float speedBoostTimer;
@@ -40,12 +39,17 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     public bool isSpeedBoosted;
     public bool isDamageBoosted;
 
+    bool isSlowed;
+    float slowTimer;
+    float slowDur;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         HPOrig = HP;
         updatePlayerUI();
+        isSlowed = false;
     }
 
     // Update is called once per frame
@@ -53,10 +57,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         //if disabled is false, then movement is allowed
         
-            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.red);
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.red);
 
-            movement();
-            sprint();
+        movement();
+        sprint();
+        checkSlow();
     } 
 
     void movement()
@@ -236,4 +241,34 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         shootDamage += damageBoostAmount;
         damageBoostTimer = damageBoostTime;
     }
+
+    private void checkSlow()
+    {
+        if (isSlowed == true)
+        {
+            slowTimer = Time.deltaTime;
+        }
+        if (slowTimer >= slowDur)
+        {
+            normalSpeed();
+        }
+    }
+    public void slowSpeed(int slow)
+    {
+        if (isSlowed != true)
+        {
+            slowDur = slow;
+            speed = speed / 2;
+            isSlowed = true;
+        }
+    }
+
+    public void normalSpeed()
+    {
+        speed = speed * 2;
+        isSlowed = false;
+        slowDur = 0;
+        slowTimer = 0;
+    }
+
 }
