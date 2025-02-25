@@ -1,11 +1,11 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class GameManager : MonoBehaviour
+public class gamemanager : MonoBehaviour
 {
-
-    public static GameManager instance;
+    public static gamemanager instance;
 
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
@@ -15,33 +15,36 @@ public class GameManager : MonoBehaviour
 
     public Image playerHPBar;
     public GameObject playerDamageScreen;
+    public GameObject checkpointPopup;
+
     public bool isPaused;
     public GameObject player;
-    public PlayerController playerScript;
-    public GameObject youLoseScreen;
+    public playerController playerScript;
+    public GameObject playerSpawnPos;
 
-    private int goalCount;
+    int goalCount;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
-        playerScript = player.GetComponent<PlayerController>();
+        playerScript = player.GetComponent<playerController>();
+        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if(Input.GetButtonDown("Cancel"))
         {
-            if (menuActive == null)
+            if(menuActive == null)
             {
                 statePause();
                 menuActive = menuPause;
                 menuActive.SetActive(true);
             }
-            else if (menuActive == menuPause)
+            else if(menuActive == menuPause)
             {
                 stateUnpause();
             }
@@ -64,14 +67,14 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
-
     }
 
     public void updateGameGoal(int amount)
     {
         goalCount += amount;
-        //goalCountText.text = goalCount.ToString("F0");
-        if (goalCount <= 0)
+        goalCountText.text = goalCount.ToString("F0");
+
+        if(goalCount <= 0)
         {
             statePause();
             menuActive = menuWin;
@@ -85,4 +88,6 @@ public class GameManager : MonoBehaviour
         menuActive = menuLose;
         menuActive.SetActive(true);
     }
+
+
 }

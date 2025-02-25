@@ -1,45 +1,57 @@
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class LevelTimer : MonoBehaviour
 {
-    [SerializeField] private float timeLimit = 60f; // Editable per level in Unity
+    [SerializeField] private float timeLimit = 60f; 
+    [SerializeField] private GameObject youLoseScreen; 
     private float currentTime;
     private bool timerRunning = true;
 
-    public Text timerText; // Assign in the Unity Inspector
+    public TMP_Text TimerText; 
+    public TMP_Text LoseTimeText; 
 
     void Start()
     {
-        ResetTimer();
+        currentTime = timeLimit; // Initialize timer
+        timerRunning = true;
+        UpdateTimerDisplay();
     }
 
     void Update()
     {
-        if (timerRunning)
+        if (!timerRunning) return; 
+
+        currentTime -= Time.deltaTime;
+
+        if (currentTime <= 0)
         {
-            currentTime -= Time.deltaTime;
-            if (currentTime <= 0)
-            {
-                currentTime = 0;
-                timerRunning = false;
+            currentTime = 0;
+            timerRunning = false;
 
-                // Use GameManager to trigger the "You Lose" screen
-                GameManager.instance.youLose();
-                Debug.Log("Time's up! Player loses.");
+            
+            if (GameManager.instance != null && GameManager.instance.youLoseScreen != null)
+            {
+                GameManager.instance.youLoseScreen.SetActive(true);
             }
 
-            if (timerText != null)
+          
+            if (LoseTimeText != null)
             {
-                // Display countdown timer, rounded down to an integer
-                timerText.text = Mathf.Floor(currentTime).ToString();
+                LoseTimeText.text = $"Time's Up! You lasted {timeLimit} seconds";
             }
+
+            Debug.Log("Time's up! Player loses.");
         }
+
+        UpdateTimerDisplay();
     }
 
-    public void ResetTimer()
+    void UpdateTimerDisplay()
     {
-        currentTime = timeLimit;
-        timerRunning = true;
+        if (TimerText != null)
+        {
+            TimerText.text = Mathf.Ceil(currentTime).ToString(); 
+        }
     }
 }
