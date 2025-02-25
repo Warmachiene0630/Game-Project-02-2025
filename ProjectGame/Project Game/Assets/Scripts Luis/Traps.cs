@@ -136,11 +136,6 @@ public class Traps : MonoBehaviour
     void shoot()
     {
         trapTimer = 0;
-        if (slowTrap == true)
-        {
-            cannonBall.
-
-        }
 
         Instantiate(cannonBall, shootPos.position, shootPos.transform.rotation);
         bulletsShot += 1;
