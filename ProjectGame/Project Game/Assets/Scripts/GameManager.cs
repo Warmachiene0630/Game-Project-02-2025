@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text goalCountText;
     [SerializeField] TMP_Text coinCountText;
     [SerializeField] TMP_Text healthPriceText;
-    [SerializeField] TMP_Text ammoPriceText;
+    [SerializeField] TMP_Text damageBoostPriceText;
     [SerializeField] TMP_Text speedBoostPriceText;
     [SerializeField] Slider sensSlider;
 
@@ -40,11 +40,13 @@ public class GameManager : MonoBehaviour
     private int goalCount;
     public int coinCount;
     public int healthPrice;
-    public int ammoPrice;
+    public int damageBoostPrice;
     public int speedBoostPrice;
 
-    bool boughtBoost;
-    bool isBoosted = false;
+    bool boughtSpeedBoost;
+    bool isSpeedBoosted = false;
+    bool boughtDamageBoost;
+    bool isDamageBoosted = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -142,7 +144,7 @@ public class GameManager : MonoBehaviour
     public void updateMerchantPrices()
     {
         healthPriceText.text = healthPrice.ToString("F0");
-        ammoPriceText.text = ammoPrice.ToString("F0");
+        damageBoostPriceText.text = damageBoostPrice.ToString("F0");
         speedBoostPriceText.text = speedBoostPrice.ToString("F0");
     }
 
@@ -184,17 +186,25 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void buyAmmo()
+    public void buyDamageBoost()
     {
-        if (coinCount >= ammoPrice)
+        if (coinCount >= damageBoostPrice)
         {
-            resetStorePopups();
-            purchaseSuccessfulPopup.SetActive(true);
-            //fill ammo
-            coinCount -= ammoPrice;
-            playerScript.updatePlayerUI();
-            updateCoinCount(-(ammoPrice));
-            
+            if (isDamageBoosted || instance.playerScript.isDamageBoosted)
+            {
+                resetStorePopups();
+                alreadyAppliedPopup.SetActive(true);
+            }
+            else
+            {
+                resetStorePopups();
+                purchaseSuccessfulPopup.SetActive(true);
+                //double speed (need new public method with timer/countdown in player contorller)
+                coinCount -= damageBoostPrice;
+                updateCoinCount(-(damageBoostPrice));
+                boughtDamageBoost = true;
+                isDamageBoosted = true;
+            }
         }
         else
         {
@@ -207,7 +217,7 @@ public class GameManager : MonoBehaviour
     {
         if (coinCount >= speedBoostPrice)
         {
-            if (isBoosted || instance.playerScript.isBoosted)
+            if (isSpeedBoosted || instance.playerScript.isSpeedBoosted)
             {
                 resetStorePopups();
                 alreadyAppliedPopup.SetActive(true);
@@ -219,8 +229,8 @@ public class GameManager : MonoBehaviour
                 //double speed (need new public method with timer/countdown in player contorller)
                 coinCount -= speedBoostPrice;
                 updateCoinCount(-(speedBoostPrice));
-                boughtBoost = true;
-                isBoosted = true;
+                boughtSpeedBoost = true;
+                isSpeedBoosted = true;
             }
         }
         else
@@ -240,11 +250,16 @@ public class GameManager : MonoBehaviour
 
     public void exitStore()
     {
-        if (boughtBoost)
+        if (boughtSpeedBoost)
         {
             instance.playerScript.speedBoost();
         }
-        boughtBoost = false;
+        if (boughtDamageBoost)
+        {
+            instance.playerScript.damageBoost();
+        }
+        boughtSpeedBoost = false;
+        boughtDamageBoost = false;
         stateUnpause();
     }
 }

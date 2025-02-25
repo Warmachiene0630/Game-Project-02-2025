@@ -20,20 +20,25 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     [SerializeField] float shootRate;
     [SerializeField] int shootDist;
     [SerializeField] float speedBoostTime;
+    [SerializeField] float damageBoostTime;
+    [SerializeField] int damageBoostAmount;
 
     int jumpCount;
     int dashCount;
     int HPOrig;
+    
 
     float shootTimer;
     float speedBoostTimer;
+    float damageBoostTimer;
 
     Vector3 moveDir;
 
     Vector3 playerVel;
 
     bool isSprinting;
-    public bool isBoosted;
+    public bool isSpeedBoosted;
+    public bool isDamageBoosted;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -73,10 +78,16 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         shootTimer += Time.deltaTime;
         speedBoostTimer -= Time.deltaTime;
 
-        if(isBoosted && speedBoostTimer <= 0)
+        if(isSpeedBoosted && speedBoostTimer <= 0)
         {
-            isBoosted = false;
+            isSpeedBoosted = false;
             speed = speed / sprintMod;
+        }
+
+        if (isDamageBoosted && damageBoostTimer <= 0)
+        {
+            isDamageBoosted = false;
+            shootDamage = shootDamage - damageBoostAmount;
         }
 
         if (Input.GetButton("Fire1") && shootTimer >= shootRate)
@@ -208,8 +219,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     public void speedBoost()
     {
-        isBoosted = true;
+        isSpeedBoosted = true;
         speed = speed * sprintMod;
         speedBoostTimer = speedBoostTime;
+    }
+
+    public void damageBoost()
+    {
+        isDamageBoosted = true;
+        shootDamage += damageBoostAmount;
+        damageBoostTimer = damageBoostTime;
     }
 }
