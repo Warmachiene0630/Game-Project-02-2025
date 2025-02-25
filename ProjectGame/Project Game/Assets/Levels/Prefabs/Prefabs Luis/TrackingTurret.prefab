@@ -5180,7 +5180,7 @@ GameObject:
   - component: {fileID: 4222580272182917319}
   - component: {fileID: 8547824139444108421}
   m_Layer: 0
-  m_Name: FattyCannonG02
+  m_Name: TrackingTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5243,8 +5243,9 @@ MonoBehaviour:
   barrel: {fileID: 1454602631919742}
   facePlayerSpeed: 2
   FOV: 10
-  trapRate: 5
-  trapDelay: 0
+  slowTrap: 0
+  trapRate: 0.2
+  trapDelay: 2
   bulletsFire: 5
   shootPos: {fileID: 4703932692914808}
   cannonBall: {fileID: 1627521441993660, guid: 12ea0a574b594264685afffd52fff036, type: 3}

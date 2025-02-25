@@ -47,7 +47,7 @@ public class Traps : MonoBehaviour
 
 
 
-        Debug.DrawLine(shootPos.position, transform.forward * 10, Color.blue);
+        
         if (followPlayer == true && canSeePlayer() == true && shooting == true)
         {
             moveTurret();
