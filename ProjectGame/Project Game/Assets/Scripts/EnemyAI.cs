@@ -15,7 +15,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int animTransSpeed;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int FOV;
-
+    [SerializeField] bool trackingBullets;
 
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
@@ -129,8 +129,14 @@ public class EnemyAI : MonoBehaviour, IDamage
     void shoot()
     {
         shootTimer = 0;
-
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        if (trackingBullets == false)
+        {
+            Instantiate(bullet, shootPos.position, transform.rotation);
+        }
+        else
+        {
+            Instantiate(bullet, shootPos.position, GameManager.instance.player.transform.rotation);
+        }
     }
 
     public bool gainHealth(int amount)
