@@ -11,6 +11,16 @@ public class CameraController : MonoBehaviour
 
     float rotX;
 
+    public int getSens()
+    {
+        return sens;
+    }
+
+    public void setSens(int newSens)
+    {
+        sens = newSens;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

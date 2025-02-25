@@ -11,10 +11,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuSettings;
+    [SerializeField] GameObject menuSens;
     [SerializeField] TMP_Text goalCountText;
+    [SerializeField] Slider sensSlider;
 
     public Image playerHPBar;
     public GameObject playerDamageScreen;
+    public GameObject playerHealthScreen;
     public bool isPaused;
     public GameObject player;
     public PlayerController playerScript;
@@ -84,5 +88,27 @@ public class GameManager : MonoBehaviour
         statePause();
         menuActive = menuLose;
         menuActive.SetActive(true);
+    }
+
+
+    public void settings()
+    {
+        menuActive.SetActive(false);
+        statePause();
+        menuActive = menuSettings;
+        menuActive.SetActive(true);
+    }
+
+    public void sensitivity()
+    {
+        menuActive.SetActive(false);
+        statePause();
+        menuActive = menuSens;
+        menuActive.SetActive(true);
+    }
+
+    public float getNewSens()
+    {
+        return sensSlider.normalizedValue;
     }
 }

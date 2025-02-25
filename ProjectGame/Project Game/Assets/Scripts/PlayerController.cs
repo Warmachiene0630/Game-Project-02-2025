@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDamage
+public class PlayerController : MonoBehaviour, IDamage, IPickUp
 {
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
 
     [SerializeField] int HP;
-    [SerializeField] int speed;
-    [SerializeField] int sprintMod;
+    [SerializeField] float speed;
+    [SerializeField] float sprintMod;
     [SerializeField] int jumpSpeed;
     [SerializeField] int jumpMax;
     [SerializeField] int gravity;
@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] int shootDist;
 
     int jumpCount;
+    int dashCount;
     int HPOrig;
 
     float shootTimer;
@@ -43,17 +44,16 @@ public class PlayerController : MonoBehaviour, IDamage
 
         movement();
         sprint();
-    }
+    } 
 
     void movement()
     {
         if (controller.isGrounded)
         {
             jumpCount = 0;
+            dashCount = 0;
             playerVel = Vector3.zero;
         }
-        //moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        //transform.position += moveDir * speed * Time.deltaTime;
 
         moveDir = (Input.GetAxis("Horizontal") * transform.right) +
             (Input.GetAxis("Vertical") * transform.forward);
@@ -74,10 +74,12 @@ public class PlayerController : MonoBehaviour, IDamage
         if (Input.GetButtonDown("Sprint"))
         {
             speed *= sprintMod;
+            isSprinting = true;
         }
-        else if (Input.GetButtonUp("Sprint"))
+        else if (Input.GetButtonUp("Sprint") && isSprinting)
         {
             speed /= sprintMod;
+            isSprinting = false;
         }
     }
 
@@ -88,6 +90,11 @@ public class PlayerController : MonoBehaviour, IDamage
             jumpCount++;
             playerVel.y = jumpSpeed;
         }
+        else if (Input.GetButtonDown("Jump") && dashCount == 0)
+        {
+            dashCount++;
+            StartCoroutine(dash());
+        }    
     }
 
     void shoot()
@@ -119,16 +126,51 @@ public class PlayerController : MonoBehaviour, IDamage
             GameManager.instance.youLose();
         }
     }
+    public bool gainHealth(int amount)
+    {
+        if (HP != HPOrig) 
+        {
+            HP += amount;
+
+            if (HP >= HPOrig)
+            {
+                HP = HPOrig;
+            }
+            
+            StartCoroutine(flashHealthScreen());
+
+            updatePlayerUI();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     IEnumerator flashDamageScreen()
     {
         GameManager.instance.playerDamageScreen.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        GameManager.instance.playerDamageScreen.SetActive(true);
+        GameManager.instance.playerDamageScreen.SetActive(false);
+    }
+
+    IEnumerator flashHealthScreen()
+    {
+        GameManager.instance.playerHealthScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        GameManager.instance.playerHealthScreen.SetActive(false);
     }
 
     void updatePlayerUI()
     {
         GameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+    }
+
+    IEnumerator dash()
+    {
+        speed *= sprintMod;
+        yield return new WaitForSeconds(0.5f);
+        speed /= sprintMod;
     }
 }
