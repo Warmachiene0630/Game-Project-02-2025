@@ -15,18 +15,24 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int animTransSpeed;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int FOV;
+    [SerializeField] int roamPauseTime;
+    [SerializeField] int roamDist;
 
 
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
     [SerializeField] float shootRate;
+    [SerializeField] int shootFOV;
 
     Color colorOrig;
 
     float shootTimer;
+    float roamTimer;
     float angleToPlayer;
+    float stoppingDistOrig;
 
     Vector3 playerDir;
+    Vector3 startingPos;
 
     bool playerInRange;
 
@@ -47,10 +53,40 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         shootTimer += Time.deltaTime;
 
-        if (playerInRange && canSeePlayer())
+        if (agent.remainingDistance < 0.01f)
         {
-
+            roamTimer += Time.deltaTime;
         }
+
+        if (playerInRange && !canSeePlayer())
+        {
+            checkRoam();
+        }
+        else if (!playerInRange)
+        {
+            checkRoam();
+        }
+    }
+
+    void checkRoam()
+    {
+        if ((roamTimer > roamPauseTime && agent.remainingDistance < 0.01f) || GameManager.instance.playerScript.HP <= 0)
+        {
+            roam();
+        }
+    }
+
+    void roam()
+    {
+        roamTimer = 0;
+        agent.stoppingDistance = 0;
+
+        Vector3 randPos = Random.insideUnitSphere * roamDist;
+        randPos += startingPos;
+
+        NavMeshHit hit;
+        NavMesh.SamplePosition(randPos, out hit, roamDist, 1);
+        agent.SetDestination(hit.position);
     }
 
     bool canSeePlayer()

@@ -14,6 +14,12 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.instance.stateUnpause();
     }
 
+    public void respawnPlayer()
+    {
+        GameManager.instance.playerScript.spawnPlayer();
+        GameManager.instance.stateUnpause();
+    }
+
     public void confirmSens()
     {
         GameObject cam = GameObject.FindWithTag("MainCamera");

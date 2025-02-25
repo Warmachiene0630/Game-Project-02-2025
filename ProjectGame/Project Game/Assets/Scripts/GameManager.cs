@@ -19,9 +19,11 @@ public class GameManager : MonoBehaviour
     public Image playerHPBar;
     public GameObject playerDamageScreen;
     public GameObject playerHealthScreen;
+    public GameObject checkpointPopup;
     public bool isPaused;
     public GameObject player;
     public PlayerController playerScript;
+    public GameObject playerSpawnPos;
 
     private int goalCount;
 
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
     }
 
     // Update is called once per frame
