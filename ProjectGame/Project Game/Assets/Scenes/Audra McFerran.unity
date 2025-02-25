@@ -2238,7 +2238,7 @@ GameObject:
   - component: {fileID: 1152042023}
   - component: {fileID: 1152042022}
   m_Layer: 5
-  m_Name: AmmoPrice
+  m_Name: DamageBoostPrice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2647,12 +2647,12 @@ GameObject:
   - component: {fileID: 1268360499}
   - component: {fileID: 1268360498}
   m_Layer: 5
-  m_Name: BuyAmmoButton
+  m_Name: BuyDamageBoost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1268360497
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2719,7 +2719,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1760461427576677633}
         m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
-        m_MethodName: buyAmmo
+        m_MethodName: buyDamageBoost
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3067,12 +3067,12 @@ GameObject:
   - component: {fileID: 1435548166}
   - component: {fileID: 1435548165}
   m_Layer: 5
-  m_Name: BuyGunAmmoText
+  m_Name: BuyDamageBoostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1435548164
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3114,7 +3114,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ammo Refill
+  m_text: 'Damage Boost
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8250,7 +8252,7 @@ MonoBehaviour:
   goalCountText: {fileID: 644964393}
   coinCountText: {fileID: 829872910}
   healthPriceText: {fileID: 1966272955}
-  ammoPriceText: {fileID: 1152042022}
+  damageBoostPriceText: {fileID: 1152042022}
   speedBoostPriceText: {fileID: 1171868853}
   sensSlider: {fileID: 4256630020175792316}
   playerHPBar: {fileID: 5022612716936783042}
@@ -8267,8 +8269,8 @@ MonoBehaviour:
   alreadyAppliedPopup: {fileID: 647453275}
   coinCount: 0
   healthPrice: 100
-  ammoPrice: 50
-  speedBoostPrice: 50
+  damageBoostPrice: 1
+  speedBoostPrice: 1
 --- !u!23 &3345815310789370578
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12821,7 +12823,10 @@ MonoBehaviour:
   shootRate: 0.5
   shootDist: 150
   speedBoostTime: 5
-  isBoosted: 0
+  damageBoostTime: 10
+  damageBoostAmount: 2
+  isSpeedBoosted: 0
+  isDamageBoosted: 0
 --- !u!222 &6924858021910277500
 CanvasRenderer:
   m_ObjectHideFlags: 0

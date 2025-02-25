@@ -69,9 +69,9 @@ public class ButtonFunctions : MonoBehaviour
     }
 
 
-    public void buyAmmo()
+    public void buyDamageBoost()
     {
-        GameManager.instance.buyAmmo();
+        GameManager.instance.buyDamageBoost();
     }
 
     public void buySpeedBoost()
