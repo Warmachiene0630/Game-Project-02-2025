@@ -61,7 +61,6 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.instance.stateUnpause();
     }
 
-    //make harder levels, load by difficulty
 
     public void buyHealth()
     {

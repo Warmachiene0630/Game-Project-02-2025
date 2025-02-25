@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Merchant : MonoBehaviour
 {
+    //players collect coins on enemy defeat and can use them to buy items from the merchant when in range
+    
     bool canShop;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

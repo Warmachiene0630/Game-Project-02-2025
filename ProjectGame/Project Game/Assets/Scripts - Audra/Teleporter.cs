@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Teleporter : MonoBehaviour
 {
+    // if the teleport object is set as a trap, the player will instantly teleport
+    //if it isnt a trap, the player will be given the option to press a button to teleport
+
     [SerializeField] Transform teleportPos;
 
     [SerializeField] bool isTrap;

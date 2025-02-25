@@ -130,17 +130,20 @@ public class GameManager : MonoBehaviour
         menuActive.SetActive(true);
     }
 
+    //allows oyu to change your sens in game
     public float getNewSens()
     {
         return sensSlider.normalizedValue;
     }
 
+    //updates the player's coin count in the UI
     public void updateCoinCount(int amount)
     {
         coinCount += amount;
         coinCountText.text = coinCount.ToString("F0");
     }
 
+    //updates prices in the Merchant Menu when menu is entered
     public void updateMerchantPrices()
     {
         healthPriceText.text = healthPrice.ToString("F0");
@@ -148,16 +151,18 @@ public class GameManager : MonoBehaviour
         speedBoostPriceText.text = speedBoostPrice.ToString("F0");
     }
 
+    //pulls up Merchant Menu when store is entered
     public void enterStore()
     {
-        //merchantPopup.SetActive(false);
         updateMerchantPrices();
         statePause();
         menuActive = menuMerchant;
         menuActive.SetActive(true);
     }
 
-    //popups all remain on screen, even after leaving menu
+    //if the player has enough coins, resets health and deducts coins
+    //if not tells the player they don't have enough coins
+    //if HP is already full, tells the player HP is full
     public void buyHealth()
     {
         bool isHPFull = playerScript.isHPFull();
@@ -185,7 +190,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    //if the player has enough coins, adds damage boost to shoot damage
+    //if not tells the player they don't have enough coins
+    //if a damage boost is active, tells the player a boost is already applied
     public void buyDamageBoost()
     {
         if (coinCount >= damageBoostPrice)
@@ -199,7 +206,6 @@ public class GameManager : MonoBehaviour
             {
                 resetStorePopups();
                 purchaseSuccessfulPopup.SetActive(true);
-                //double speed (need new public method with timer/countdown in player contorller)
                 coinCount -= damageBoostPrice;
                 updateCoinCount(-(damageBoostPrice));
                 boughtDamageBoost = true;
@@ -213,6 +219,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //if the player has enough coins, adds speed boos to player speed
+    //if not tells the player they don't have enough coins
+    //if a speed boost is active, tells the player a boost is already applied
     public void buySpeedBoost()
     {
         if (coinCount >= speedBoostPrice)
@@ -226,7 +235,6 @@ public class GameManager : MonoBehaviour
             {
                 resetStorePopups();
                 purchaseSuccessfulPopup.SetActive(true);
-                //double speed (need new public method with timer/countdown in player contorller)
                 coinCount -= speedBoostPrice;
                 updateCoinCount(-(speedBoostPrice));
                 boughtSpeedBoost = true;
@@ -240,6 +248,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //makes sure all popups involved in the merchant store are not active
     void resetStorePopups()
     {
         notEnoughCoinsPopup.SetActive(false);
@@ -248,6 +257,7 @@ public class GameManager : MonoBehaviour
         alreadyFullPopup.SetActive(false);
     }
 
+    //applies speed and damage boosts upon exiting the store and resets variables and popups
     public void exitStore()
     {
         if (boughtSpeedBoost)

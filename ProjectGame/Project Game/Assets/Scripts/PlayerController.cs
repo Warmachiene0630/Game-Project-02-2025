@@ -78,12 +78,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         shootTimer += Time.deltaTime;
         speedBoostTimer -= Time.deltaTime;
 
+        //checks for speed boost, if there was a boost and it ended reverts speed back to original
         if(isSpeedBoosted && speedBoostTimer <= 0)
         {
             isSpeedBoosted = false;
             speed = speed / sprintMod;
         }
 
+        //checks for damage boost, if there was a boost and it ended reverts shoot damage back to original
         if (isDamageBoosted && damageBoostTimer <= 0)
         {
             isDamageBoosted = false;
@@ -200,11 +202,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         speed /= sprintMod;
     }
 
+    //used to fill HP to original
     public void fillHealth()
     {
         HP = HPOrig;
     }
 
+    //used to check if HP is full
     public bool isHPFull()
     {
         if(HP == HPOrig)
@@ -217,6 +221,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         }
     }
 
+    //adds speed boost to player using sprint mod and starts countdown
     public void speedBoost()
     {
         isSpeedBoosted = true;
@@ -224,6 +229,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         speedBoostTimer = speedBoostTime;
     }
 
+    //adds damage boost to player using damage boost amount variable and starts countdown
     public void damageBoost()
     {
         isDamageBoosted = true;
