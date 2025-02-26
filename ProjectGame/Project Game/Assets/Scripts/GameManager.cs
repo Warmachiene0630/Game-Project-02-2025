@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     public GameObject player;
     public PlayerController playerScript;
-    public GameObject youLoseScreen;
+    
 
     private int goalCount;
 

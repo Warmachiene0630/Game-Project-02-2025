@@ -1,57 +1,38 @@
 using UnityEngine;
 using TMPro;
 
-public class LevelTimer : MonoBehaviour
+public class CountdownTimer : MonoBehaviour
 {
-    [SerializeField] private float timeLimit = 60f; 
-    [SerializeField] private GameObject youLoseScreen; 
-    private float currentTime;
+    [SerializeField] private float timeRemaining = 60f;
+    [SerializeField] private TMP_Text timerText;
     private bool timerRunning = true;
-
-    public TMP_Text TimerText; 
-    public TMP_Text LoseTimeText; 
 
     void Start()
     {
-        currentTime = timeLimit; // Initialize timer
-        timerRunning = true;
+        Time.timeScale = 1; // Ensure the game is running
         UpdateTimerDisplay();
     }
 
     void Update()
     {
-        if (!timerRunning) return; 
-
-        currentTime -= Time.deltaTime;
-
-        if (currentTime <= 0)
+        if (timerRunning && timeRemaining > 0)
         {
-            currentTime = 0;
-            timerRunning = false;
-
-            
-            if (GameManager.instance != null && GameManager.instance.youLoseScreen != null)
-            {
-                GameManager.instance.youLoseScreen.SetActive(true);
-            }
-
-          
-            if (LoseTimeText != null)
-            {
-                LoseTimeText.text = $"Time's Up! You lasted {timeLimit} seconds";
-            }
-
-            Debug.Log("Time's up! Player loses.");
+            timeRemaining -= Time.deltaTime;
+            UpdateTimerDisplay();
         }
-
-        UpdateTimerDisplay();
+        else if (timerRunning) // Timer reaches 0
+        {
+            timerRunning = false;
+            timeRemaining = 0; // Prevent negative numbers
+            UpdateTimerDisplay();
+            GameManager.instance.youLose(); 
+        }
     }
 
     void UpdateTimerDisplay()
     {
-        if (TimerText != null)
-        {
-            TimerText.text = Mathf.Ceil(currentTime).ToString(); 
-        }
+        int minutes = Mathf.FloorToInt(timeRemaining / 60);
+        int seconds = Mathf.FloorToInt(timeRemaining % 60);
+        timerText.text = $"{minutes:00}:{seconds:00}";
     }
 }
