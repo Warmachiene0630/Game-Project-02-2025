@@ -4,24 +4,31 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage, IPickUp
 {
-
+    [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
+    [SerializeField] AudioSource aud;
 
+    [Header("----- Stats -----")]
     [SerializeField] int HP;
     [SerializeField] float speed;
     [SerializeField] float sprintMod;
     [SerializeField] int jumpSpeed;
     [SerializeField] int jumpMax;
     [SerializeField] int gravity;
+    [SerializeField] float speedBoostTime;
+    [SerializeField] float damageBoostTime;
+    [SerializeField] int damageBoostAmount;
 
+    [Header("----- Guns -----")]
     [SerializeField] GameObject gunModel;
     [SerializeField] int shootDamage;
     [SerializeField] float shootRate;
     [SerializeField] int shootDist;
-    [SerializeField] float speedBoostTime;
-    [SerializeField] float damageBoostTime;
-    [SerializeField] int damageBoostAmount;
+
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audHurt;
+    [SerializeField] float audHurtVol;
 
     int jumpCount;
     int dashCount;
@@ -155,6 +162,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         StartCoroutine(flashDamageScreen());
 
         updatePlayerUI();
+        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
 
         if (HP <= 0)
         {
