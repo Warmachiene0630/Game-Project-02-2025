@@ -6,21 +6,23 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour, IDamage
 {
+    [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
 
-
+    [Header("----- Stats -----")]
     [SerializeField] Transform headPos;
-    [SerializeField] int HP;
-    [SerializeField] int animTransSpeed;
-    [SerializeField] int faceTargetSpeed;
-    [SerializeField] int FOV;
-    [SerializeField] bool trackingBullets;
+    [Range(1, 15)] [SerializeField] int HP;
+    [Range(1, 10)] [SerializeField] int animTransSpeed;
+    [Range(1, 15)] [SerializeField] int faceTargetSpeed;
+    [Range(45, 180)] [SerializeField] int FOV;
 
+    [Header("----- Weaponry -----")]
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
-    [SerializeField] float shootRate;
+    [Range(1, 5)] [SerializeField] float shootRate;
+    [SerializeField] bool trackingBullets;
 
     Color colorOrig;
 

@@ -580,6 +580,63 @@ Transform:
   - {fileID: 356284446}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &85082349
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 740076906443025174, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
+      propertyPath: m_Name
+      value: Enemy1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990048997867806316, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 84.301384
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990048997867806316, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990048997867806316, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 32.888657
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990048997867806316, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990048997867806316, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990048997867806316, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990048997867806316, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990048997867806316, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990048997867806316, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990048997867806316, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
 --- !u!1 &95572742
 GameObject:
   m_ObjectHideFlags: 0
@@ -20427,6 +20484,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c1271bb996094f4ca239c3315aab122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 2070277503329445113}
+  playerScript: {fileID: 0}
+  healthPrice: 100
+  damageBoostPrice: 50
+  speedBoostPrice: 50
   menuActive: {fileID: 0}
   menuPause: {fileID: 4862567238624461761}
   menuWin: {fileID: 1769333845533740584}
@@ -20434,6 +20496,7 @@ MonoBehaviour:
   menuSettings: {fileID: 3715567707333934695}
   menuSens: {fileID: 6972415639969328805}
   menuMerchant: {fileID: 1286672827831554148}
+  isPaused: 0
   goalCountText: {fileID: 5028484153133588488}
   coinCountText: {fileID: 1667683873544953875}
   healthPriceText: {fileID: 8363997262818527822}
@@ -20443,19 +20506,12 @@ MonoBehaviour:
   playerHPBar: {fileID: 4132606846249013270}
   playerDamageScreen: {fileID: 7700724718816754252}
   playerHealthScreen: {fileID: 1821566220}
-  isPaused: 0
-  player: {fileID: 0}
-  playerScript: {fileID: 0}
   teleportPopup: {fileID: 4090776172959133811}
   merchantPopup: {fileID: 1836640836719130450}
   notEnoughCoinsPopup: {fileID: 3765228806456824673}
   purchaseSuccessfulPopup: {fileID: 7060681617972532089}
   alreadyFullPopup: {fileID: 3983091178944939117}
   alreadyAppliedPopup: {fileID: 6892755242523256565}
-  coinCount: 0
-  healthPrice: 100
-  damageBoostPrice: 50
-  speedBoostPrice: 50
 --- !u!222 &4656663041948011063
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22676,16 +22732,13 @@ MonoBehaviour:
   HP: 10
   speed: 4
   sprintMod: 2
-  jumpSpeed: 3
+  jumpSpeed: 5
   jumpMax: 2
-  gravity: 4
+  gravity: 15
+  speedBoostTime: 5
+  damageBoostTime: 5
+  damageBoostAmount: 1
   gunModel: {fileID: 0}
-  shootDamage: 1
-  shootRate: 2
-  shootDist: 10
-  speedBoostTime: 0
-  damageBoostTime: 0
-  damageBoostAmount: 0
   audHurt:
   - {fileID: 8300000, guid: 04ab2f1b6b1d94f499b73dbf80854fa1, type: 3}
   - {fileID: 8300000, guid: 4401523f8ce1fc246903d0d07664c350, type: 3}
@@ -22693,7 +22746,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 97c3deadcd597de49a222ea681c3290a, type: 3}
   - {fileID: 8300000, guid: c034bbf22999348409b450d20ade3c34, type: 3}
   - {fileID: 8300000, guid: 8d418ee4a60a7f74e82f5200d884eacf, type: 3}
-  audHurtVol: 0
+  audHurtVol: 0.5
   isSpeedBoosted: 0
   isDamageBoosted: 0
 --- !u!224 &6625351919090794853
@@ -26243,3 +26296,4 @@ SceneRoots:
   - {fileID: 1284668564}
   - {fileID: 1144959911}
   - {fileID: 1683444110}
+  - {fileID: 85082349}

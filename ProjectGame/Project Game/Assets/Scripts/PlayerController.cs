@@ -10,21 +10,21 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     [SerializeField] AudioSource aud;
 
     [Header("----- Stats -----")]
-    [SerializeField] int HP;
-    [SerializeField] float speed;
-    [SerializeField] float sprintMod;
-    [SerializeField] int jumpSpeed;
-    [SerializeField] int jumpMax;
-    [SerializeField] int gravity;
-    [SerializeField] float speedBoostTime;
-    [SerializeField] float damageBoostTime;
-    [SerializeField] int damageBoostAmount;
+    [Range(1, 10)] [SerializeField] int HP;
+    [Range(3, 10)] [SerializeField] float speed;
+    [Range(2, 5)] [SerializeField] float sprintMod;
+    [Range(5, 20)] [SerializeField] int jumpSpeed;
+    [Range(1, 3)] [SerializeField] int jumpMax;
+    [Range(15, 45)] [SerializeField] int gravity;
+    [Range(5, 15)] [SerializeField] float speedBoostTime;
+    [Range(5, 15)] [SerializeField] float damageBoostTime;
+    [Range(1, 5)] [SerializeField] int damageBoostAmount;
 
     [Header("----- Guns -----")]
     [SerializeField] GameObject gunModel;
-    [SerializeField] int shootDamage;
-    [SerializeField] float shootRate;
-    [SerializeField] int shootDist;
+    int shootDamage;
+    float shootRate;
+    int shootDist;
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audHurt;

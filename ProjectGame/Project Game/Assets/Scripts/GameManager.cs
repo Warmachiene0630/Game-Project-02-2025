@@ -6,9 +6,16 @@ using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
-
+    [Header("----- Components -----")]
     public static GameManager instance;
+    public GameObject player;
+    public PlayerController playerScript;
 
+    [Range(50, 500)] public int healthPrice;
+    [Range(50, 500)] public int damageBoostPrice;
+    [Range(50, 500)] public int speedBoostPrice;
+
+    [Header("----- Menus -----")]
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
@@ -16,6 +23,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuSens;
     [SerializeField] GameObject menuMerchant;
+    public bool isPaused;
+
+    [Header("----- UI -----")]
     [SerializeField] TMP_Text goalCountText;
     [SerializeField] TMP_Text coinCountText;
     [SerializeField] TMP_Text healthPriceText;
@@ -26,10 +36,9 @@ public class GameManager : MonoBehaviour
     public Image playerHPBar;
     public GameObject playerDamageScreen;
     public GameObject playerHealthScreen;
-    public bool isPaused;
-    public GameObject player;
-    public PlayerController playerScript;
 
+
+    [Header("----- Popups -----")]
     public GameObject teleportPopup;
     public GameObject merchantPopup;
     public GameObject notEnoughCoinsPopup;
@@ -37,12 +46,11 @@ public class GameManager : MonoBehaviour
     public GameObject alreadyFullPopup;
     public GameObject alreadyAppliedPopup;
 
+    [Header("----- Stats -----")]
     private int goalCount;
-    public int coinCount;
-    public int healthPrice;
-    public int damageBoostPrice;
-    public int speedBoostPrice;
+    private int coinCount;
 
+    [Header("----- Boosts -----")]
     bool boughtSpeedBoost;
     bool isSpeedBoosted = false;
     bool boughtDamageBoost;
