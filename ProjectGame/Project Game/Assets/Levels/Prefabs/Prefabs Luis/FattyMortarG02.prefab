@@ -173,7 +173,7 @@ MonoBehaviour:
   facePlayerSpeed: 0
   FOV: 0
   slowTrap: 0
-  trapRate: 1
+  trapRate: 2
   trapDelay: 0
   bulletsFire: 0
   shootPos: {fileID: 4411725851834284}
