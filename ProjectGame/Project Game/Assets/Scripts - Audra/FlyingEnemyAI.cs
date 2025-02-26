@@ -5,17 +5,17 @@ using UnityEngine.AI;
 
 public class FlyingEnemyAI : MonoBehaviour, IDamage
 {
+    [Header ("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
-
-
     [SerializeField] Transform headPos;
-    [SerializeField] int HP;
-    [SerializeField] int faceTargetSpeed;
-    [SerializeField] int FOV;
 
+    [Header("----- Stats -----")]
+    [Range (1, 15)] [SerializeField] int HP;
+    [Range(1, 15)] [SerializeField] int faceTargetSpeed;
+    [Range(90, 180)] [SerializeField] int FOV;
 
-    [SerializeField] GameObject bullet;
+    [Header("----- Weaponry -----")]
     [SerializeField] Transform shootPos;
     [SerializeField] float shootRate;
 
