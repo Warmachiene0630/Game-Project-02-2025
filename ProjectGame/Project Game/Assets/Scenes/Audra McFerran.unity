@@ -2020,7 +2020,7 @@ GameObject:
   - component: {fileID: 966788783}
   - component: {fileID: 966788780}
   m_Layer: 0
-  m_Name: TeleportTest1
+  m_Name: TeleportTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2647,7 +2647,11 @@ GameObject:
   - component: {fileID: 1268360499}
   - component: {fileID: 1268360498}
   m_Layer: 5
+<<<<<<< Updated upstream
   m_Name: BuyDamageBoost
+=======
+  m_Name: BuyDamageBoostButton
+>>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3114,9 +3118,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< Updated upstream
   m_text: 'Damage Boost
 
 '
+=======
+  m_text: Damage Boost
+>>>>>>> Stashed changes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3419,7 +3427,7 @@ GameObject:
   - component: {fileID: 1623544615}
   - component: {fileID: 1623544612}
   m_Layer: 0
-  m_Name: TeleportTest2
+  m_Name: Teleport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8269,7 +8277,11 @@ MonoBehaviour:
   alreadyAppliedPopup: {fileID: 647453275}
   coinCount: 0
   healthPrice: 100
+<<<<<<< Updated upstream
   damageBoostPrice: 1
+=======
+  ammoPrice: 1
+>>>>>>> Stashed changes
   speedBoostPrice: 1
 --- !u!23 &3345815310789370578
 MeshRenderer:
