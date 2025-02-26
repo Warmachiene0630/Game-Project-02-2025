@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
     public void updateGameGoal(int amount)
     {
         goalCount += amount;
-        //goalCountText.text = goalCount.ToString("F0");
+        goalCountText.text = goalCount.ToString("F0");
         if (goalCount <= 0)
         {
             statePause();
