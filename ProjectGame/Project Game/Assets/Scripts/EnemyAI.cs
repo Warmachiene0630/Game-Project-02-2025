@@ -17,19 +17,26 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Range(1, 10)] [SerializeField] int animTransSpeed;
     [Range(1, 15)] [SerializeField] int faceTargetSpeed;
     [Range(45, 180)] [SerializeField] int FOV;
+    [SerializeField] int roamPauseTime;
+    [SerializeField] int roamDist;
+
 
     [Header("----- Weaponry -----")]
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
     [Range(1, 5)] [SerializeField] float shootRate;
+    [SerializeField] int shootFOV;
     [SerializeField] bool trackingBullets;
 
     Color colorOrig;
 
     float shootTimer;
+    float roamTimer;
     float angleToPlayer;
+    float stoppingDistOrig;
 
     Vector3 playerDir;
+    Vector3 startingPos;
 
     bool playerInRange;
 
@@ -50,10 +57,41 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         shootTimer += Time.deltaTime;
 
-        if (playerInRange && canSeePlayer())
+        if (agent.remainingDistance < 0.01f)
         {
-
+            roamTimer += Time.deltaTime;
         }
+
+        if (playerInRange && !canSeePlayer())
+        {
+            checkRoam();
+        }
+        else if (!playerInRange)
+        {
+            checkRoam();
+        }
+    }
+
+    void checkRoam()
+    {
+        if (roamTimer > roamPauseTime && agent.remainingDistance < 0.01f || GameManager.instance.playerScript.HP <= 0)
+        {
+            roam();
+        }
+    }
+
+    void roam()
+    {
+        roamTimer = 0;
+
+        agent.stoppingDistance = 0;
+
+        Vector3 ranPos = Random.insideUnitSphere * roamDist;
+        ranPos += startingPos;
+
+        NavMeshHit hit;
+        NavMesh.SamplePosition(ranPos, out hit, roamDist, 1);
+        agent.SetDestination(hit.position);
     }
 
     bool canSeePlayer()
@@ -79,10 +117,14 @@ public class EnemyAI : MonoBehaviour, IDamage
                 {
                     faceTarget();
                 }
+
+                agent.stoppingDistance = stoppingDistOrig;
+
                 return true;
             }
 
         }
+        agent.stoppingDistance = 0;
         return false;
 
     }
@@ -137,10 +179,12 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (trackingBullets == false)
         {
             Instantiate(bullet, shootPos.position, transform.rotation);
+            //anim.SetTrigger("Attack");
         }
         else
         {
             Instantiate(bullet, shootPos.position, GameManager.instance.player.transform.rotation);
+            //anim.SetTrigger("Attack");
         }
     }
 

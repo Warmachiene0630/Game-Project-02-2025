@@ -16,8 +16,9 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
     [Range(90, 180)] [SerializeField] int FOV;
 
     [Header("----- Weaponry -----")]
+    [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
-    [SerializeField] float shootRate;
+    [Range(1, 5)][SerializeField] float shootRate;
 
     Color colorOrig;
 

@@ -121,7 +121,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1dcd4ea457239f049875b7a7c8f9509e, type: 2}
+  - {fileID: 2100000, guid: c9486973708cc584b8e53a536aed920e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -262,11 +262,15 @@ MonoBehaviour:
   headPos: {fileID: 9046756215061125051}
   HP: 3
   animTransSpeed: 4
-  faceTargetSpeed: 8
+  faceTargetSpeed: 4
   FOV: 90
+  roamPauseTime: 3
+  roamDist: 10
   bullet: {fileID: 3939113816799495493, guid: 852a7d41108f89e4ea05d57e462a445f, type: 3}
   shootPos: {fileID: 2017071860726584107}
   shootRate: 1
+  shootFOV: 0
+  trackingBullets: 0
 --- !u!195 &7079621019707269339
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -347,7 +351,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1536
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
