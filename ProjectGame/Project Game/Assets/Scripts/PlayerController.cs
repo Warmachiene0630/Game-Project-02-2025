@@ -21,7 +21,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     [Range(1, 5)] [SerializeField] int damageBoostAmount;
 
     [Header("----- Guns -----")]
+    [SerializeField] List<GunStats> gunList = new List<GunStats>();
     [SerializeField] GameObject gunModel;
+    [SerializeField] Transform muzzleFlash;
     int shootDamage;
     float shootRate;
     int shootDist;
@@ -170,11 +172,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     void shoot()
     {
         shootTimer = 0;
+        //gunList[gunListPos].ammoCur--;
+        //aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootVol);
 
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
-            Debug.Log(hit.collider.name);
+            //Debug.Log(hit.collider.name);
+
+            //Instantiate(gunList[gunListPos].hitEffect, hit.point, Quaternion.identity);
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             if (dmg != null)
