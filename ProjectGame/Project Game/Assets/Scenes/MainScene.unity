@@ -23114,6 +23114,17 @@ MonoBehaviour:
   damageBoostTime: 5
   damageBoostAmount: 1
   gunModel: {fileID: 0}
+  audSteps:
+  - {fileID: 8300000, guid: 2aaf9becbe6bb484aab750d3f7172012, type: 3}
+  - {fileID: 8300000, guid: f43a8d5fcbbcd5343b468d56b0a8964d, type: 3}
+  - {fileID: 8300000, guid: 67400f81283fad842bfb118e29d18baa, type: 3}
+  - {fileID: 8300000, guid: d992e5ab97b9aa8409f83e26d07d76e6, type: 3}
+  - {fileID: 8300000, guid: 6a8981d8d28d88c438aa0ef5c43fc06d, type: 3}
+  - {fileID: 8300000, guid: 2e9384e7e11484e44bbf76a0f1210cf1, type: 3}
+  - {fileID: 8300000, guid: 9d6cae0b08c1ec046acc25225be6d076, type: 3}
+  - {fileID: 8300000, guid: 26e3d376f7a6bfc4dbafecbe84388ebd, type: 3}
+  - {fileID: 8300000, guid: a6abe08e2b5f8b542966c532ad11261d, type: 3}
+  audStepsVol: 0.5
   audHurt:
   - {fileID: 8300000, guid: 04ab2f1b6b1d94f499b73dbf80854fa1, type: 3}
   - {fileID: 8300000, guid: 4401523f8ce1fc246903d0d07664c350, type: 3}

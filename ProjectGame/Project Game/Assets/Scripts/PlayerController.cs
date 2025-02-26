@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     int shootDist;
 
     [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audSteps;
+    [Range(0, 1)][SerializeField] float audStepsVol;
     [SerializeField] AudioClip[] audHurt;
     [Range(0, 1)][SerializeField] float audHurtVol;
     [SerializeField] AudioClip[] audJump;
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     Vector3 playerVel;
 
     bool isSprinting;
+    bool isPlayingSteps;
     public bool isSpeedBoosted;
     public bool isDamageBoosted;
 
@@ -79,6 +82,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         if (controller.isGrounded)
         {
+            if (moveDir.magnitude > 0.3f && !isPlayingSteps)
+            {
+                StartCoroutine(playSteps());
+            }
             jumpCount = 0;
             dashCount = 0;
             playerVel = Vector3.zero;
@@ -125,6 +132,24 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
             speed /= sprintMod;
             isSprinting = false;
         }
+    }
+
+    IEnumerator playSteps()
+    {
+        isPlayingSteps = true;
+
+        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+
+        if (!isSprinting)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.3f);
+        }
+
+        isPlayingSteps = false;
     }
 
     void jump()
