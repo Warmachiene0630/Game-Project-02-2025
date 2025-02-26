@@ -50,7 +50,7 @@ MonoBehaviour:
   type: 0
   rb: {fileID: 718268207462821832}
   damageAmount: 1
-  speed: 10
+  speed: 15
   destroyTime: 3
 --- !u!54 &718268207462821832
 Rigidbody:
@@ -166,7 +166,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 411572573190f4041a986aa1774cf4d0, type: 2}
+  - {fileID: 2100000, guid: ce00fe90b26138948a9411e9e1d48c2f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

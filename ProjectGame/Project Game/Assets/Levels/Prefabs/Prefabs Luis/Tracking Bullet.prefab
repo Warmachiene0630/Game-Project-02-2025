@@ -151,6 +151,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3850745730311289616}
   slowTimer: 2
-  speed: 2
+  speed: 5
   destroyTime: 10
   facePlayerSpeed: 4
