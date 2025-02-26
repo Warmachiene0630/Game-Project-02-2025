@@ -23264,7 +23264,7 @@ MonoBehaviour:
   damageBoostTime: 5
   damageBoostAmount: 1
   gunList: []
-  gunModel: {fileID: 0}
+  gunModel: {fileID: 2095946966}
   muzzleFlash: {fileID: 0}
   audSteps:
   - {fileID: 8300000, guid: 2aaf9becbe6bb484aab750d3f7172012, type: 3}
