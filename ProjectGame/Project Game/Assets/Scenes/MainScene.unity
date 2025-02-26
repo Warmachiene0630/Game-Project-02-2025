@@ -23122,6 +23122,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c034bbf22999348409b450d20ade3c34, type: 3}
   - {fileID: 8300000, guid: 8d418ee4a60a7f74e82f5200d884eacf, type: 3}
   audHurtVol: 0.5
+  audJump:
+  - {fileID: 8300000, guid: 4819eca97b9cad8448674e6401b83768, type: 3}
+  - {fileID: 8300000, guid: e35e9a847739edf419a168754a28cfc9, type: 3}
+  - {fileID: 8300000, guid: 1e9ecb3bd20906a4b829071ee879baa0, type: 3}
+  audJumpVol: 0.5
   isSpeedBoosted: 0
   isDamageBoosted: 0
 --- !u!224 &6625351919090794853

@@ -28,7 +28,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audHurt;
-    [SerializeField] float audHurtVol;
+    [Range(0, 1)][SerializeField] float audHurtVol;
+    [SerializeField] AudioClip[] audJump;
+    [Range(0, 1)][SerializeField] float audJumpVol;
 
     int jumpCount;
     int dashCount;
@@ -131,6 +133,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         {
             jumpCount++;
             playerVel.y = jumpSpeed;
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
         }
         else if (Input.GetButtonDown("Jump") && dashCount == 0)
         {
