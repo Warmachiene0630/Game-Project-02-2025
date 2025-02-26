@@ -118,10 +118,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
             shootDamage = shootDamage - damageBoostAmount;
         }
 
-        if (Input.GetButton("Fire1") && shootTimer >= shootRate)
+        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
         {
             shoot();
+
         }
+
+        selectGun();
+        gunReload();
     }
     void sprint()
     {
@@ -173,15 +177,17 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     void shoot()
     {
         shootTimer = 0;
-        //gunList[gunListPos].ammoCur--;
-        //aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootVol);
+        gunList[gunListPos].ammoCur--;
+        aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootVol);
+
+        StartCoroutine(flashMuzzle());
 
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
             //Debug.Log(hit.collider.name);
 
-            //Instantiate(gunList[gunListPos].hitEffect, hit.point, Quaternion.identity);
+            Instantiate(gunList[gunListPos].hitEffect, hit.point, Quaternion.identity);
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             if (dmg != null)
@@ -355,4 +361,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     }
 
+    IEnumerator flashMuzzle()
+    {
+        //muzzleFlash.localEulerAngles = new Vector3(0, 0, Random.Range(0, 360));
+        muzzleFlash.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.05f);
+        muzzleFlash.gameObject.SetActive(false);
+    }
 }
