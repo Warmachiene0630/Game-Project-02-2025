@@ -40,7 +40,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     void Start()
     {
         colorOrig = model.material.color;
-        GameManager.instance.updateGameGoal(1);
+        startingPos = transform.position;
+        stoppingDistOrig = agent.stoppingDistance;
     }
 
     // Update is called once per frame
@@ -112,10 +113,13 @@ public class EnemyAI : MonoBehaviour, IDamage
                 {
                     faceTarget();
                 }
+
+                agent.stoppingDistance = stoppingDistOrig;
                 return true;
             }
 
         }
+        agent.stoppingDistance = 0;
         return false;
 
     }
@@ -133,6 +137,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+            agent.stoppingDistance = 0;
         }
     }
 
@@ -151,7 +156,6 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             Destroy(gameObject);
-            GameManager.instance.updateGameGoal(-1);
         }
     }
 
@@ -165,13 +169,11 @@ public class EnemyAI : MonoBehaviour, IDamage
     void shoot()
     {
         shootTimer = 0;
-
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        anim.SetTrigger("Attack");
     }
 
-    public bool gainHealth(int amount)
+    public void createBullet()
     {
-        HP += amount;
-        return true;
+        Instantiate(bullet, shootPos.position, transform.rotation);
     }
 }
