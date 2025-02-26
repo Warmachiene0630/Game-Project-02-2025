@@ -61,7 +61,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
         movement();
         sprint();
-        checkSlow();
+        if (isSlowed == true) {
+            checkSlow();
+        }
     } 
 
     void movement()
@@ -244,10 +246,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     private void checkSlow()
     {
-        if (isSlowed == true)
-        {
-            slowTimer = Time.deltaTime;
-        }
+        slowTimer += Time.deltaTime;
         if (slowTimer >= slowDur)
         {
             normalSpeed();
