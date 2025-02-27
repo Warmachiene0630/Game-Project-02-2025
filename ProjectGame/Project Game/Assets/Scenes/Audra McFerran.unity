@@ -3322,6 +3322,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c1271bb996094f4ca239c3315aab122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 90838171776137782}
+  playerScript: {fileID: 6924389011915554006}
+  healthPrice: 100
+  damageBoostPrice: 1
+  speedBoostPrice: 1
   menuActive: {fileID: 0}
   menuPause: {fileID: 7055605479643144714}
   menuWin: {fileID: 9028471450204456170}
@@ -3329,6 +3334,7 @@ MonoBehaviour:
   menuSettings: {fileID: 8355997261962644202}
   menuSens: {fileID: 496323564442431519}
   menuMerchant: {fileID: 704543995325901932}
+  isPaused: 0
   goalCountText: {fileID: 2007737805742231746}
   coinCountText: {fileID: 4799891745727422053}
   healthPriceText: {fileID: 2103653099502962753}
@@ -3338,19 +3344,12 @@ MonoBehaviour:
   playerHPBar: {fileID: 6348909573773715810}
   playerDamageScreen: {fileID: 2396170908700405232}
   playerHealthScreen: {fileID: 0}
-  isPaused: 0
-  player: {fileID: 90838171776137782}
-  playerScript: {fileID: 6924389011915554006}
   teleportPopup: {fileID: 1803466053647852949}
   merchantPopup: {fileID: 5747504619636657979}
   notEnoughCoinsPopup: {fileID: 6671343420726911625}
   purchaseSuccessfulPopup: {fileID: 7789190427754328051}
   alreadyFullPopup: {fileID: 8736528109404457121}
   alreadyAppliedPopup: {fileID: 6378768614750300239}
-  coinCount: 0
-  healthPrice: 100
-  damageBoostPrice: 1
-  speedBoostPrice: 1
 --- !u!1 &2251444150680174231
 GameObject:
   m_ObjectHideFlags: 0
@@ -4490,9 +4489,13 @@ MonoBehaviour:
   animTransSpeed: 4
   faceTargetSpeed: 8
   FOV: 90
+  roamPauseTime: 0
+  roamDist: 0
   bullet: {fileID: 3939113816799495493, guid: 852a7d41108f89e4ea05d57e462a445f, type: 3}
   shootPos: {fileID: 5726281023798917570}
   shootRate: 1
+  shootFOV: 0
+  trackingBullets: 0
 --- !u!114 &3194271378389221644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10212,19 +10215,25 @@ MonoBehaviour:
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 0
+  aud: {fileID: 0}
   HP: 5
   speed: 5
   sprintMod: 3
   jumpSpeed: 12
   jumpMax: 2
   gravity: 35
-  gunModel: {fileID: 3850090857277833991}
-  shootDamage: 1
-  shootRate: 0.5
-  shootDist: 150
   speedBoostTime: 5
   damageBoostTime: 10
   damageBoostAmount: 2
+  gunList: []
+  gunModel: {fileID: 3850090857277833991}
+  muzzleFlash: {fileID: 0}
+  audSteps: []
+  audStepsVol: 0
+  audHurt: []
+  audHurtVol: 0
+  audJump: []
+  audJumpVol: 0
   isSpeedBoosted: 0
   isDamageBoosted: 0
 --- !u!222 &6939482738028455580
@@ -11128,6 +11137,63 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1001 &7503917140596752117
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1685382682223631048, guid: 24fe1c226430de541b482eb431f29857, type: 3}
+      propertyPath: m_Name
+      value: Lantern
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079643614781904536, guid: 24fe1c226430de541b482eb431f29857, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.079
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079643614781904536, guid: 24fe1c226430de541b482eb431f29857, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.036
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079643614781904536, guid: 24fe1c226430de541b482eb431f29857, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.8332546
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079643614781904536, guid: 24fe1c226430de541b482eb431f29857, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079643614781904536, guid: 24fe1c226430de541b482eb431f29857, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079643614781904536, guid: 24fe1c226430de541b482eb431f29857, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079643614781904536, guid: 24fe1c226430de541b482eb431f29857, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079643614781904536, guid: 24fe1c226430de541b482eb431f29857, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079643614781904536, guid: 24fe1c226430de541b482eb431f29857, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079643614781904536, guid: 24fe1c226430de541b482eb431f29857, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 24fe1c226430de541b482eb431f29857, type: 3}
 --- !u!114 &7538217468745304074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13956,3 +14022,4 @@ SceneRoots:
   - {fileID: 2880020767225438461}
   - {fileID: 8688154948471476988}
   - {fileID: 1715074033113420088}
+  - {fileID: 7503917140596752117}

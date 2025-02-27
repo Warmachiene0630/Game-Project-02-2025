@@ -595,6 +595,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy1
       objectReference: {fileID: 0}
+    - target: {fileID: 4352508155892364761, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c9486973708cc584b8e53a536aed920e, type: 2}
     - target: {fileID: 6990048997867806316, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
       propertyPath: m_LocalPosition.x
       value: 84.301384
@@ -2244,6 +2248,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lava Block
       objectReference: {fileID: 0}
+    - target: {fileID: 5956467945224340865, guid: 6a559d67e4a168448bb14185cc589fd4, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c3c098253e78eb4f8baebee595d222d, type: 2}
     - target: {fileID: 7691962365255967914, guid: 6a559d67e4a168448bb14185cc589fd4, type: 3}
       propertyPath: m_LocalScale.x
       value: 100
@@ -6088,6 +6096,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 948234635}
     m_Modifications:
+    - target: {fileID: 5453609784809405563, guid: 13fe789dde39ad346b47143164f00dbc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c3c098253e78eb4f8baebee595d222d, type: 2}
     - target: {fileID: 7512136266328261514, guid: 13fe789dde39ad346b47143164f00dbc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 117.12
@@ -7712,6 +7724,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lava Block
       objectReference: {fileID: 0}
+    - target: {fileID: 5956467945224340865, guid: 6a559d67e4a168448bb14185cc589fd4, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c3c098253e78eb4f8baebee595d222d, type: 2}
     - target: {fileID: 7691962365255967914, guid: 6a559d67e4a168448bb14185cc589fd4, type: 3}
       propertyPath: m_LocalScale.x
       value: 5
@@ -21090,7 +21106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2070277503329445113}
   playerScript: {fileID: 0}
-  healthPrice: 100
+  healthPrice: 50
   damageBoostPrice: 50
   speedBoostPrice: 50
   menuActive: {fileID: 0}
