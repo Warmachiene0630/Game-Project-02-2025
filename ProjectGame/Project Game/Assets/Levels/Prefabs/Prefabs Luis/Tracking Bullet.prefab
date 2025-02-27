@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2092087122638227904}
   - component: {fileID: 3850745730311289616}
   - component: {fileID: -79069714183564115}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tracking Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

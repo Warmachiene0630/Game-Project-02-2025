@@ -97,10 +97,14 @@ public class CatAI : MonoBehaviour, IDamage
             {
                 agent.SetDestination(GameManager.instance.player.transform.position);
 
+
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
                     faceTarget();
                 }
+
+                agent.stoppingDistance = stoppingDistOrig;
+
                 return true;
             }
 

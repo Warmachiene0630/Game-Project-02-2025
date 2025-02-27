@@ -151,6 +151,7 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             Destroy(gameObject);
+            GameManager.instance.updateCoinCount(Random.Range(0, 50));
         }
     }
 
