@@ -16,7 +16,7 @@ public class checkpoint : MonoBehaviour
     // Update is called once per frame
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && GameManager.instance.playerSpawnPos.transform.position != transform.position)
         {
             GameManager.instance.playerSpawnPos.transform.position = transform.position;
             StartCoroutine(flashColor());
