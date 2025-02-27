@@ -21,7 +21,7 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
     [Range(1, 5)][SerializeField] float shootRate;
-    [SerializeField] int shootFOV;
+    //[SerializeField] int shootFOV;
 
     Color colorOrig;
 
@@ -139,7 +139,7 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
     {
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, playerDir.y, playerDir.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
-        shootPos.rotation = Quaternion.Lerp(shootPos.rotation, rot, Time.deltaTime * faceTargetSpeed);
+        shootPos.rotation = Quaternion.Lerp(headPos.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
 
     public void takeDamage(int amount)
@@ -166,7 +166,7 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
     {
         shootTimer = 0;
 
-        Instantiate(bullet, shootPos.position,shootPos.rotation);
+        Instantiate(bullet, headPos.position,shootPos.rotation);
     }
 
     bool gainHealth(int amount)
