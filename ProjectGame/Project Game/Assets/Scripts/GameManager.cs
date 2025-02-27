@@ -57,12 +57,16 @@ public class GameManager : MonoBehaviour
     bool isDamageBoosted = false;
 
 
+    public GameObject playerSpawnPos;
+    public GameObject checkpointPopup;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
     }
 
     // Update is called once per frame

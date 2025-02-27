@@ -27,7 +27,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Range(1, 5)] [SerializeField] float shootRate;
     [SerializeField] int shootFOV;
     [SerializeField] bool trackingBullets;
-    //[SerializeField] Collider weaponCol;
 
     Color colorOrig;
 
@@ -45,7 +44,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     void Start()
     {
         colorOrig = model.material.color;
-        //GameManager.instance.updateGameGoal(1);
     }
 
     // Update is called once per frame
@@ -160,10 +158,10 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-            Destroy(gameObject);
-            //GameManager.instance.updateGameGoal(-1);
+           
             //coin drop on defeat
             GameManager.instance.updateCoinCount(Random.Range(0, 50));
+            Destroy(gameObject);
         }
     }
 
@@ -177,17 +175,15 @@ public class EnemyAI : MonoBehaviour, IDamage
     void shoot()
     {
         shootTimer = 0;
-        anim.SetTrigger("Attack");
-    }
-    public void createBullet()
-    {
         if (trackingBullets == false)
         {
             Instantiate(bullet, shootPos.position, transform.rotation);
+            //anim.SetTrigger("Attack");
         }
         else
         {
             Instantiate(bullet, shootPos.position, GameManager.instance.player.transform.rotation);
+            //anim.SetTrigger("Attack");
         }
     }
 
@@ -196,15 +192,4 @@ public class EnemyAI : MonoBehaviour, IDamage
         HP += amount;
         return true;
     }
-
-    /*public void weaponColOn()
-    {
-        weaponCol.enabled = true;
-    }
-
-    public void weaponColOff()
-    {
-        weaponCol.enabled = false;
-        //GameManager.instance.statePause();
-    }*/
 }
