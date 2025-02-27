@@ -595,10 +595,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy1
       objectReference: {fileID: 0}
-    - target: {fileID: 4352508155892364761, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: c9486973708cc584b8e53a536aed920e, type: 2}
     - target: {fileID: 6990048997867806316, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
       propertyPath: m_LocalPosition.x
       value: 84.301384
@@ -638,10 +634,6 @@ PrefabInstance:
     - target: {fileID: 6990048997867806316, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8708035461915243787, guid: 690c5b5b77327a249bb67b8da221ec36, type: 3}
-      propertyPath: roamDist
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4253,22 +4245,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 918732737921394484, guid: 4c9f2e83ed937014baf08c48a1598538, type: 3}
-      propertyPath: roamDist
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 918732737921394484, guid: 4c9f2e83ed937014baf08c48a1598538, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 918732737921394484, guid: 4c9f2e83ed937014baf08c48a1598538, type: 3}
-      propertyPath: roamPauseTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2772044691269943417, guid: 4c9f2e83ed937014baf08c48a1598538, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 1536
-      objectReference: {fileID: 0}
     - target: {fileID: 2782257732444714887, guid: 4c9f2e83ed937014baf08c48a1598538, type: 3}
       propertyPath: m_LocalPosition.x
       value: 87.36479
@@ -13999,8 +13975,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 1445865734}
-  numToSpawn: 4
-  timeBetweenSpawns: 10
+  numToSpawn: 2
+  timeBetweenSpawns: 5
   spawnPos:
   - {fileID: 2056706328}
   - {fileID: 300280674}
