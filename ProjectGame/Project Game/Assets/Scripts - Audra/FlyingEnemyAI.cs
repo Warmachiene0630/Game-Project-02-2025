@@ -14,18 +14,24 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
     [Range (1, 15)] [SerializeField] int HP;
     [Range(1, 15)] [SerializeField] int faceTargetSpeed;
     [Range(90, 180)] [SerializeField] int FOV;
+    [SerializeField] int roamPauseTime;
+    [SerializeField] int roamDist;
 
     [Header("----- Weaponry -----")]
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
     [Range(1, 5)][SerializeField] float shootRate;
+    [SerializeField] int shootFOV;
 
     Color colorOrig;
 
     float shootTimer;
+    float roamTimer;
     float angleToPlayer;
+    float stoppingDistOrig;
 
     Vector3 playerDir;
+    Vector3 startingPos;
 
     bool playerInRange;
 
@@ -33,7 +39,8 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
     void Start()
     {
         colorOrig = model.material.color;
-        GameManager.instance.updateGameGoal(1);
+        startingPos = transform.position;
+        stoppingDistOrig = agent.stoppingDistance;
     }
 
     // Update is called once per frame
@@ -43,10 +50,41 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
 
         shootTimer += Time.deltaTime;
 
-        if (playerInRange && canSeePlayer())
+        if (agent.remainingDistance < 0.01f)
         {
-            
+            roamTimer += Time.deltaTime;
         }
+
+        if (playerInRange && !canSeePlayer())
+        {
+            checkRoam();
+        }
+        else if (!playerInRange)
+        {
+            checkRoam();
+        }
+    }
+
+    void checkRoam()
+    {
+        if (roamTimer > roamPauseTime && agent.remainingDistance < 0.01f || GameManager.instance.playerScript.HP <= 0)
+        {
+            roam();
+        }
+    }
+
+    void roam()
+    {
+        roamTimer = 0;
+
+        agent.stoppingDistance = 0;
+
+        Vector3 ranPos = Random.insideUnitSphere * roamDist;
+        ranPos += startingPos;
+
+        NavMeshHit hit;
+        NavMesh.SamplePosition(ranPos, out hit, roamDist, 1);
+        agent.SetDestination(hit.position);
     }
 
     bool canSeePlayer()
@@ -76,6 +114,7 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
             }
 
         }
+        agent.stoppingDistance = 0;
         return false;
 
     }
@@ -112,7 +151,6 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             Destroy(gameObject);
-            GameManager.instance.updateGameGoal(-1);
         }
     }
 

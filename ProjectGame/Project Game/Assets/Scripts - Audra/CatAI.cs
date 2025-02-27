@@ -16,13 +16,18 @@ public class CatAI : MonoBehaviour, IDamage
     [Range(1, 10)] [SerializeField] int animTransSpeed;
     [Range(1, 15)] [SerializeField] int faceTargetSpeed;
     [Range(45, 180)] [SerializeField] int FOV;
+    [SerializeField] int roamPauseTime;
+    [SerializeField] int roamDist;
 
 
     Color colorOrig;
 
+    float roamTimer;
     float angleToPlayer;
+    float stoppingDistOrig;
 
     Vector3 playerDir;
+    Vector3 startingPos;
 
     bool playerInRange;
 
@@ -41,10 +46,41 @@ public class CatAI : MonoBehaviour, IDamage
         anim.SetFloat("Speed", Mathf.MoveTowards(animCurSpeed, agentSpeed, Time.deltaTime * animTransSpeed));
 
 
-        if (playerInRange && canSeePlayer())
+        if (agent.remainingDistance < 0.01f)
         {
-
+            roamTimer += Time.deltaTime;
         }
+
+        if (playerInRange && !canSeePlayer())
+        {
+            checkRoam();
+        }
+        else if (!playerInRange)
+        {
+            checkRoam();
+        }
+    }
+
+    void checkRoam()
+    {
+        if (roamTimer > roamPauseTime && agent.remainingDistance < 0.01f || GameManager.instance.playerScript.HP <= 0)
+        {
+            roam();
+        }
+    }
+
+    void roam()
+    {
+        roamTimer = 0;
+
+        agent.stoppingDistance = 0;
+
+        Vector3 ranPos = Random.insideUnitSphere * roamDist;
+        ranPos += startingPos;
+
+        NavMeshHit hit;
+        NavMesh.SamplePosition(ranPos, out hit, roamDist, 1);
+        agent.SetDestination(hit.position);
     }
 
     bool canSeePlayer()
@@ -69,6 +105,7 @@ public class CatAI : MonoBehaviour, IDamage
             }
 
         }
+        agent.stoppingDistance = 0;
         return false;
 
     }
