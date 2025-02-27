@@ -25,7 +25,7 @@ public class HealthPack : MonoBehaviour
             IPickUp dmg = other.GetComponent<IPickUp>();
             if (dmg != null)
             {
-                if (dmg.gainHealth(5))
+                if (dmg.gainHealth(packStrength))
                 {
                     Destroy(gameObject);
                 }

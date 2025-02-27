@@ -13,7 +13,11 @@ public class ButtonFunctions : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.instance.stateUnpause();
     }
-
+    public void respawnPlayer()
+    {
+        GameManager.instance.playerScript.spawnPlayer();
+        GameManager.instance.stateUnpause();
+    }
     public void confirmSens()
     {
         GameObject cam = GameObject.FindWithTag("MainCamera");
@@ -61,6 +65,26 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.instance.stateUnpause();
     }
 
-    //make harder levels, load by difficulty
+
+    public void buyHealth()
+    {
+        GameManager.instance.buyHealth();
+    }
+
+
+    public void buyDamageBoost()
+    {
+        GameManager.instance.buyDamageBoost();
+    }
+
+    public void buySpeedBoost()
+    {
+        GameManager.instance.buySpeedBoost();
+    }
+
+    public void leaveStore()
+    {
+        GameManager.instance.exitStore();
+    }
 }
 
