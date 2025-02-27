@@ -120,7 +120,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
         if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
         {
-            shoot();
+            if (!GameManager.instance.isPaused)
+            {
+                shoot();
+            }
+            
 
         }
 
