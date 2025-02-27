@@ -7,9 +7,14 @@ public class Teleporter : MonoBehaviour
     //if it isnt a trap, the player will be given the option to press a button to teleport
 
     [SerializeField] Transform teleportPos;
+    [SerializeField] AudioSource aud;
 
     [SerializeField] bool isTrap;
     public bool canTeleport;
+
+    [Header("----- Audio -----")]
+    public AudioClip teleSound;
+    [Range(0, 1)] public float teleVol;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,6 +27,7 @@ public class Teleporter : MonoBehaviour
         if (canTeleport && Input.GetButtonDown("Interact"))
         {
             StartCoroutine(Teleport());
+            aud.PlayOneShot(teleSound, teleVol);
         }
     }
 
@@ -32,6 +38,7 @@ public class Teleporter : MonoBehaviour
             if (isTrap)
             {
                 StartCoroutine(Teleport());
+                aud.PlayOneShot(teleSound,teleVol);
             }
             else if (!isTrap)
             {

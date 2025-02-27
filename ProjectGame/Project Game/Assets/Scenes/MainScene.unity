@@ -3962,18 +3962,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1769633733227033829, guid: 48a6c41d5812e3b45a9d0f6b952dbd7f, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1769633733227033829, guid: 48a6c41d5812e3b45a9d0f6b952dbd7f, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1769633733227033829, guid: 48a6c41d5812e3b45a9d0f6b952dbd7f, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1769633733227033829, guid: 48a6c41d5812e3b45a9d0f6b952dbd7f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 71.5
       objectReference: {fileID: 0}
@@ -4016,14 +4004,6 @@ PrefabInstance:
     - target: {fileID: 2520047059931564493, guid: 48a6c41d5812e3b45a9d0f6b952dbd7f, type: 3}
       propertyPath: m_Name
       value: TeleportTrap
-      objectReference: {fileID: 0}
-    - target: {fileID: 6054128953038197374, guid: 48a6c41d5812e3b45a9d0f6b952dbd7f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 18.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6054128953038197374, guid: 48a6c41d5812e3b45a9d0f6b952dbd7f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 10.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12471,33 +12451,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1987852605696051182, guid: ecc0f8fd6d562a34bbaeb6732833b840, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -19.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1987852605696051182, guid: ecc0f8fd6d562a34bbaeb6732833b840, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1987852605696051182, guid: ecc0f8fd6d562a34bbaeb6732833b840, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.9
-      objectReference: {fileID: 0}
     - target: {fileID: 2446663891762074042, guid: ecc0f8fd6d562a34bbaeb6732833b840, type: 3}
       propertyPath: m_Name
       value: Teleport
-      objectReference: {fileID: 0}
-    - target: {fileID: 6163675064499719087, guid: ecc0f8fd6d562a34bbaeb6732833b840, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6163675064499719087, guid: ecc0f8fd6d562a34bbaeb6732833b840, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6163675064499719087, guid: ecc0f8fd6d562a34bbaeb6732833b840, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6163675064499719087, guid: ecc0f8fd6d562a34bbaeb6732833b840, type: 3}
       propertyPath: m_LocalPosition.x

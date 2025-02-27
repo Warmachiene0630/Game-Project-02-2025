@@ -149,7 +149,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
         if (!isSprinting)
         {
-            yield return new WaitForSeconds(0.5f);
+            if (!isSlowed)
+            {
+                yield return new WaitForSeconds(0.5f);
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.7f);
+            }
         }
         else
         {
