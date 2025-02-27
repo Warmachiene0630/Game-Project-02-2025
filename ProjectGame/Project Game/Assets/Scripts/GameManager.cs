@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameObject player;
     public PlayerController playerScript;
+    [SerializeField] AudioSource aud;
 
     [Range(50, 500)] public int healthPrice;
     [Range(50, 500)] public int damageBoostPrice;
@@ -56,6 +57,10 @@ public class GameManager : MonoBehaviour
     bool boughtDamageBoost;
     bool isDamageBoosted = false;
 
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip backgroundMusic;
+    [Range(0, 1)][SerializeField] float musicVol;
+
 
     public GameObject playerSpawnPos;
     public GameObject checkpointPopup;
@@ -67,6 +72,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
+        aud.PlayOneShot(backgroundMusic, musicVol);
     }
 
     // Update is called once per frame
