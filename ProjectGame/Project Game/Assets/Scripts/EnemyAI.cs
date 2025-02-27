@@ -44,7 +44,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     void Start()
     {
         colorOrig = model.material.color;
-        GameManager.instance.updateGameGoal(1);
     }
 
     // Update is called once per frame
@@ -159,10 +158,10 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-            Destroy(gameObject);
-            GameManager.instance.updateGameGoal(-1);
+           
             //coin drop on defeat
             GameManager.instance.updateCoinCount(Random.Range(0, 50));
+            Destroy(gameObject);
         }
     }
 

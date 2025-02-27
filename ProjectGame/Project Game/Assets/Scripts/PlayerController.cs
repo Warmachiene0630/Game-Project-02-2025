@@ -158,6 +158,16 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
         isPlayingSteps = false;
     }
+    public void spawnPlayer()
+    {
+        HP = HPOrig;
+        updatePlayerUI();
+        controller.transform.position = GameManager.instance.playerSpawnPos.transform.position;
+        HP = HPOrig;
+        updatePlayerUI();
+
+
+    }
 
     void jump()
     {
