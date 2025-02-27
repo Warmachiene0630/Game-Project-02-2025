@@ -385,7 +385,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     IEnumerator flashMuzzle()
     {
-        //muzzleFlash.localEulerAngles = new Vector3(0, 0, Random.Range(0, 360));
+        muzzleFlash.localEulerAngles = new Vector3(0, 0, Random.Range(0, 360));
         muzzleFlash.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.05f);
         muzzleFlash.gameObject.SetActive(false);
