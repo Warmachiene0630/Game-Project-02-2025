@@ -48,8 +48,10 @@ public class PlayerController : MonoBehaviour, IDamage
 
         movement();
         sprint();
-
-        checkSlowed();
+        if (isSlowed == true)
+        {
+            checkSlowed();
+        }
     }
 
     void movement()
@@ -149,15 +151,25 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
+    public void spawnPlayer()
+    {
+        HP = HPOrig;
+        updatePlayerUI();
+        //to get the enemy to see the exit of the player turn on auto sync
+        //controller.enabled = false;
+        controller.transform.position = GameManager.instance.playerSpawnPos.transform.position;
+        HP = HPOrig;
+        updatePlayerUI();
+        //controller.enabled = true;
+
+    }
 
     public void slowSpeed(int slow)
     {
-        if (isSlowed != true)
-        {
-            slowDur = slow;
-            speed = speed / 2;
-            isSlowed = true;
-        } 
+
+        slowDur = slow;
+        speed = speed / 2;
+        isSlowed = true;
     }
 
     public void normalSpeed() {
