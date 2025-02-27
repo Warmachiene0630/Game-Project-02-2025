@@ -11,13 +11,12 @@ public class Damage : MonoBehaviour
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
 
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (type == damageType.moving)
         {
-            rb.linearVelocity = (GameManager.instance.player.transform.position - transform.position).normalized * speed;
+            rb.linearVelocity = transform.forward * speed;
             Destroy(gameObject, destroyTime);
         }
     }
