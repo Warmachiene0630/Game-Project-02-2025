@@ -367,6 +367,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         if (Input.GetButtonDown("Reload"))
         {
             gunList[gunListPos].ammoCur = gunList[gunListPos].ammoMax;
+            aud.PlayOneShot(gunList[gunListPos].reloadSound[Random.Range(0, gunList[gunListPos].reloadSound.Length)], gunList[gunListPos].reloadVol);
         }
 
     }
