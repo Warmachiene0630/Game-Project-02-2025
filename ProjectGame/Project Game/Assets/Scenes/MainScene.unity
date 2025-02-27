@@ -8500,6 +8500,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 872630823}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &873344864
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3840188421864164908, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_Name
+      value: Lava Rock Cluster
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 123.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 39.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
 --- !u!1 &925187060
 GameObject:
   m_ObjectHideFlags: 0
@@ -9012,7 +9069,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7691962365255967914, guid: 6a559d67e4a168448bb14185cc589fd4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.50000095
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7691962365255967914, guid: 6a559d67e4a168448bb14185cc589fd4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19198,6 +19255,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1990317921}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1990646319
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3840188421864164908, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_Name
+      value: Lava Rock Cluster (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 73.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 28.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.18571511
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9826037
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -201.406
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477155377051376989, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 35cf2ed9c0d99174d99579658c111148, type: 3}
 --- !u!1 &2001207260
 GameObject:
   m_ObjectHideFlags: 0
@@ -31635,3 +31749,5 @@ SceneRoots:
   - {fileID: 1468735840}
   - {fileID: 1791655341}
   - {fileID: 340211683}
+  - {fileID: 873344864}
+  - {fileID: 1990646319}

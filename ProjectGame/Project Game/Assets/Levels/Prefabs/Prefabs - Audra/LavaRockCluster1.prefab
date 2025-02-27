@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3269635560301653692}
   - component: {fileID: 3956898499741011859}
   m_Layer: 0
-  m_Name: Lava Rock Cluster
+  m_Name: LavaRockCluster1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
