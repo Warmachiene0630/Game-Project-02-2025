@@ -120,7 +120,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
         if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
         {
-            shoot();
+            if (!GameManager.instance.isPaused)
+            {
+                shoot();
+            }
+            
 
         }
 
@@ -149,7 +153,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
         if (!isSprinting)
         {
-            yield return new WaitForSeconds(0.5f);
+            if (!isSlowed)
+            {
+                yield return new WaitForSeconds(0.5f);
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.7f);
+            }
         }
         else
         {
@@ -367,13 +378,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         if (Input.GetButtonDown("Reload"))
         {
             gunList[gunListPos].ammoCur = gunList[gunListPos].ammoMax;
+            aud.PlayOneShot(gunList[gunListPos].reloadSound[Random.Range(0, gunList[gunListPos].reloadSound.Length)], gunList[gunListPos].reloadVol);
         }
 
     }
 
     IEnumerator flashMuzzle()
     {
-        //muzzleFlash.localEulerAngles = new Vector3(0, 0, Random.Range(0, 360));
+        muzzleFlash.localEulerAngles = new Vector3(0, 0, Random.Range(0, 360));
         muzzleFlash.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.05f);
         muzzleFlash.gameObject.SetActive(false);

@@ -5,7 +5,12 @@ using UnityEngine;
 public class HealthPack : MonoBehaviour
 {
     [SerializeField] int packStrength;
-    
+    [SerializeField] AudioSource aud;
+
+    [Header("----- Audio -----")]
+    public AudioClip healthSound;
+    [Range(0, 1)] public float healthVol;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,7 +32,9 @@ public class HealthPack : MonoBehaviour
             {
                 if (dmg.gainHealth(packStrength))
                 {
+                    aud.PlayOneShot(healthSound, healthVol);
                     Destroy(gameObject);
+                   
                 }
             }
         }

@@ -15,5 +15,7 @@ public class GunStats : ScriptableObject
 
     [Header("----- Audio -----")]
     public AudioClip[] shootSound;
-    public float shootVol;
+    [Range (0,1)] public float shootVol;
+    public AudioClip[] reloadSound;
+    [Range(0, 1)] public float reloadVol;
 }
