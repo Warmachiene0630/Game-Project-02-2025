@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     [SerializeField] LayerMask ignoreLayer;
     [SerializeField] AudioSource aud;
 
+    [SerializeField] PlayerType player;
+
     [Header("----- Stats -----")]
     [Range(1, 10)] public int HP;
     [Range(3, 10)] [SerializeField] float speed;
