@@ -284,16 +284,29 @@ MonoBehaviour:
   controller: {fileID: 1467388755200440996}
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
+  aud: {fileID: 0}
+  player: {fileID: 0}
   HP: 10
   speed: 4
   sprintMod: 2
   jumpSpeed: 3
   jumpMax: 2
   gravity: 4
-  shootDamage: 1
-  shootRate: 2
-  shootDist: 10
+  speedBoostTime: 0
+  damageBoostTime: 0
+  damageBoostAmount: 0
+  gunList: []
+  gunModel: {fileID: 0}
+  muzzleFlash: {fileID: 0}
+  audSteps: []
+  audStepsVol: 0
+  audHurt: []
+  audHurtVol: 0
+  audJump: []
+  audJumpVol: 0
+  isSpeedBoosted: 0
+  isDamageBoosted: 0
 --- !u!136 &7976401438984722490
 CapsuleCollider:
   m_ObjectHideFlags: 0

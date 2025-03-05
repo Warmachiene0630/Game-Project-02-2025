@@ -39728,8 +39728,9 @@ MonoBehaviour:
   controller: {fileID: 1467388754259312022}
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   aud: {fileID: 9080503161497302636}
+  player: {fileID: 0}
   HP: 10
   speed: 4
   sprintMod: 2

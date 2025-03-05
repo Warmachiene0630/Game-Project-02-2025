@@ -19,9 +19,8 @@ public class PlayerType : ScriptableObject
     [Range(1, 5)][SerializeField] int damageBoostAmount;
 
     [Header("----- Bonuses -----")]
-    public int melee;
+    public int meleeBonus;
     public int meleeSpeed;
-    public int hp;
     public int hpRecover;
 
     [Header("----- Audio -----")]
