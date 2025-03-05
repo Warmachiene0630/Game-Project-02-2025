@@ -4,6 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
+<<<<<<< HEAD
+=======
+  - HealthPack
+>>>>>>> main
   - Player Spawn Pos
   layers:
   - Default
@@ -16,12 +20,12 @@ TagManager:
   - play
   - playbul
   - enembul
+  - lava
+  - plane
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - InvinciblePlayer
+  - rocks
   - 
   - 
   - 
