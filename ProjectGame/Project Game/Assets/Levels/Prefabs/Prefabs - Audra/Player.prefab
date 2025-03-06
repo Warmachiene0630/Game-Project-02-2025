@@ -286,25 +286,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   aud: {fileID: 0}
-  player: {fileID: 0}
-  HP: 10
-  speed: 4
-  sprintMod: 2
-  jumpSpeed: 3
-  jumpMax: 2
-  gravity: 4
-  speedBoostTime: 0
-  damageBoostTime: 0
-  damageBoostAmount: 0
+  player:
+  - {fileID: 11400000, guid: f0a4dfa29d8b8f143b8fee6a95efcebf, type: 2}
+  - {fileID: 11400000, guid: 94f99966b64e50d469a6b1026d9ee082, type: 2}
+  listPos: 0
+  gravity: 15
+  speedBoostTime: 5
+  damageBoostTime: 5
+  damageBoostAmount: 1
   gunList: []
   gunModel: {fileID: 0}
   muzzleFlash: {fileID: 0}
-  audSteps: []
-  audStepsVol: 0
-  audHurt: []
-  audHurtVol: 0
-  audJump: []
-  audJumpVol: 0
+  HPCurr: 0
   isSpeedBoosted: 0
   isDamageBoosted: 0
 --- !u!136 &7976401438984722490

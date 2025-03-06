@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class PlayerType : ScriptableObject
 {
+    [Header("----- Animator -----")]
+    [SerializeField] Animator anim;
+
     [Header("----- Model -----")]
     public GameObject model;
 
     [Header("----- Stats -----")]
-    [Range(1, 10)] public int HP;
-    [Range(3, 10)][SerializeField] float speed;
-    [Range(2, 5)][SerializeField] float sprintMod;
-    [Range(5, 20)][SerializeField] int jumpSpeed;
-    [Range(1, 3)][SerializeField] int jumpMax;
-    [Range(15, 45)][SerializeField] int gravity;
-    [Range(5, 15)][SerializeField] float speedBoostTime;
-    [Range(5, 15)][SerializeField] float damageBoostTime;
-    [Range(1, 5)][SerializeField] int damageBoostAmount;
+    [Range(1, 10)] public int HPMax;
+    [Range(3, 10)]public float speed;
+    [Range(2, 5)]public float sprintMod;
+    [Range(5, 20)]public int jumpSpeed;
+    [Range(1, 3)]public int jumpMax;
+
 
     [Header("----- Bonuses -----")]
     public int meleeBonus;
@@ -24,10 +24,10 @@ public class PlayerType : ScriptableObject
     public int hpRecover;
 
     [Header("----- Audio -----")]
-    [SerializeField] AudioClip[] audSteps;
-    [Range(0, 1)][SerializeField] float audStepsVol;
-    [SerializeField] AudioClip[] audHurt;
-    [Range(0, 1)][SerializeField] float audHurtVol;
-    [SerializeField] AudioClip[] audJump;
-    [Range(0, 1)][SerializeField] float audJumpVol;
+    public AudioClip[] audSteps;
+    [Range(0, 1)]public float audStepsVol;
+    public AudioClip[] audHurt;
+    [Range(0, 1)]public float audHurtVol;
+    public AudioClip[] audJump;
+    [Range(0, 1)]public float audJumpVol;
 }

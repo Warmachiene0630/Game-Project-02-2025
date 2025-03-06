@@ -12,22 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e2932a336240a64ab0af4b03c16dbe1, type: 3}
   m_Name: BountyHunter
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
   model: {fileID: 1021034596772366858, guid: 7166087c57f18214f9cc1622ff2e3113, type: 3}
-  HP: 8
+  HPMax: 1
   speed: 5
   sprintMod: 2
-  jumpSpeed: 4
+  jumpSpeed: 5
   jumpMax: 2
-  gravity: 4
-  speedBoostTime: 0
-  damageBoostTime: 0
-  damageBoostAmount: 0
   meleeBonus: 0
   meleeSpeed: 1
   hpRecover: 0
-  audSteps: []
+  audSteps:
+  - {fileID: 8300000, guid: 2aaf9becbe6bb484aab750d3f7172012, type: 3}
+  - {fileID: 8300000, guid: 67400f81283fad842bfb118e29d18baa, type: 3}
+  - {fileID: 8300000, guid: f43a8d5fcbbcd5343b468d56b0a8964d, type: 3}
+  - {fileID: 8300000, guid: d992e5ab97b9aa8409f83e26d07d76e6, type: 3}
+  - {fileID: 8300000, guid: 6a8981d8d28d88c438aa0ef5c43fc06d, type: 3}
   audStepsVol: 0.2
-  audHurt: []
+  audHurt:
+  - {fileID: 8300000, guid: 04ab2f1b6b1d94f499b73dbf80854fa1, type: 3}
+  - {fileID: 8300000, guid: 4401523f8ce1fc246903d0d07664c350, type: 3}
+  - {fileID: 8300000, guid: e83af5cf0e369ee41873fc539ad2d3c3, type: 3}
+  - {fileID: 8300000, guid: 97c3deadcd597de49a222ea681c3290a, type: 3}
   audHurtVol: 0.2
-  audJump: []
+  audJump:
+  - {fileID: 8300000, guid: 4819eca97b9cad8448674e6401b83768, type: 3}
+  - {fileID: 8300000, guid: e35e9a847739edf419a168754a28cfc9, type: 3}
+  - {fileID: 8300000, guid: 1e9ecb3bd20906a4b829071ee879baa0, type: 3}
   audJumpVol: 0.2

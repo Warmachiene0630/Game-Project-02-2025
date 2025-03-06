@@ -12,16 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e2932a336240a64ab0af4b03c16dbe1, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
   model: {fileID: 4132312772176831909, guid: 64b182395c0b6744a920c74bce3ece13, type: 3}
-  HP: 10
+  HPMax: 1
   speed: 4
   sprintMod: 2
-  jumpSpeed: 3
+  jumpSpeed: 5
   jumpMax: 2
-  gravity: 4
-  speedBoostTime: 0
-  damageBoostTime: 0
-  damageBoostAmount: 0
   meleeBonus: 0
   meleeSpeed: 1
   hpRecover: 0

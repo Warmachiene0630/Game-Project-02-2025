@@ -9,4 +9,8 @@ public interface IPickUp
     {
 
     }
+    public void getMeleeStats(meleeStats melee)
+    {
+
+    }
 }
