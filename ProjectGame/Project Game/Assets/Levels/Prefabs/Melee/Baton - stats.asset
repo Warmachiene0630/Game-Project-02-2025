@@ -15,7 +15,8 @@ MonoBehaviour:
   model: {fileID: 5009325343584731918, guid: f9015f5d156a84c429f2fea26e65abf3, type: 3}
   meleeDamage: 2
   meleeSpeed: 0.5
-  hitEffect: {fileID: 970440554703164915, guid: 47096eff328e11a418ace7db2d72aa97, type: 3}
+  twoHanded: 0
+  hitEffect: {fileID: 0}
   hitSound: []
   hitVol: 0
   swingSound: []

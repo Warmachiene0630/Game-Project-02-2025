@@ -29,7 +29,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     [Header("----- Melee -----")]
     [SerializeField] meleeStats meleeWeapon;
-    [SerializeField] GameObject meleeModel;
+    [SerializeField] GameObject melee;
+    public Collider[] meleeCol;
+    int melColPos;
+
     int meleeDamage;
     float meleeSpeed;
     bool meleeSelected;
@@ -127,7 +130,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         }
         else
         {
-            if (Input.GetButton("Fire1") && meleeSelected != null && shootTimer >= meleeSpeed){
+            if (Input.GetButton("Fire1") && meleeWeapon != null && shootTimer >= meleeSpeed){
                 swing();
             }
         }
@@ -225,8 +228,31 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     void swing()
     {
+        isTwoHanded();
         
     }
+    void isTwoHanded()
+    {
+        if (meleeWeapon.twoHanded == true)
+        {
+            melColPos = 0;
+        }
+        else
+        {
+            melColPos = 1;
+        }
+    }
+
+    public void weaponColOn()
+    {
+        meleeCol[melColPos].enabled = true;  
+    }
+
+    public void weaponColOff()
+    {
+        meleeCol[melColPos].enabled = false;
+    }
+
 
     public void takeDamage(int amount)
     {
@@ -386,8 +412,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         if (meleeSelected == true)
         {
-            gunModel.GetComponent<MeshFilter>().sharedMesh = meleeModel.GetComponent<MeshFilter>().sharedMesh;
-            gunModel.GetComponent<MeshRenderer>().sharedMaterial = meleeModel.GetComponent<MeshRenderer>().sharedMaterial;
+            gunModel.GetComponent<MeshFilter>().sharedMesh = melee.GetComponent<MeshFilter>().sharedMesh;
+            gunModel.GetComponent<MeshRenderer>().sharedMaterial = melee.GetComponent<MeshRenderer>().sharedMaterial;
         }
         else {
             shootDamage = gunList[gunListPos].shootDamage;

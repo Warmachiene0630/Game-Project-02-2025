@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class PickUpKelee : MonoBehaviour
+public class PickUpMelee : MonoBehaviour
 {
     [SerializeField] meleeStats melee;
-
+    [SerializeField] Collider col;
 
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)

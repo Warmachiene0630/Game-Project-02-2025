@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BountyHunter
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  model: {fileID: 1021034596772366858, guid: 7166087c57f18214f9cc1622ff2e3113, type: 3}
+  model: {fileID: 1021034596772366858, guid: d73eeeddd4ebc5a4881ed4964ee96890, type: 3}
   HPMax: 1
   speed: 5
   sprintMod: 2
