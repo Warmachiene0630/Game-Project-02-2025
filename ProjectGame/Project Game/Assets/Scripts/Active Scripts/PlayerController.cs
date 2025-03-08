@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage, IPickUp
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     int meleeDamage;
     float meleeSpeed;
     bool meleeSelected;
+    float playerSpeed;
 
     int jumpCount;
     int dashCount;
@@ -68,7 +70,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         HPCurr = player[listPos].HPMax;
         updatePlayerUI();
         isSlowed = false;
-        meleeSelected = false;
+        if (gunList.Count() > 0) {
+            meleeSelected = false;
+        }
+        else
+        {
+            meleeSelected = true;
+        }
+
     }
 
     // Update is called once per frame
@@ -87,6 +96,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     void movement()
     {
+
         if (controller.isGrounded)
         {
             if (moveDir.magnitude > 0.3f && !isPlayingSteps)
@@ -103,10 +113,21 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         controller.Move(moveDir * player[listPos].speed * Time.deltaTime);
         jump();
         controller.Move(playerVel * Time.deltaTime);
+
         playerVel.y -= gravity * Time.deltaTime;
 
         shootTimer += Time.deltaTime;
         speedBoostTimer -= Time.deltaTime;
+
+        //cheks whick animation to play
+        if (controller.isGrounded)
+        {
+            playerSpeed = controller.velocity.normalized.magnitude;
+            getAnimDir();
+            float animCurSpeed = anim.GetFloat("Speed");
+            anim.SetBool("Melee", meleeSelected);
+            anim.SetFloat("Speed", animCurSpeed);
+        }
 
         //checks for speed boost, if there was a boost and it ended reverts speed back to original
         if(isSpeedBoosted && speedBoostTimer <= 0)
@@ -456,6 +477,29 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         meleeDamage = meleeWeapon.meleeDamage;
         meleeSpeed = meleeWeapon.meleeSpeed;
     }
+    void getAnimDir()
+    {
+        if (moveDir.x > 0)
+        {
+            anim.SetBool("Right", true);
+        }
+        else
+        {
+            anim.SetBool("Right", false);
+        }
+        if (moveDir.z > 0)
+        {
+            anim.SetBool("For", true);
+        }
+        else if(moveDir.z < 0)
+        {
+            anim.SetBool("For", false);
+        }
+        else
+        {
+            anim.SetBool("No For", true);
+        }
 
+    }
 
 }
