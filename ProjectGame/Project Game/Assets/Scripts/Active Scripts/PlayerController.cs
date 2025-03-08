@@ -142,6 +142,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
             isDamageBoosted = false;
             shootDamage = shootDamage - damageBoostAmount;
         }
+        if (Input.GetButton("Melee"))
+        {
+            selectMelee();
+        }
+
         if (meleeSelected == false)
         {
             if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
@@ -252,10 +257,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     void swing()
     {
+        shootTimer = 0;
         isTwoHanded();
-        if (meleeWeapon.twoHanded)
+        if (meleeWeapon.twoHanded == true)
         {
-
+            anim.SetTrigger("Swing 2");
+        }
+        else
+        {
+            anim.SetTrigger("Swing 1");
         }
         
     }
@@ -415,8 +425,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     void selectGun()
     {
 
-        
-
         if (meleeSelected != true) {
             if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
             {
@@ -479,19 +487,21 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     }
     void getAnimDir()
     {
-        if (moveDir.x > 0)
+        if (playerVel.x > 0)
         {
             anim.SetBool("Right", true);
         }
-        else
-        {
+        else if(playerVel.x < 0){
             anim.SetBool("Right", false);
+        }else
+        {
+            anim.SetBool("No Right", false);
         }
-        if (moveDir.z > 0)
+        if (playerVel.z > 0)
         {
             anim.SetBool("For", true);
         }
-        else if(moveDir.z < 0)
+        else if(playerVel.z < 0)
         {
             anim.SetBool("For", false);
         }
