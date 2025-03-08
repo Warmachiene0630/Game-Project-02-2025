@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerType : ScriptableObject
 {
-    [Header("----- Animator -----")]
-    [SerializeField] Animator anim;
 
     [Header("----- Model -----")]
     public GameObject model;

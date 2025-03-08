@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage, IPickUp
 {
+    [Header("----- Animator -----")]
+    [SerializeField] Animator anim;
+
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
@@ -229,6 +232,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     void swing()
     {
         isTwoHanded();
+        if (meleeWeapon.twoHanded)
+        {
+
+        }
         
     }
     void isTwoHanded()
