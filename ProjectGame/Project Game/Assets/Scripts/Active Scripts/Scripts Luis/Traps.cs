@@ -86,7 +86,7 @@ public class Traps : MonoBehaviour
 
     private bool canSeePlayer()
     {
-        playerDir = GameManager.instance.player.transform.position - shootPos.position;
+        playerDir = new Vector3(GameManager.instance.player.transform.position.x - transform.position.x, GameManager.instance.player.transform.position.y - transform.position.y + 1, GameManager.instance.player.transform.position.z - transform.position.z);
 
         RaycastHit hit;
         if (Physics.Raycast(shootPos.position, playerDir, out hit))

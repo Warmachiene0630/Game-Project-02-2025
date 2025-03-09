@@ -487,23 +487,28 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     }
     void getAnimDir()
     {
-        if (playerVel.x > 0)
+        if (Input.GetAxis("Horizontal") > 0)
         {
             anim.SetBool("Right", true);
-        }
-        else if(playerVel.x < 0){
-            anim.SetBool("Right", false);
-        }else
-        {
             anim.SetBool("No Right", false);
         }
-        if (playerVel.z > 0)
+        else if(Input.GetAxis("Horizontal") < 0){
+            anim.SetBool("Right", false);
+            anim.SetBool("No Right", false);
+        }
+        else
+        {
+            anim.SetBool("No Right", true);
+        }
+        if (Input.GetAxis("Vertical") > 0)
         {
             anim.SetBool("For", true);
+            anim.SetBool("No For", false);
         }
-        else if(playerVel.z < 0)
+        else if(Input.GetAxis("Vertical") < 0)
         {
             anim.SetBool("For", false);
+            anim.SetBool("No For", false);
         }
         else
         {
