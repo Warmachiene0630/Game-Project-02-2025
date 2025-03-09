@@ -120,14 +120,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         speedBoostTimer -= Time.deltaTime;
 
         //cheks whick animation to play
-        if (controller.isGrounded)
-        {
-            playerSpeed = controller.velocity.normalized.magnitude;
-            getAnimDir();
-            float animCurSpeed = anim.GetFloat("Speed");
-            anim.SetBool("Melee", meleeSelected);
-            anim.SetFloat("Speed", animCurSpeed);
-        }
+        playerSpeed = controller.velocity.normalized.magnitude;
+        getAnimDir();
+        float animCurSpeed = anim.GetFloat("Speed");
+        anim.SetBool("Melee", meleeSelected);
+        anim.SetFloat("Speed", Mathf.MoveTowards(animCurSpeed, playerSpeed, Time.deltaTime));
 
         //checks for speed boost, if there was a boost and it ended reverts speed back to original
         if(isSpeedBoosted && speedBoostTimer <= 0)
