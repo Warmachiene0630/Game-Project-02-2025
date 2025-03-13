@@ -58,6 +58,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     float slowTimer;
     float slowDur;
 
+    private Vector3 velocity;
+    private bool isSliding = false;
+    private float slideFriction = 1f;
+    private float slideSpeed = 1f;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -79,7 +84,19 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         if (isSlowed == true) {
             checkSlow();
         }
-    } 
+    }
+
+    public void SetSliding(bool sliding, float friction, float speed)
+    {
+        isSliding = sliding;
+        slideFriction = friction;
+        slideSpeed = speed;
+
+        if (sliding)
+        {
+            velocity = new Vector3(velocity.x * slideSpeed, velocity.y, velocity.z * slideSpeed);
+        }
+    }
 
     void movement()
     {
