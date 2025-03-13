@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
     [SerializeField] AudioSource aud;
-
+    [SerializeField] GameObject playerModel;
     [SerializeField] List<PlayerType> player;
     public int listPos;
 
@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerModel.GetComponent<SkinnedMeshRenderer>().sharedMesh = player[listPos].model.GetComponent<SkinnedMeshRenderer>().sharedMesh;
         HPCurr = player[listPos].HPMax;
         updatePlayerUI();
         isSlowed = false;
@@ -76,6 +77,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         else
         {
             meleeSelected = true;
+            changeGun();
         }
 
     }
@@ -258,13 +260,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         isTwoHanded();
         if (meleeWeapon.twoHanded == true)
         {
-            anim.SetTrigger("Swing 2");
-        }
-        else
-        {
             anim.SetTrigger("Swing 1");
-        }
-        
+        }        
     }
     void isTwoHanded()
     {
@@ -449,13 +446,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
             gunModel.GetComponent<MeshRenderer>().sharedMaterial = melee.GetComponent<MeshRenderer>().sharedMaterial;
         }
         else {
-            shootDamage = gunList[gunListPos].shootDamage;
-            shootDist = gunList[gunListPos].shootDist;
-            shootRate = gunList[gunListPos].shootRate;
+            if (gunList.Count > 0) {
+                shootDamage = gunList[gunListPos].shootDamage;
+                shootDist = gunList[gunListPos].shootDist;
+                shootRate = gunList[gunListPos].shootRate;
 
-            gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].model.GetComponent<MeshFilter>().sharedMesh;
-            gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].model.GetComponent<MeshRenderer>().sharedMaterial;
-        } 
+                gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].model.GetComponent<MeshFilter>().sharedMesh;
+                gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].model.GetComponent<MeshRenderer>().sharedMaterial;
+            } 
+        }
     }
 
     void gunReload()

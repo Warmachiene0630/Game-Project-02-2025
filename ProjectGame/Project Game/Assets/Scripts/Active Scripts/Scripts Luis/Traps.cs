@@ -17,7 +17,7 @@ public class Traps : MonoBehaviour
     Vector3 playerDir;
     private float angleToPlayer;
     public bool slowTrap;
-    
+    RaycastHit hit;
 
     private float trapTimer;
     private bool shooting;
@@ -25,7 +25,9 @@ public class Traps : MonoBehaviour
     [SerializeField] float trapRate;
     [SerializeField] float trapDelay;
     [SerializeField] float bulletsFire;
+    [SerializeField] LayerMask ignoreLayer;
     private float bulletsShot;
+    float seePlayerTimer;
 
 
     [SerializeField] Transform shootPos;
@@ -46,13 +48,14 @@ public class Traps : MonoBehaviour
         trapTimer += Time.deltaTime;
 
 
-
+        canSeePlayer();
         
         if (followPlayer == true && canSeePlayer() == true && shooting == true)
         {
             moveTurret();
             moveBarrel();
         }
+        Debug.DrawRay(shootPos.position, playerDir, Color.red);
         angleToPlayer = Vector3.Angle(playerDir, shootPos.transform.forward);
         if (trapShot == false)
         {
@@ -86,13 +89,12 @@ public class Traps : MonoBehaviour
 
     private bool canSeePlayer()
     {
-        playerDir = new Vector3(GameManager.instance.player.transform.position.x - transform.position.x, GameManager.instance.player.transform.position.y - transform.position.y + 1, GameManager.instance.player.transform.position.z - transform.position.z);
-
-        RaycastHit hit;
-        if (Physics.Raycast(shootPos.position, playerDir, out hit))
+        playerDir = new Vector3(GameManager.instance.player.transform.position.x - shootPos.transform.position.x, GameManager.instance.player.transform.position.y - 0.4f, GameManager.instance.player.transform.position.z - shootPos.transform.position.z);
+        if (Physics.Raycast(shootPos.position, playerDir, out hit, collider.radius, ~ignoreLayer))
         {
             if (hit.collider.CompareTag("Player"))
             {
+                seePlayerTimer += Time.deltaTime;
                 return true;
             }
         }
@@ -129,7 +131,7 @@ public class Traps : MonoBehaviour
 
     void moveBarrel()
     {
-        Quaternion rot = Quaternion.LookRotation(playerDir);
+        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, playerDir.y, playerDir.z));
         barrel.transform.rotation = Quaternion.Lerp(barrel.transform.rotation, rot, Time.deltaTime * facePlayerSpeed);
     }
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4779222424309044}
   - component: {fileID: 33878293007528876}
   - component: {fileID: 23364559723917138}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CannonG_Plate00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 4905286732937208}
   - component: {fileID: 198190432169522098}
   - component: {fileID: 199449255769242030}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FireFx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4946,7 +4946,7 @@ GameObject:
   - component: {fileID: 4914773783399600}
   - component: {fileID: 33557720888194326}
   - component: {fileID: 23430875037819608}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CannonG_Guard00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5032,7 +5032,7 @@ GameObject:
   - component: {fileID: 4597034265451690}
   - component: {fileID: 33575077343818718}
   - component: {fileID: 23884825674443308}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CannonG_Barrel02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5118,7 +5118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4722236510932744}
   - component: {fileID: 5079000749700552387}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5179,7 +5179,7 @@ GameObject:
   - component: {fileID: 4595654756050798}
   - component: {fileID: 4222580272182917319}
   - component: {fileID: 8547824139444108421}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TrackingTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5247,6 +5247,9 @@ MonoBehaviour:
   trapRate: 0.2
   trapDelay: 2
   bulletsFire: 5
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 4
   shootPos: {fileID: 4703932692914808}
   cannonBall: {fileID: 1627521441993660, guid: 12ea0a574b594264685afffd52fff036, type: 3}
 --- !u!1 &1931211189434318
@@ -5258,7 +5261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4703932692914808}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
