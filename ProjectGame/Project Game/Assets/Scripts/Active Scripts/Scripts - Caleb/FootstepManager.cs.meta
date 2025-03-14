@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 07f5c4a7f0d6ad5468c00081a4882ac2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - footstepAudio: {instanceID: 0}
+  - defaultFootstep: {fileID: 8300000, guid: 57e8196011a976440b7344ce3fce8c3b, type: 3}
+  - grassFootstep: {fileID: 8300000, guid: fb9c60469a4a4b24180765237c78ee21, type: 3}
+  - iceFootstep: {fileID: 8300000, guid: 57e8196011a976440b7344ce3fce8c3b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
