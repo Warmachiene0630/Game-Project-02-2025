@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e2932a336240a64ab0af4b03c16dbe1, type: 3}
   m_Name: BountyHunter
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  model: {fileID: 1021034596772366858, guid: d73eeeddd4ebc5a4881ed4964ee96890, type: 3}
-  HPMax: 1
+  model: {fileID: 6545087010582928603, guid: 7275b7bcc6fe16a44bb0f9f6175cc1d5, type: 3}
+  HPMax: 7
   speed: 5
-  sprintMod: 2
+  sprintMod: 2.35
   jumpSpeed: 5
   jumpMax: 2
   meleeBonus: 0

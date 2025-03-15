@@ -6,6 +6,9 @@ using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Levels")]
+    public GameObject[] sceneList;
+
     [Header("----- Components -----")]
     public static GameManager instance;
     public GameObject player;
