@@ -35,8 +35,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] Slider sensSlider;
 
     public Image playerHPBar;
+    public Image playerFuelBar;
     public GameObject playerDamageScreen;
     public GameObject playerHealthScreen;
+    public GameObject playerDashScreen;
 
 
     [Header("----- Popups -----")]

@@ -9,4 +9,6 @@ public interface IPickUp
     {
 
     }
+
+    bool gainFuel(float amount);
 }

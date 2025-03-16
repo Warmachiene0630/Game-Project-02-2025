@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     [Range(1, 10)] public int HP;
     [Range(3, 10)] [SerializeField] float speed;
     [Range(2, 5)] [SerializeField] float sprintMod;
+    [SerializeField] float dashSpeed;
+    [SerializeField] float dashTime;
     [Range(5, 20)] [SerializeField] int jumpSpeed;
     [Range(1, 3)] [SerializeField] int jumpMax;
     [Range(15, 45)] [SerializeField] int gravity;
@@ -29,6 +31,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     int shootDist;
     int gunListPos;
 
+    [Header("----- Jetpack -----")]
+    [Range(0, 1)] [SerializeField] float holdTime;
+    [Range(10, 20)] [SerializeField] float flightSpeed;
+    [Range(5, 20)] [SerializeField] int fuelMax;
+    [SerializeField] bool hasJetpack;
+    bool jumpPressed = false;
+    float timeHeld = 0;
+    float fuel;
+
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audSteps;
     [Range(0, 1)][SerializeField] float audStepsVol;
@@ -36,6 +47,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     [Range(0, 1)][SerializeField] float audHurtVol;
     [SerializeField] AudioClip[] audJump;
     [Range(0, 1)][SerializeField] float audJumpVol;
+    [SerializeField] AudioClip[] audFly;
+    [Range(0, 1)][SerializeField] float audFlyVol;
 
     int jumpCount;
     int dashCount;
@@ -50,6 +63,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     Vector3 playerVel;
 
     bool isSprinting;
+    bool isDashing;
+    bool isFlying;
     bool isPlayingSteps;
     public bool isSpeedBoosted;
     public bool isDamageBoosted;
@@ -63,6 +78,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     void Start()
     {
         HPOrig = HP;
+        fuel = fuelMax;
         updatePlayerUI();
         isSlowed = false;
     }
@@ -90,7 +106,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
                 StartCoroutine(playSteps());
             }
             jumpCount = 0;
-            dashCount = 0;
+            if (isDashing == false) 
+            { 
+                dashCount = 0; 
+            }
+            isFlying = false;
             playerVel = Vector3.zero;
         }
 
@@ -98,6 +118,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
             (Input.GetAxis("Vertical") * transform.forward);
         controller.Move(moveDir * speed * Time.deltaTime);
         jump();
+        dash();
+        if (hasJetpack)
+        { 
+            fly(); 
+        }
         controller.Move(playerVel * Time.deltaTime);
         playerVel.y -= gravity * Time.deltaTime;
 
@@ -175,6 +200,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         updatePlayerUI();
         controller.transform.position = GameManager.instance.playerSpawnPos.transform.position;
         HP = HPOrig;
+        fuel = fuelMax;
         updatePlayerUI();
 
 
@@ -188,11 +214,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
             playerVel.y = jumpSpeed;
             aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
         }
-        else if (Input.GetButtonDown("Jump") && dashCount == 0)
-        {
-            dashCount++;
-            StartCoroutine(dash());
-        }    
     }
 
     void shoot()
@@ -270,13 +291,33 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     public void updatePlayerUI()
     {
         GameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+        GameManager.instance.playerFuelBar.fillAmount = (float)fuel / fuelMax;
     }
 
-    IEnumerator dash()
+    void dash()
     {
-        speed *= sprintMod;
-        yield return new WaitForSeconds(0.5f);
-        speed /= sprintMod;
+        if (Input.GetButtonDown("Dash") && dashCount < 1)
+        {
+            dashCount++;
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
+            StartCoroutine(dashCoroutine());
+        }
+    }
+
+    IEnumerator dashCoroutine()
+    {
+        float startTime = Time.time;
+        Vector3 dashDir = Camera.main.transform.forward;
+        dashDir.y = 0.5f;
+        GameManager.instance.playerDashScreen.SetActive(true);
+        isDashing = true;
+        while (Time.time < startTime + dashTime)
+        {
+            controller.Move(dashDir * dashSpeed * Time.deltaTime);
+            yield return null;
+        }
+        GameManager.instance.playerDashScreen.SetActive(false);
+        isDashing = false;
     }
 
     //used to fill HP to original
@@ -389,5 +430,52 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         muzzleFlash.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.05f);
         muzzleFlash.gameObject.SetActive(false);
+    }
+
+    void fly()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpPressed = true;
+            if (isFlying)
+            {
+                timeHeld = holdTime;
+            }
+        }
+        else if (Input.GetButtonUp("Jump") || jumpPressed == false || fuel <= 0)
+        {
+            jumpPressed = false;
+            timeHeld = 0;
+            aud.Stop();
+        }
+        timeHeld += Time.deltaTime;
+        if (jumpPressed == true && timeHeld >= holdTime && fuel > 0)
+        {
+            aud.PlayOneShot(audFly[0], audFlyVol);
+            playerVel.y = 1 * flightSpeed; 
+            isFlying = true;
+            fuel -= Time.deltaTime * (flightSpeed / 2);
+            updatePlayerUI();
+        }
+    }
+
+    public bool gainFuel(float amount)
+    {
+        bool fuelGained;
+        if (fuel < fuelMax)
+        {
+            fuel += amount;
+            if (fuel > fuelMax)
+            {
+                fuel = fuelMax;
+            }
+            fuelGained = true;
+        }
+        else
+        {
+            fuelGained = false;
+        }
+        updatePlayerUI();
+        return fuelGained;
     }
 }
