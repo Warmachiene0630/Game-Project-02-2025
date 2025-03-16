@@ -75,7 +75,6 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
         aud.PlayOneShot(backgroundMusic, musicVol);
-        loadMainMenu();
     }
 
     // Update is called once per frame
@@ -143,13 +142,6 @@ public class GameManager : MonoBehaviour
     {
         statePause();
         menuActive = menuLose;
-        menuActive.SetActive(true);
-    }
-
-    public void loadMainMenu()
-    {
-        statePause();
-        menuActive = menuMain;
         menuActive.SetActive(true);
     }
 
