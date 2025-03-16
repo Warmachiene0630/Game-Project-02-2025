@@ -75,8 +75,7 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
         aud.PlayOneShot(backgroundMusic, musicVol);
-        menuActive = menuMain;
-        menuActive.SetActive(true);
+        //loadMainMenu();
     }
 
     // Update is called once per frame
@@ -86,9 +85,10 @@ public class GameManager : MonoBehaviour
         {
             if (menuActive == null)
             {
-                statePause();
-                menuActive = menuPause;
-                menuActive.SetActive(true);
+                //statePause();
+                //menuActive = menuPause;
+                //menuActive.SetActive(true);
+                openPauseMenu();
             }
             else if (menuActive == menuPause)
             {
@@ -97,6 +97,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void openPauseMenu()
+    {
+        statePause();
+        menuActive = menuPause;
+        menuActive.SetActive(true);
+    }
     public void statePause()
     {
         isPaused = !isPaused;
@@ -111,9 +117,14 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        menuActive.SetActive(false);
+        resetMenu();
         menuActive = null;
         resetStorePopups();
+    }
+
+    public void resetMenu()
+    {
+        menuActive.SetActive(false);
     }
 
     public void updateGameGoal(int amount)
@@ -135,6 +146,13 @@ public class GameManager : MonoBehaviour
         menuActive.SetActive(true);
     }
 
+    public void loadMainMenu()
+    {
+        statePause();
+        menuActive = menuMain;
+        menuActive.SetActive(true);
+    }
+
 
     public void settings()
     {
@@ -149,6 +167,14 @@ public class GameManager : MonoBehaviour
         menuActive.SetActive(false);
         statePause();
         menuActive = menuSens;
+        menuActive.SetActive(true);
+    }
+
+    public void audioMenu()
+    {
+        menuActive.SetActive(false);
+        statePause();
+        menuActive = menuAudio;
         menuActive.SetActive(true);
     }
 

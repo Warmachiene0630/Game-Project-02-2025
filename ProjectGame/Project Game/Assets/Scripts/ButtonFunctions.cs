@@ -33,21 +33,32 @@ public class ButtonFunctions : MonoBehaviour
         {
             camScript.setSens(sensOrig);
         }
-        GameManager.instance.stateUnpause();
+        //GameManager.instance.stateUnpause();
+        GameManager.instance.resetMenu();
+        GameManager.instance.openPauseMenu();
     }
 
     public void backPause()
     {
-        GameManager.instance.statePause();
+        //GameManager.instance.stateUnpause();
+        GameManager.instance.resetMenu();
+        GameManager.instance.openPauseMenu();
     }
 
     public void backSett()
     {
+        //GameManager.instance.stateUnpause();
+        GameManager.instance.resetMenu();
         GameManager.instance.settings();
     }
     public void openSens()
     {
         GameManager.instance.sensitivity();
+    }
+
+    public void openAudio()
+    {
+        GameManager.instance.audioMenu();
     }
 
     public void quit()
