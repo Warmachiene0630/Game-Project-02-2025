@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
         aud.PlayOneShot(backgroundMusic, musicVol);
-        //loadMainMenu();
+        loadMainMenu();
     }
 
     // Update is called once per frame
