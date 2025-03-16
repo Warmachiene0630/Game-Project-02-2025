@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuSens;
     [SerializeField] GameObject menuMerchant;
+    [SerializeField] GameObject menuMain;
+    [SerializeField] GameObject menuAudio;
     public bool isPaused;
 
     [Header("----- UI -----")]
@@ -73,6 +75,8 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
         aud.PlayOneShot(backgroundMusic, musicVol);
+        menuActive = menuMain;
+        menuActive.SetActive(true);
     }
 
     // Update is called once per frame
