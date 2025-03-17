@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     int jumpCount;
     int dashCount;
     int HPOrig;
+    int lifeCount;
 
     float shootTimer;
     float speedBoostTimer;
@@ -63,14 +64,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     void Start()
     {
         HPOrig = HP;
+        lifeCount = 3;
         updatePlayerUI();
         isSlowed = false;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if disabled is false, then movement is allowed
         
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.red);
 
@@ -226,7 +228,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         updatePlayerUI();
         aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
 
-        if (HP <= 0)
+        if(HP <= 0)
+        {
+            lifeCount = lifeCount - 1;
+            HP = HPOrig;
+            updatePlayerUI();
+        }
+
+        if (lifeCount <= 0)
         {
             GameManager.instance.youLose();
         }
@@ -270,6 +279,18 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     public void updatePlayerUI()
     {
         GameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+        if(lifeCount == 2)
+        {
+            GameManager.instance.life3.fillAmount = 0;
+        }
+        if (lifeCount == 1)
+        {
+            GameManager.instance.life2.fillAmount = 0;
+        }
+        if (lifeCount == 0)
+        {
+            GameManager.instance.life1.fillAmount = 0;
+        }
     }
 
     IEnumerator dash()

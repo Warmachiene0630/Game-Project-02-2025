@@ -45,6 +45,7 @@ public class VolumeSettings : MonoBehaviour
         
     }
 
+
     public void SetMusicVol()
     {
         float vol = musicSlider.value;

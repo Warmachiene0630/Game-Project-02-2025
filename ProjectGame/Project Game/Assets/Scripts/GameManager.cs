@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
     public Image playerHPBar;
     public GameObject playerDamageScreen;
     public GameObject playerHealthScreen;
+    public Image life1;
+    public Image life2;
+    public Image life3;
 
 
     [Header("----- Popups -----")]
