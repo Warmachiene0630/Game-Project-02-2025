@@ -25,13 +25,28 @@ public class gamemanager : MonoBehaviour
     int goalCount;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+     void Awake()
+{
+    if (instance == null)
     {
         instance = this;
-        player = GameObject.FindWithTag("Player");
-        playerScript = player.GetComponent<playerController>();
-        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
+        DontDestroyOnLoad(gameObject);
     }
+    else
+    {
+        Destroy(gameObject);
+        return;
+    }
+
+    if (SceneManager.GetActiveScene().name != "MainMenu")
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    Time.timeScale = 1;
+    Cursor.visible = true;
+    Cursor.lockState = CursorLockMode.None;
+}
 
     // Update is called once per frame
     void Update()
@@ -89,5 +104,9 @@ public class gamemanager : MonoBehaviour
         menuActive.SetActive(true);
     }
 
-
+     public void StartGame()
+    {
+        SceneManager.LoadScene("MainScene");
+        stateUnpause();
+    }
 }

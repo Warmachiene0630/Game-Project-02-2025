@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
-using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
     public GameObject playerDamageScreen;
     public GameObject playerHealthScreen;
 
-
     [Header("----- Popups -----")]
     public GameObject teleportPopup;
     public GameObject merchantPopup;
@@ -61,18 +60,48 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioClip backgroundMusic;
     [Range(0, 1)][SerializeField] float musicVol;
 
-
     public GameObject playerSpawnPos;
     public GameObject checkpointPopup;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Start is called before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // Ensure Main Menu is the first scene to load
+        if (SceneManager.GetActiveScene().name != "MainMenu - Caleb")
+        {
+            SceneManager.LoadScene("MainMenu - Caleb");
+            return; // Prevent further execution until Main Menu is loaded
+        }
+
+        // Ensure UI and Cursor Settings
+        Time.timeScale = 1;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        // Try to find player only if not in Main Menu
         player = GameObject.FindWithTag("Player");
-        playerScript = player.GetComponent<PlayerController>();
-        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
-        aud.PlayOneShot(backgroundMusic, musicVol);
+        if (player != null)
+        {
+            playerScript = player.GetComponent<PlayerController>();
+            playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
+        }
+
+        // Play Background Music if Audio Source is Assigned
+        if (aud != null && backgroundMusic != null)
+        {
+            aud.PlayOneShot(backgroundMusic, musicVol);
+        }
     }
 
     // Update is called once per frame
@@ -95,7 +124,7 @@ public class GameManager : MonoBehaviour
 
     public void statePause()
     {
-        isPaused = !isPaused;
+        isPaused = true;
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
@@ -103,12 +132,15 @@ public class GameManager : MonoBehaviour
 
     public void stateUnpause()
     {
-        isPaused = !isPaused;
+        isPaused = false;
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        menuActive.SetActive(false);
-        menuActive = null;
+        if (menuActive != null)
+        {
+            menuActive.SetActive(false);
+            menuActive = null;
+        }
         resetStorePopups();
     }
 
@@ -131,10 +163,10 @@ public class GameManager : MonoBehaviour
         menuActive.SetActive(true);
     }
 
-
     public void settings()
     {
-        menuActive.SetActive(false);
+        if (menuActive != null)
+            menuActive.SetActive(false);
         statePause();
         menuActive = menuSettings;
         menuActive.SetActive(true);
@@ -142,26 +174,24 @@ public class GameManager : MonoBehaviour
 
     public void sensitivity()
     {
-        menuActive.SetActive(false);
+        if (menuActive != null)
+            menuActive.SetActive(false);
         statePause();
         menuActive = menuSens;
         menuActive.SetActive(true);
     }
 
-    //allows oyu to change your sens in game
     public float getNewSens()
     {
         return sensSlider.normalizedValue;
     }
 
-    //updates the player's coin count in the UI
     public void updateCoinCount(int amount)
     {
         coinCount += amount;
         coinCountText.text = coinCount.ToString("F0");
     }
 
-    //updates prices in the Merchant Menu when menu is entered
     public void updateMerchantPrices()
     {
         healthPriceText.text = healthPrice.ToString("F0");
@@ -169,7 +199,6 @@ public class GameManager : MonoBehaviour
         speedBoostPriceText.text = speedBoostPrice.ToString("F0");
     }
 
-    //pulls up Merchant Menu when store is entered
     public void enterStore()
     {
         updateMerchantPrices();
@@ -178,95 +207,55 @@ public class GameManager : MonoBehaviour
         menuActive.SetActive(true);
     }
 
-    //if the player has enough coins, resets health and deducts coins
-    //if not tells the player they don't have enough coins
-    //if HP is already full, tells the player HP is full
     public void buyHealth()
     {
-        bool isHPFull = playerScript.isHPFull();
-        if (coinCount >= healthPrice)
+        if (playerScript == null) return;
+        if (coinCount >= healthPrice && !playerScript.isHPFull())
         {
-            if (isHPFull)
-            {
-                resetStorePopups();
-                alreadyFullPopup.SetActive(true);
-            }
-            else
-            {
-                resetStorePopups();
-                purchaseSuccessfulPopup.SetActive(true);
-                playerScript.fillHealth();
-                playerScript.updatePlayerUI();
-                updateCoinCount(-(healthPrice));
-            }
-            
+            resetStorePopups();
+            purchaseSuccessfulPopup.SetActive(true);
+            playerScript.fillHealth();
+            updateCoinCount(-healthPrice);
         }
         else
         {
             resetStorePopups();
-            notEnoughCoinsPopup.SetActive(true);
+            notEnoughCoinsPopup.SetActive(playerScript.isHPFull() ? alreadyFullPopup : notEnoughCoinsPopup);
         }
     }
 
-    //if the player has enough coins, adds damage boost to shoot damage
-    //if not tells the player they don't have enough coins
-    //if a damage boost is active, tells the player a boost is already applied
     public void buyDamageBoost()
     {
-        if (coinCount >= damageBoostPrice)
+        if (coinCount >= damageBoostPrice && !isDamageBoosted)
         {
-            if (isDamageBoosted || instance.playerScript.isDamageBoosted)
-            {
-                resetStorePopups();
-                alreadyAppliedPopup.SetActive(true);
-            }
-            else
-            {
-                resetStorePopups();
-                purchaseSuccessfulPopup.SetActive(true);
-                coinCount -= damageBoostPrice;
-                updateCoinCount(-(damageBoostPrice));
-                boughtDamageBoost = true;
-                isDamageBoosted = true;
-            }
+            resetStorePopups();
+            purchaseSuccessfulPopup.SetActive(true);
+            updateCoinCount(-damageBoostPrice);
+            isDamageBoosted = true;
         }
         else
         {
             resetStorePopups();
-            notEnoughCoinsPopup.SetActive(true);
+            alreadyAppliedPopup.SetActive(true);
         }
     }
 
-    //if the player has enough coins, adds speed boos to player speed
-    //if not tells the player they don't have enough coins
-    //if a speed boost is active, tells the player a boost is already applied
     public void buySpeedBoost()
     {
-        if (coinCount >= speedBoostPrice)
+        if (coinCount >= speedBoostPrice && !isSpeedBoosted)
         {
-            if (isSpeedBoosted || instance.playerScript.isSpeedBoosted)
-            {
-                resetStorePopups();
-                alreadyAppliedPopup.SetActive(true);
-            }
-            else
-            {
-                resetStorePopups();
-                purchaseSuccessfulPopup.SetActive(true);
-                coinCount -= speedBoostPrice;
-                updateCoinCount(-(speedBoostPrice));
-                boughtSpeedBoost = true;
-                isSpeedBoosted = true;
-            }
+            resetStorePopups();
+            purchaseSuccessfulPopup.SetActive(true);
+            updateCoinCount(-speedBoostPrice);
+            isSpeedBoosted = true;
         }
         else
         {
             resetStorePopups();
-            notEnoughCoinsPopup.SetActive(true);
+            alreadyAppliedPopup.SetActive(true);
         }
     }
 
-    //makes sure all popups involved in the merchant store are not active
     void resetStorePopups()
     {
         notEnoughCoinsPopup.SetActive(false);
@@ -275,19 +264,14 @@ public class GameManager : MonoBehaviour
         alreadyFullPopup.SetActive(false);
     }
 
-    //applies speed and damage boosts upon exiting the store and resets variables and popups
     public void exitStore()
     {
-        if (boughtSpeedBoost)
-        {
-            instance.playerScript.speedBoost();
-        }
-        if (boughtDamageBoost)
-        {
-            instance.playerScript.damageBoost();
-        }
-        boughtSpeedBoost = false;
-        boughtDamageBoost = false;
         stateUnpause();
+    }
+
+    public void StartGame()
+    {
+        Debug.Log("Starting Game...");
+        SceneManager.LoadScene("CalebScene");
     }
 }
