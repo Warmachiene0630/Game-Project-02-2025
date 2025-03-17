@@ -596,7 +596,7 @@ MonoBehaviour:
   agent: {fileID: 5181388857299515026}
   anim: {fileID: 8376032604093670844}
   headPos: {fileID: 1424630478152510717}
-  HP: 15
+  HP: 10
   animTransSpeed: 4
   faceTargetSpeed: 4
   FOV: 90
