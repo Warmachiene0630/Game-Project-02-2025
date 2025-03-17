@@ -61,7 +61,9 @@ public class GameManager : MonoBehaviour
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip backgroundMusic;
-    [Range(0, 1)][SerializeField] float musicVol;
+    public float musicVol = MainManager.instance.musicVol;
+    public float sfxVol = MainManager.instance.sfxVol;
+    public float masterVol = MainManager.instance.masterVol;
 
 
     public GameObject playerSpawnPos;
@@ -71,6 +73,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        DontDestroyOnLoad(gameObject);
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");

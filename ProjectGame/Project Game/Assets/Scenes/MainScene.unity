@@ -32308,6 +32308,18 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2070277503329445113}
+    - target: {fileID: 2714857637722797866, guid: b56c1cbaa54e5da4798189f19eff57d3, type: 3}
+      propertyPath: sfxVol
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714857637722797866, guid: b56c1cbaa54e5da4798189f19eff57d3, type: 3}
+      propertyPath: musicVol
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714857637722797866, guid: b56c1cbaa54e5da4798189f19eff57d3, type: 3}
+      propertyPath: masterVol
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6817512458320184692, guid: b56c1cbaa54e5da4798189f19eff57d3, type: 3}
       propertyPath: m_Pivot.x
       value: 0
