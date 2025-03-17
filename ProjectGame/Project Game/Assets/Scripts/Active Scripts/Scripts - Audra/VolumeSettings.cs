@@ -14,6 +14,9 @@ public class VolumeSettings : MonoBehaviour
 
     private void Start()
     {
+        //musicSlider.value = 0;
+        //masterSlider.value = 0;
+        //sfxSlider.value = 0;
         if (PlayerPrefs.HasKey("musicVolume") || PlayerPrefs.HasKey("masterVolume") || PlayerPrefs.HasKey("sfxVolume"))
         {
             LoadVol();
@@ -70,7 +73,7 @@ public class VolumeSettings : MonoBehaviour
         PlayerPrefs.SetFloat("sfxVolume", MainManager.instance.sfxVol);
     }
 
-    private void LoadVol()
+    public void LoadVol()
     {
         musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
         MainManager.instance.musicVol = PlayerPrefs.GetFloat("musicVolume");

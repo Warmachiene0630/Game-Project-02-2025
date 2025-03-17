@@ -42830,6 +42830,9 @@ MonoBehaviour:
   playerDamageScreen: {fileID: 7755367823786597088}
   playerHealthScreen: {fileID: 3660532991095023837}
   playerDashScreen: {fileID: 0}
+  life1: {fileID: 1423994174}
+  life2: {fileID: 619755224}
+  life3: {fileID: 802068234}
   teleportPopup: {fileID: 87331966060185286}
   merchantPopup: {fileID: 4690651261910802083}
   notEnoughCoinsPopup: {fileID: 1908313575634202023}

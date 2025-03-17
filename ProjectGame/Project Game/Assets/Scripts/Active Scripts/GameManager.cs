@@ -41,6 +41,9 @@ public class GameManager : MonoBehaviour
     public GameObject playerDamageScreen;
     public GameObject playerHealthScreen;
     public GameObject playerDashScreen;
+    public Image life1;
+    public Image life2;
+    public Image life3;
 
 
     [Header("----- Popups -----")]
@@ -76,7 +79,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
-        aud.PlayOneShot(backgroundMusic, musicVol);
+        aud.PlayOneShot(backgroundMusic, MainManager.instance.musicVol);
     }
 
     // Update is called once per frame
@@ -172,7 +175,7 @@ public class GameManager : MonoBehaviour
         menuActive.SetActive(true);
     }
 
-    //allows oyu to change your sens in game
+    //allows you to change your sens in game
     public float getNewSens()
     {
         return sensSlider.normalizedValue;

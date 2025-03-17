@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     int jumpCount;
     int dashCount;
     int HPOrig;
+    int lifeCount;
 
     float shootTimer;
     float speedBoostTimer;
@@ -79,6 +80,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         HPOrig = HP;
         fuel = fuelMax;
+        lifeCount = 3;
         updatePlayerUI();
         isSlowed = false;
     }
@@ -86,7 +88,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     // Update is called once per frame
     void Update()
     {
-        //if disabled is false, then movement is allowed
         
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.red);
 
@@ -248,6 +249,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
 
         if (HP <= 0)
+        {
+            lifeCount = lifeCount - 1;
+            HP = HPOrig;
+            updatePlayerUI();
+        }
+
+        if (lifeCount <= 0)
         {
             GameManager.instance.youLose();
         }

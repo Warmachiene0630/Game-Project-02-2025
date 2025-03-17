@@ -1,16 +1,25 @@
+using TMPro;
 using UnityEngine;
-
-public class DialogueAsset : MonoBehaviour
+[CreateAssetMenu]
+public class DialogueAsset : ScriptableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [TextArea]
+    public string[] dialogue;
+    [SerializeField] TextMeshProUGUI dialogueText;
+    [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] GameObject dialoguePanel;
+
+    public void ShowDialogue(string dialogue, string name)
     {
-        
+        nameText.text = name + "...";
+        dialogueText.text = dialogue;
+        dialoguePanel.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void endDialogue()
     {
-        
+        nameText.text = null;
+        dialogueText.text = null;
+        dialoguePanel.SetActive(false);
     }
 }
