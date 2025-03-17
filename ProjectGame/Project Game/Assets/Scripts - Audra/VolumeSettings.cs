@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class VolumeSettings : MonoBehaviour
@@ -8,6 +9,8 @@ public class VolumeSettings : MonoBehaviour
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
     [SerializeField] private Slider masterSlider;
+    [SerializeField] AudioSource sfxSource;
+    [SerializeField] AudioClip sfxClip;
 
     private void Start()
     {
@@ -24,7 +27,9 @@ public class VolumeSettings : MonoBehaviour
 
     private void Update()
     {
+        float sfxOrigVol = MainManager.instance.sfxVol;
         MainManager.instance.musicVol = musicSlider.value;
+        //GameManager.instance.musicVol = MainManager.instance.musicVol;
         mixer.SetFloat("musicVol", Mathf.Log10(MainManager.instance.musicVol) * 20);
         PlayerPrefs.SetFloat("musicVolume", MainManager.instance.musicVol);
         MainManager.instance.masterVol = masterSlider.value;
@@ -33,6 +38,11 @@ public class VolumeSettings : MonoBehaviour
         MainManager.instance.sfxVol = sfxSlider.value;
         mixer.SetFloat("sfxVol", Mathf.Log10(MainManager.instance.sfxVol) * 20);
         PlayerPrefs.SetFloat("sfxVolume", MainManager.instance.sfxVol);
+        if (sfxOrigVol != MainManager.instance.sfxVol)
+        {
+            sfxSource.PlayOneShot(sfxClip, MainManager.instance.sfxVol);
+        }
+        
     }
 
     public void SetMusicVol()

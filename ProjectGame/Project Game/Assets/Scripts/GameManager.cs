@@ -61,9 +61,6 @@ public class GameManager : MonoBehaviour
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip backgroundMusic;
-    public float musicVol = MainManager.instance.musicVol;
-    public float sfxVol = MainManager.instance.sfxVol;
-    public float masterVol = MainManager.instance.masterVol;
 
 
     public GameObject playerSpawnPos;
@@ -77,7 +74,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
-        aud.PlayOneShot(backgroundMusic, musicVol);
+        aud.PlayOneShot(backgroundMusic, MainManager.instance.musicVol);
     }
 
     // Update is called once per frame
@@ -97,6 +94,7 @@ public class GameManager : MonoBehaviour
                 stateUnpause();
             }
         }
+        
     }
 
     public void openPauseMenu()
