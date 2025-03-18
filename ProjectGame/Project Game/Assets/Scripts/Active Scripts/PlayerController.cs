@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     [SerializeField] GameObject playerModel;
     [SerializeField] List<PlayerType> player;
     public int listPos;
+
+    [Header("----- Jetpack -----")]
+    [Range(0, 1)][SerializeField] float holdTime;
+    [Range(10, 20)][SerializeField] float flightSpeed;
+    [Range(5, 20)][SerializeField] int fuelMax;
+    [SerializeField] bool hasJetpack;
+    bool jumpPressed = false;
+    float timeHeld = 0;
+    float fuel;
 
     [Header("----- Stats -----")]
     [Range(15, 45)] [SerializeField] int gravity;
@@ -128,9 +138,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         float animCurSpeed = anim.GetFloat("Speed");
         anim.SetBool("Melee", meleeSelected);
         anim.SetFloat("Speed", Mathf.MoveTowards(animCurSpeed, playerSpeed, Time.deltaTime));
+        jump();
+        dash();
+        if (hasJetpack)
+        {
+            fly();
+        }
 
         //checks for speed boost, if there was a boost and it ended reverts speed back to original
-        if(isSpeedBoosted && speedBoostTimer <= 0)
+        if (isSpeedBoosted && speedBoostTimer <= 0)
         {
             isSpeedBoosted = false;
             player[listPos].speed = player[listPos].speed / player[listPos].sprintMod;
@@ -337,14 +353,33 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     public void updatePlayerUI()
     {
-        GameManager.instance.playerHPBar.fillAmount = (float)HPCurr / player[listPos].HPMax;
+        GameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+        GameManager.instance.playerFuelBar.fillAmount = (float)fuel / fuelMax;
     }
 
-    IEnumerator dash()
+    void dash()
     {
-        player[listPos].speed *= player[listPos].sprintMod;
-        yield return new WaitForSeconds(0.5f);
-        player[listPos].speed /= player[listPos].sprintMod;
+        if (Input.GetButtonDown("Dash") && dashCount < 1)
+        {
+            dashCount++;
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
+            StartCoroutine(dashCoroutine());
+        }
+    }
+    IEnumerator dashCoroutine()
+    {
+        float startTime = Time.time;
+        Vector3 dashDir = Camera.main.transform.forward;
+        dashDir.y = 0.5f;
+        GameManager.instance.playerDashScreen.SetActive(true);
+        isDashing = true;
+        while (Time.time < startTime + dashTime)
+        {
+            controller.Move(dashDir * dashSpeed * Time.deltaTime);
+            yield return null;
+        }
+        GameManager.instance.playerDashScreen.SetActive(false);
+        isDashing = false;
     }
 
     //used to fill HP to original
@@ -484,6 +519,52 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         anim.SetFloat("Right", Input.GetAxis("Horizontal"));
         anim.SetFloat("For", Input.GetAxis("Vertical"));
+    }
+
+    void fly()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpPressed = true;
+            if (isFlying)
+            {
+                timeHeld = holdTime;
+            }
+        }
+        else if (Input.GetButtonUp("Jump") || jumpPressed == false || fuel <= 0)
+        {
+            jumpPressed = false;
+            timeHeld = 0;
+            aud.Stop();
+        }
+        timeHeld += Time.deltaTime;
+        if (jumpPressed == true && timeHeld >= holdTime && fuel > 0)
+        {
+            aud.PlayOneShot(audFly[0], audFlyVol);
+            playerVel.y = 1 * flightSpeed;
+            isFlying = true;
+            fuel -= Time.deltaTime * (flightSpeed / 2);
+            updatePlayerUI();
+        }
+    }
+    public bool gainFuel(float amount)
+    {
+        bool fuelGained;
+        if (fuel < fuelMax)
+        {
+            fuel += amount;
+            if (fuel > fuelMax)
+            {
+                fuel = fuelMax;
+            }
+            fuelGained = true;
+        }
+        else
+        {
+            fuelGained = false;
+        }
+        updatePlayerUI();
+        return fuelGained;
     }
 
 }
