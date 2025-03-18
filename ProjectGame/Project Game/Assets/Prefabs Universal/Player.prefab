@@ -53,11 +53,13 @@ MonoBehaviour:
   controller: {fileID: 4329320787705618288}
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   aud: {fileID: 1700274298257426475}
   HP: 10
   speed: 4
   sprintMod: 2
+  dashSpeed: 0
+  dashTime: 0
   jumpSpeed: 5
   jumpMax: 2
   gravity: 15
@@ -67,6 +69,10 @@ MonoBehaviour:
   gunList: []
   gunModel: {fileID: 8417901199478045709}
   muzzleFlash: {fileID: 0}
+  holdTime: 0
+  flightSpeed: 10
+  fuelMax: 5
+  hasJetpack: 0
   audSteps:
   - {fileID: 8300000, guid: 2aaf9becbe6bb484aab750d3f7172012, type: 3}
   - {fileID: 8300000, guid: f43a8d5fcbbcd5343b468d56b0a8964d, type: 3}
@@ -91,6 +97,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e35e9a847739edf419a168754a28cfc9, type: 3}
   - {fileID: 8300000, guid: 1e9ecb3bd20906a4b829071ee879baa0, type: 3}
   audJumpVol: 0.5
+  audFly: []
+  audFlyVol: 0
   isSpeedBoosted: 0
   isDamageBoosted: 0
 --- !u!33 &7990704639551605736

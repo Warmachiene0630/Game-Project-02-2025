@@ -136,15 +136,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bac5b8ad1d7eca4eaf8ea55067dea27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
   controller: {fileID: 6471287770051922416}
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 0
   aud: {fileID: 2848711140017861496}
-  player:
-  - {fileID: 11400000, guid: 94f99966b64e50d469a6b1026d9ee082, type: 2}
-  listPos: 0
+  HP: 1
+  speed: 3
+  sprintMod: 2
+  dashSpeed: 0
+  dashTime: 0
+  jumpSpeed: 5
+  jumpMax: 1
   gravity: 15
   speedBoostTime: 5
   damageBoostTime: 5
@@ -152,10 +155,18 @@ MonoBehaviour:
   gunList: []
   gunModel: {fileID: 390584704269039560}
   muzzleFlash: {fileID: 0}
-  meleeWeapon: {fileID: 0}
-  melee: {fileID: 0}
-  meleeCol: []
-  HPCurr: 0
+  holdTime: 0
+  flightSpeed: 0
+  fuelMax: 0
+  hasJetpack: 0
+  audSteps: []
+  audStepsVol: 0
+  audHurt: []
+  audHurtVol: 0
+  audJump: []
+  audJumpVol: 0
+  audFly: []
+  audFlyVol: 0
   isSpeedBoosted: 0
   isDamageBoosted: 0
 --- !u!33 &6750260647577950046
