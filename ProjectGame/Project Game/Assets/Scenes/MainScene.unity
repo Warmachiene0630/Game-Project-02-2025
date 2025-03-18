@@ -47921,7 +47921,7 @@ MonoBehaviour:
   alreadyAppliedPopup: {fileID: 5727693297727655967}
   doorPopUp: {fileID: 0}
   backgroundMusic: {fileID: 8300000, guid: dff9addb6af538f46bf66ab8f97410b8, type: 3}
-  musicVol: 0
+  musicVol: 0.101
   playerSpawnPos: {fileID: 0}
   checkpointPopup: {fileID: 4679759505319729170}
 --- !u!224 &8883766053948338540

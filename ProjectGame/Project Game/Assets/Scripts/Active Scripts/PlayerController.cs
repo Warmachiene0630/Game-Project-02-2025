@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     [SerializeField] AudioSource aud;
     [SerializeField] GameObject playerModel;
     [SerializeField] List<PlayerType> player;
-    [Range(0,5)]public int listPos;
+    public int listPos;
 
     [Header("----- Jetpack -----")]
     [Range(0, 1)][SerializeField] float holdTime;
