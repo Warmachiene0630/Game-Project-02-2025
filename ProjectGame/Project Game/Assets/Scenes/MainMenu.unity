@@ -627,8 +627,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 488d702709d95bd4a9a1309d212e99fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxSource: {fileID: 319858361}
-  sfxClip: {fileID: 8300000, guid: e83af5cf0e369ee41873fc539ad2d3c3, type: 3}
 --- !u!82 &319858361
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2317,9 +2315,9 @@ MonoBehaviour:
   mixer: {fileID: 24100000, guid: ebccedf70b82e4949ba455fe380d6d4d, type: 2}
   menuMusic: {fileID: 8300000, guid: 28677795e9a70f9418a5542482ccc13b, type: 3}
   sfxClip: {fileID: 8300000, guid: c034bbf22999348409b450d20ade3c34, type: 3}
-  musicVol: 0.5
-  sfxVol: 0.5
-  masterVol: 0.5
+  musicVol: 0.1
+  sfxVol: 0.1
+  masterVol: 0.1
 --- !u!82 &1228450344
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2429,7 +2427,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -3197210688943703675, guid: ebccedf70b82e4949ba455fe380d6d4d, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2474,7 +2472,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.567
       inSlope: 0
       outSlope: 0
       tangentMode: 0
