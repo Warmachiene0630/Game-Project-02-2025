@@ -300,6 +300,18 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         GameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
         GameManager.instance.playerFuelBar.fillAmount = (float)fuel / fuelMax;
+        if (lifeCount == 2)
+        {
+            GameManager.instance.life3.fillAmount = 0;
+        }
+        if (lifeCount == 1)
+        {
+            GameManager.instance.life2.fillAmount = 0;
+        }
+        if (lifeCount == 0)
+        {
+            GameManager.instance.life1.fillAmount = 0;
+        }
     }
 
     void dash()
