@@ -221,7 +221,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         shootTimer = 0;
         gunList[gunListPos].ammoCur--;
-        aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootVol);
+        aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootVol*MainManager.instance.sfxVol);
 
         StartCoroutine(flashMuzzle());
 
