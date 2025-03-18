@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuSens;
     [SerializeField] GameObject menuMerchant;
+    [SerializeField] GameObject menuMain;
+    [SerializeField] GameObject menuAudio;
     public GameObject playerDashScreen;
     public bool isPaused;
 
@@ -42,6 +44,9 @@ public class GameManager : MonoBehaviour
     public Image playerFuelBar;
     public GameObject playerDamageScreen;
     public GameObject playerHealthScreen;
+    public Image life1;
+    public Image life2;
+    public Image life3;
 
 
     [Header("----- Popups -----")]
@@ -88,15 +93,24 @@ public class GameManager : MonoBehaviour
         {
             if (menuActive == null)
             {
-                statePause();
-                menuActive = menuPause;
-                menuActive.SetActive(true);
+                //statePause();
+                //menuActive = menuPause;
+                //menuActive.SetActive(true);
+                openPauseMenu();
             }
             else if (menuActive == menuPause)
             {
                 stateUnpause();
             }
         }
+
+    }
+
+    public void openPauseMenu()
+    {
+        statePause();
+        menuActive = menuPause;
+        menuActive.SetActive(true);
     }
 
     public void statePause()
@@ -116,6 +130,11 @@ public class GameManager : MonoBehaviour
         menuActive.SetActive(false);
         menuActive = null;
         resetStorePopups();
+    }
+
+    public void resetMenu()
+    {
+        menuActive.SetActive(false);
     }
 
     public void updateGameGoal(int amount)
@@ -151,6 +170,14 @@ public class GameManager : MonoBehaviour
         menuActive.SetActive(false);
         statePause();
         menuActive = menuSens;
+        menuActive.SetActive(true);
+    }
+
+    public void audioMenu()
+    {
+        menuActive.SetActive(false);
+        statePause();
+        menuActive = menuAudio;
         menuActive.SetActive(true);
     }
 

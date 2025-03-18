@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     int jumpCount;
     int dashCount;
     public int HPCurr;
+    int lifeCount;
 
     float shootTimer;
     float speedBoostTimer;
@@ -84,6 +85,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         playerModel.GetComponent<SkinnedMeshRenderer>().sharedMesh = player[listPos].model.GetComponent<SkinnedMeshRenderer>().sharedMesh;
         HPCurr = player[listPos].HPMax;
+        lifeCount = 3;
         updatePlayerUI();
         isSlowed = false;
 
@@ -292,6 +294,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
         if (HPCurr <= 0)
         {
+            lifeCount = lifeCount - 1;
+            HPCurr = player[listPos].HPMax;
+            updatePlayerUI();
+        }
+
+        if (lifeCount <= 0)
+        {
             GameManager.instance.youLose();
         }
     }
@@ -335,6 +344,18 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         GameManager.instance.playerHPBar.fillAmount = (float)HPCurr / player[listPos].HPMax;
         GameManager.instance.playerFuelBar.fillAmount = (float)fuel / fuelMax;
+        if (lifeCount == 2)
+        {
+            GameManager.instance.life3.fillAmount = 0;
+        }
+        if (lifeCount == 1)
+        {
+            GameManager.instance.life2.fillAmount = 0;
+        }
+        if (lifeCount == 0)
+        {
+            GameManager.instance.life1.fillAmount = 0;
+        }
     }
 
     void dash()
