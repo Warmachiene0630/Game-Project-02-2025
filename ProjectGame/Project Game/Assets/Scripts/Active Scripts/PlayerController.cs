@@ -26,8 +26,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     float timeHeld = 0;
     float fuel;
 
+    [SerializeField] AudioClip[] audFly;
+    [Range(0, 1)][SerializeField] float audFlyVol;
+
     [Header("----- Stats -----")]
     [Range(15, 45)] [SerializeField] int gravity;
+    [SerializeField] float dashSpeed;
+    [SerializeField] float dashTime;
     [Range(5, 15)] [SerializeField] float speedBoostTime;
     [Range(5, 15)] [SerializeField] float damageBoostTime;
     [Range(1, 5)] [SerializeField] int damageBoostAmount;
@@ -64,7 +69,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     Vector3 playerVel;
 
+
     bool isSprinting;
+    bool isDashing;
+    bool isFlying;
     bool isPlayingSteps;
     public bool isSpeedBoosted;
     public bool isDamageBoosted;
@@ -233,12 +241,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
             jumpCount++;
             playerVel.y = player[listPos].jumpSpeed;
             aud.PlayOneShot(player[listPos].audJump[Random.Range(0, player[listPos].audJump.Length)], player[listPos].audJumpVol);
-        }
-        else if (Input.GetButtonDown("Jump") && dashCount == 0)
-        {
-            dashCount++;
-            StartCoroutine(dash());
-        }    
+        } 
     }
 
 
@@ -353,7 +356,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     public void updatePlayerUI()
     {
-        GameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+        GameManager.instance.playerHPBar.fillAmount = (float)HPCurr / player[listPos].HPMax;
         GameManager.instance.playerFuelBar.fillAmount = (float)fuel / fuelMax;
     }
 
@@ -362,7 +365,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         if (Input.GetButtonDown("Dash") && dashCount < 1)
         {
             dashCount++;
-            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
+            aud.PlayOneShot(player[listPos].audJump[Random.Range(0, player[listPos].audJump.Length)], player[listPos].audJumpVol);
             StartCoroutine(dashCoroutine());
         }
     }
