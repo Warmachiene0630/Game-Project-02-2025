@@ -73,7 +73,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void checkRoam()
     {
-        if (roamTimer > roamPauseTime && agent.remainingDistance < 0.01f || GameManager.instance.playerScript.HP <= 0)
+        if (roamTimer > roamPauseTime && agent.remainingDistance < 0.01f || GameManager.instance.playerScript.HPCurr <= 0)
         {
             roam();
         }

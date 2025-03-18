@@ -16,7 +16,13 @@ public class gamemanager : MonoBehaviour
     public GameObject playerDamageScreen;
     public bool isPaused;
     public GameObject player;
+<<<<<<< HEAD:ProjectGame/Project Game/Assets/Scripts/GameManager.cs
+    public PlayerController playerScript;
+    public GameObject playerSpawnPos;
+    public GameObject checkpointPopup;
+=======
     public playerController playerScript;
+>>>>>>> main:ProjectGame/Project Game/Assets/Scripts/gameManager1.txt
 
     int goalCount;
 
@@ -25,7 +31,12 @@ public class gamemanager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
+<<<<<<< HEAD:ProjectGame/Project Game/Assets/Scripts/GameManager.cs
+        playerScript = player.GetComponent<PlayerController>();
+        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
+=======
         playerScript = player.GetComponent<playerController>();
+>>>>>>> main:ProjectGame/Project Game/Assets/Scripts/gameManager1.txt
     }
 
     // Update is called once per frame

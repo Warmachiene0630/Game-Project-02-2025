@@ -16,11 +16,12 @@ public class checkpoint : MonoBehaviour
     // Update is called once per frame
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && GameManager.instance.playerSpawnPos.transform.position != transform.position)
-        {
-            GameManager.instance.playerSpawnPos.transform.position = transform.position;
-            StartCoroutine(flashColor());
-        }
+            if (other.CompareTag("Player") && GameManager.instance.playerSpawnPos.transform.position != transform.position)
+            {
+                GameManager.instance.playerSpawnPos.transform.position = model.transform.position;
+                StartCoroutine(flashColor());
+                model = other.GetComponent<Renderer>();
+            } 
     }
 
     IEnumerator flashColor()
@@ -32,4 +33,4 @@ public class checkpoint : MonoBehaviour
         GameManager.instance.checkpointPopup.SetActive(false);
     }
 }
-
+ 

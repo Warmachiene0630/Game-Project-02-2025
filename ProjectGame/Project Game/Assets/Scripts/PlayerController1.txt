@@ -44,6 +44,13 @@ public class playerController : MonoBehaviour, IDamage
 
         movement();
         sprint();
+<<<<<<< HEAD:ProjectGame/Project Game/Assets/Scripts/PlayerController.cs
+        if (isSlowed == true)
+        {
+            checkSlowed();
+        }
+=======
+>>>>>>> main:ProjectGame/Project Game/Assets/Scripts/PlayerController1.txt
     }
 
     void movement()
@@ -137,4 +144,47 @@ public class playerController : MonoBehaviour, IDamage
     {
         gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOriginal;
     }
+<<<<<<< HEAD:ProjectGame/Project Game/Assets/Scripts/PlayerController.cs
+    void checkSlowed()
+    {
+        if (isSlowed == true) {
+            slowTimer += Time.deltaTime;
+            if (slowTimer >= slowDur)
+            {
+                normalSpeed();
+            } 
+        }
+    }
+
+    public void spawnPlayer()
+    {
+        HP = HPOrig;
+        updatePlayerUI();
+        //to get the enemy to see the exit of the player turn on auto sync
+        //controller.enabled = false;
+        controller.transform.position = GameManager.instance.playerSpawnPos.transform.position;
+        HP = HPOrig;
+        updatePlayerUI();
+        //controller.enabled = true;
+
+    }
+
+    public void slowSpeed(int slow)
+    {
+
+        slowDur = slow;
+        speed = speed / 2;
+        isSlowed = true;
+    }
+
+    public void normalSpeed() {
+        speed = speed * 2;
+        isSlowed = false;
+        slowDur = 0;
+        slowTimer = 0;
+    }
+
 }
+=======
+}
+>>>>>>> main:ProjectGame/Project Game/Assets/Scripts/PlayerController1.txt

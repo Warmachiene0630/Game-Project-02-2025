@@ -6,6 +6,9 @@ using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Levels")]
+    public GameObject[] sceneList;
+
     [Header("----- Components -----")]
     public static GameManager instance;
     public GameObject player;
@@ -24,8 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuSens;
     [SerializeField] GameObject menuMerchant;
-    [SerializeField] GameObject menuMain;
-    [SerializeField] GameObject menuAudio;
+    public GameObject playerDashScreen;
     public bool isPaused;
 
     [Header("----- UI -----")]
@@ -40,10 +42,6 @@ public class GameManager : MonoBehaviour
     public Image playerFuelBar;
     public GameObject playerDamageScreen;
     public GameObject playerHealthScreen;
-    public GameObject playerDashScreen;
-    public Image life1;
-    public Image life2;
-    public Image life3;
 
 
     [Header("----- Popups -----")]
@@ -53,6 +51,7 @@ public class GameManager : MonoBehaviour
     public GameObject purchaseSuccessfulPopup;
     public GameObject alreadyFullPopup;
     public GameObject alreadyAppliedPopup;
+    public GameObject doorPopUp;
 
     [Header("----- Stats -----")]
     private int goalCount;
@@ -66,6 +65,8 @@ public class GameManager : MonoBehaviour
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip backgroundMusic;
+    [Range(0, 1)][SerializeField] float musicVol;
+
 
     public GameObject playerSpawnPos;
     public GameObject checkpointPopup;
@@ -77,7 +78,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
-        aud.PlayOneShot(backgroundMusic, MainManager.instance.musicVol);
+        aud.PlayOneShot(backgroundMusic, musicVol);
     }
 
     // Update is called once per frame
@@ -87,10 +88,9 @@ public class GameManager : MonoBehaviour
         {
             if (menuActive == null)
             {
-                //statePause();
-                //menuActive = menuPause;
-                //menuActive.SetActive(true);
-                openPauseMenu();
+                statePause();
+                menuActive = menuPause;
+                menuActive.SetActive(true);
             }
             else if (menuActive == menuPause)
             {
@@ -99,12 +99,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void openPauseMenu()
-    {
-        statePause();
-        menuActive = menuPause;
-        menuActive.SetActive(true);
-    }
     public void statePause()
     {
         isPaused = !isPaused;
@@ -119,14 +113,9 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        resetMenu();
+        menuActive.SetActive(false);
         menuActive = null;
         resetStorePopups();
-    }
-
-    public void resetMenu()
-    {
-        menuActive.SetActive(false);
     }
 
     public void updateGameGoal(int amount)
@@ -165,15 +154,7 @@ public class GameManager : MonoBehaviour
         menuActive.SetActive(true);
     }
 
-    public void audioMenu()
-    {
-        menuActive.SetActive(false);
-        statePause();
-        menuActive = menuAudio;
-        menuActive.SetActive(true);
-    }
-
-    //allows you to change your sens in game
+    //allows oyu to change your sens in game
     public float getNewSens()
     {
         return sensSlider.normalizedValue;
