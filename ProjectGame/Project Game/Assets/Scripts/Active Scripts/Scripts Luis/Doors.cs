@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Doors : MonoBehaviour
 {
@@ -12,7 +14,7 @@ public class Doors : MonoBehaviour
     {
         keyCount = keys.Length;
         open = false;
-        sceneChoice = GameManager.sceneList.length;
+        sceneChoice = Random.Range(0, GameManager.instance.sceneList.Length);
     }
 
     // Update is called once per frame
@@ -31,7 +33,7 @@ public class Doors : MonoBehaviour
         {
             if (open == true)
             {
-                loadNextLevel(GameManager.sceneList[sceneChoice]);
+                loadNextLevel(GameManager.instance.sceneList[sceneChoice].name);
             }
             else
             {
@@ -40,9 +42,13 @@ public class Doors : MonoBehaviour
         }
     }
 
-    void missingKeys()
+    IEnumerator missingKeys()
     {
 
+        GameManager.instance.doorPopUp.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        GameManager.instance.doorPopUp.SetActive(false);
+    
     }
 
     void loadNextLevel(string nextScene)

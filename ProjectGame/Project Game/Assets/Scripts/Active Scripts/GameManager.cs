@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     public GameObject purchaseSuccessfulPopup;
     public GameObject alreadyFullPopup;
     public GameObject alreadyAppliedPopup;
+    public GameObject doorPopUp;
 
     [Header("----- Stats -----")]
     private int goalCount;

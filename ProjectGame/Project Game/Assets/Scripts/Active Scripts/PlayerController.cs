@@ -112,6 +112,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
         moveDir = (Input.GetAxis("Horizontal") * transform.right) +
             (Input.GetAxis("Vertical") * transform.forward);
+
         controller.Move(moveDir * player[listPos].speed * Time.deltaTime);
         jump();
         controller.Move(playerVel * Time.deltaTime);
@@ -122,7 +123,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         speedBoostTimer -= Time.deltaTime;
 
         //cheks whick animation to play
-        playerSpeed = controller.velocity.normalized.magnitude;
+        playerSpeed = controller.velocity.magnitude;
         getAnimDir();
         float animCurSpeed = anim.GetFloat("Speed");
         anim.SetBool("Melee", meleeSelected);
@@ -145,22 +146,16 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         {
             selectMelee();
         }
-
-        if (meleeSelected == false)
+        
+        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
         {
-            if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
+            if (!GameManager.instance.isPaused)
             {
-                if (!GameManager.instance.isPaused)
-                {
-                    shoot();
-                }
+                shoot();
             }
         }
-        else
-        {
-            if (Input.GetButton("Fire1") && meleeWeapon != null && shootTimer >= meleeSpeed){
-                swing();
-            }
+        if (Input.GetButton("Melee") && meleeWeapon != null && shootTimer >= meleeSpeed){
+            swing();
         }
 
         selectGun();
@@ -257,11 +252,16 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     void swing()
     {
         shootTimer = 0;
-        isTwoHanded();
-        if (meleeWeapon.twoHanded == true)
-        {
-            anim.SetTrigger("Swing 1");
-        }        
+        gunModel.GetComponent<MeshFilter>().sharedMesh = null;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = null;
+
+        melee.GetComponent<MeshFilter>().sharedMesh = meleeWeapon.model.GetComponent<MeshFilter>().sharedMesh;
+        melee.GetComponent<MeshRenderer>().sharedMaterial = meleeWeapon.model.GetComponent<MeshRenderer>().sharedMaterial;
+ 
+        anim.SetTrigger("Swing 1");
+
+        changeGun();
+
     }
     void isTwoHanded()
     {
@@ -418,7 +418,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     void selectGun()
     {
-
         if (meleeSelected != true) {
             if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
             {
@@ -442,8 +441,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         if (meleeSelected == true)
         {
-            gunModel.GetComponent<MeshFilter>().sharedMesh = melee.GetComponent<MeshFilter>().sharedMesh;
-            gunModel.GetComponent<MeshRenderer>().sharedMaterial = melee.GetComponent<MeshRenderer>().sharedMaterial;
+            melee.GetComponent<MeshFilter>().sharedMesh = meleeWeapon.model.GetComponent<MeshFilter>().sharedMesh;
+            melee.GetComponent<MeshRenderer>().sharedMaterial = meleeWeapon.model.GetComponent<MeshRenderer>().sharedMaterial;
         }
         else {
             if (gunList.Count > 0) {
@@ -483,34 +482,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     }
     void getAnimDir()
     {
-        if (Input.GetAxis("Horizontal") > 0)
-        {
-            anim.SetBool("Right", true);
-            anim.SetBool("No Right", false);
-        }
-        else if(Input.GetAxis("Horizontal") < 0){
-            anim.SetBool("Right", false);
-            anim.SetBool("No Right", false);
-        }
-        else
-        {
-            anim.SetBool("No Right", true);
-        }
-        if (Input.GetAxis("Vertical") > 0)
-        {
-            anim.SetBool("For", true);
-            anim.SetBool("No For", false);
-        }
-        else if(Input.GetAxis("Vertical") < 0)
-        {
-            anim.SetBool("For", false);
-            anim.SetBool("No For", false);
-        }
-        else
-        {
-            anim.SetBool("No For", true);
-        }
-
+        anim.SetFloat("Right", Input.GetAxis("Horizontal"));
+        anim.SetFloat("For", Input.GetAxis("Vertical"));
     }
 
 }
