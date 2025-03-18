@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerDamageScreen;
     public GameObject playerHealthScreen;
     public GameObject playerDashScreen;
+    public GameObject playerQuicksandScreen;
 
 
     [Header("----- Popups -----")]

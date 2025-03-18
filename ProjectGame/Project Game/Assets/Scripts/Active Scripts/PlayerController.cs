@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour, IDamage, IPickUp
 {
@@ -39,6 +41,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     bool jumpPressed = false;
     float timeHeld = 0;
     float fuel;
+    int fuelZeroCount = 0;
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audSteps;
@@ -49,10 +52,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     [Range(0, 1)][SerializeField] float audJumpVol;
     [SerializeField] AudioClip[] audFly;
     [Range(0, 1)][SerializeField] float audFlyVol;
+    [SerializeField] AudioClip[] audIce;
+    [Range(0, 1)][SerializeField] float audIceVol;
 
     int jumpCount;
     int dashCount;
     int HPOrig;
+    int gravityOrig;
 
     float shootTimer;
     float speedBoostTimer;
@@ -79,6 +85,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         HPOrig = HP;
         fuel = fuelMax;
+        gravityOrig = gravity;
         updatePlayerUI();
         isSlowed = false;
     }
@@ -442,11 +449,22 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
                 timeHeld = holdTime;
             }
         }
-        else if (Input.GetButtonUp("Jump") || jumpPressed == false || fuel <= 0)
+        else if (Input.GetButtonUp("Jump"))
         {
             jumpPressed = false;
             timeHeld = 0;
             aud.Stop();
+        }
+        else if (fuel <= 0 && fuelZeroCount == 0)
+        {
+            jumpPressed = false;
+            timeHeld = 0;
+            aud.Stop();
+            fuelZeroCount++;
+        }
+        else if (!jumpPressed)
+        {
+            timeHeld = 0;
         }
         timeHeld += Time.deltaTime;
         if (jumpPressed == true && timeHeld >= holdTime && fuel > 0)
@@ -470,6 +488,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
                 fuel = fuelMax;
             }
             fuelGained = true;
+            fuelZeroCount = 0;
         }
         else
         {
@@ -477,5 +496,47 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         }
         updatePlayerUI();
         return fuelGained;
+    }
+
+    void increaseSpeed(int mod)
+    {
+        speed *= mod;
+        StartCoroutine(iceAud(true));
+    }
+
+    IEnumerator iceAud(bool on)
+    {
+        if (on)
+        {
+            yield return new WaitForSeconds(0.1f);
+            aud.PlayOneShot(audIce[Random.Range(0, audIce.Length)], audIceVol);
+        }
+        else
+        {
+            aud.Stop();
+            yield return null;
+        }
+    }
+
+    void decreaseSpeed(int mod)
+    {
+        speed /= mod;
+        StartCoroutine(iceAud(false));
+    }
+
+    void changeGravity(int newGrav)
+    {
+        gravity = newGrav;
+        speed /= 2;
+        jumpSpeed /= 2;
+        flightSpeed /= 2;
+    }
+
+    void revertGravity()
+    {
+        gravity = gravityOrig;
+        speed *= 2;
+        jumpSpeed *= 2;
+        flightSpeed *= 2;
     }
 }
