@@ -48,12 +48,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     [Header("----- Melee -----")]
     [SerializeField] meleeStats meleeWeapon;
     [SerializeField] GameObject melee;
-    public Collider[] meleeCol;
-    int melColPos;
+    public Collider meleeCol;
 
     int meleeDamage;
     float meleeSpeed;
-    bool meleeSelected;
     float playerSpeed;
 
     int jumpCount;
@@ -88,14 +86,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         HPCurr = player[listPos].HPMax;
         updatePlayerUI();
         isSlowed = false;
-        if (gunList.Count() > 0) {
-            meleeSelected = false;
-        }
-        else
-        {
-            meleeSelected = true;
-            changeGun();
-        }
 
     }
 
@@ -148,9 +138,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         //cheks whick animation to play
         playerSpeed = controller.velocity.magnitude;
         getAnimDir();
-        float animCurSpeed = anim.GetFloat("Speed");
-        anim.SetBool("Melee", meleeSelected);
-        anim.SetFloat("Speed", Mathf.MoveTowards(animCurSpeed, playerSpeed, Time.deltaTime));
         jump();
         dash();
         if (hasJetpack)
@@ -170,10 +157,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         {
             isDamageBoosted = false;
             shootDamage = shootDamage - damageBoostAmount;
-        }
-        if (Input.GetButton("Melee"))
-        {
-            selectMelee();
         }
         
         if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
@@ -287,26 +270,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         changeGun();
 
     }
-    void isTwoHanded()
-    {
-        if (meleeWeapon.twoHanded == true)
-        {
-            melColPos = 0;
-        }
-        else
-        {
-            melColPos = 1;
-        }
-    }
 
     public void weaponColOn()
     {
-        meleeCol[melColPos].enabled = true;  
+        meleeCol.enabled = true;  
     }
 
     public void weaponColOff()
     {
-        meleeCol[melColPos].enabled = false;
+        meleeCol.enabled = false;
     }
 
 
@@ -461,33 +433,20 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     void selectGun()
     {
-        if (meleeSelected != true) {
-            if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
-            {
-                gunListPos++;
-                changeGun();
-            }
-            if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
-            {
-                gunListPos--;
-                changeGun();
-            } 
-        }
-    }
-    void selectMelee()
-    {
-        meleeSelected = !meleeSelected;
-        changeGun();
+       if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
+       {
+           gunListPos++;
+           changeGun();
+       }
+       if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
+       {
+          gunListPos--;
+          changeGun();
+       }  
     }
 
     void changeGun()
     {
-        if (meleeSelected == true)
-        {
-            melee.GetComponent<MeshFilter>().sharedMesh = meleeWeapon.model.GetComponent<MeshFilter>().sharedMesh;
-            melee.GetComponent<MeshRenderer>().sharedMaterial = meleeWeapon.model.GetComponent<MeshRenderer>().sharedMaterial;
-        }
-        else {
             if (gunList.Count > 0) {
                 shootDamage = gunList[gunListPos].shootDamage;
                 shootDist = gunList[gunListPos].shootDist;
@@ -496,7 +455,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
                 gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].model.GetComponent<MeshFilter>().sharedMesh;
                 gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].model.GetComponent<MeshRenderer>().sharedMaterial;
             } 
-        }
     }
 
     void gunReload()

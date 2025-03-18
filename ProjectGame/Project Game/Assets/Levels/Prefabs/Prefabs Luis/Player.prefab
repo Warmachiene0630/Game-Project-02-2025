@@ -429,7 +429,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464534336306983909}
-  m_Mesh: {fileID: 4077779311563332892, guid: 1af6c9d4792b975498541f34267aefc6, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!23 &4206059436777519374
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1783,7 +1783,7 @@ Transform:
   m_GameObject: {fileID: 6609312482240088915}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.262144, y: 0, z: -1.3247104}
+  m_LocalPosition: {x: 18.262144, y: 0, z: -1.291}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1861,7 +1861,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f0a4dfa29d8b8f143b8fee6a95efcebf, type: 2}
   - {fileID: 11400000, guid: 94f99966b64e50d469a6b1026d9ee082, type: 2}
   listPos: 0
+  holdTime: 0
+  flightSpeed: 10
+  fuelMax: 5
+  hasJetpack: 0
+  audFly: []
+  audFlyVol: 0
   gravity: 15
+  dashSpeed: 0
+  dashTime: 0
   speedBoostTime: 5
   damageBoostTime: 5
   damageBoostAmount: 1
@@ -1870,8 +1878,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 0}
   meleeWeapon: {fileID: 11400000, guid: 87cb0c47db7a7464d8044e404ea21a07, type: 2}
   melee: {fileID: 1464534336306983909}
-  meleeCol:
-  - {fileID: 7903893457127563766}
+  meleeCol: {fileID: 7903893457127563766}
   HPCurr: 0
   isSpeedBoosted: 0
   isDamageBoosted: 0
@@ -2345,7 +2352,7 @@ Transform:
   m_GameObject: {fileID: 7802345379658444952}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.085, y: 1.758, z: 0.317}
+  m_LocalPosition: {x: -0.085, y: 1.758, z: 0.182}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

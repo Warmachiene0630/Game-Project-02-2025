@@ -12,4 +12,8 @@ public interface IPickUp
     {
 
     }
+    public bool gainFuel(int fuel)
+    {
+        return false;
+    }
 }
