@@ -6,6 +6,9 @@ using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Levels")]
+    public GameObject[] sceneList;
+
     [Header("----- Components -----")]
     public static GameManager instance;
     public GameObject player;
@@ -24,6 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuSens;
     [SerializeField] GameObject menuMerchant;
+    public GameObject playerDashScreen;
     public bool isPaused;
 
     [Header("----- UI -----")]
@@ -48,6 +52,7 @@ public class GameManager : MonoBehaviour
     public GameObject purchaseSuccessfulPopup;
     public GameObject alreadyFullPopup;
     public GameObject alreadyAppliedPopup;
+    public GameObject doorPopUp;
 
     [Header("----- Stats -----")]
     private int goalCount;

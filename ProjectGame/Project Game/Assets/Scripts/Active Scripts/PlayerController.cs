@@ -1,23 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage, IPickUp
 {
+    [Header("----- Animator -----")]
+    [SerializeField] Animator anim;
+
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreLayer;
     [SerializeField] AudioSource aud;
+    [SerializeField] GameObject playerModel;
+    [SerializeField] List<PlayerType> player;
+    public int listPos;
+
+    [Header("----- Jetpack -----")]
+    [Range(0, 1)][SerializeField] float holdTime;
+    [Range(10, 20)][SerializeField] float flightSpeed;
+    [Range(5, 20)][SerializeField] int fuelMax;
+    [SerializeField] bool hasJetpack;
+    bool jumpPressed = false;
+    float timeHeld = 0;
+    float fuel;
+
+    [SerializeField] AudioClip[] audFly;
+    [Range(0, 1)][SerializeField] float audFlyVol;
 
     [Header("----- Stats -----")]
-    [Range(1, 10)] public int HP;
-    [Range(3, 10)] [SerializeField] float speed;
-    [Range(2, 5)] [SerializeField] float sprintMod;
+    [Range(15, 45)] [SerializeField] int gravity;
     [SerializeField] float dashSpeed;
     [SerializeField] float dashTime;
-    [Range(5, 20)] [SerializeField] int jumpSpeed;
-    [Range(1, 3)] [SerializeField] int jumpMax;
-    [Range(15, 45)] [SerializeField] int gravity;
     [Range(5, 15)] [SerializeField] float speedBoostTime;
     [Range(5, 15)] [SerializeField] float damageBoostTime;
     [Range(1, 5)] [SerializeField] int damageBoostAmount;
@@ -31,28 +45,20 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     int shootDist;
     int gunListPos;
 
-    [Header("----- Jetpack -----")]
-    [Range(0, 1)] [SerializeField] float holdTime;
-    [Range(10, 20)] [SerializeField] float flightSpeed;
-    [Range(5, 20)] [SerializeField] int fuelMax;
-    [SerializeField] bool hasJetpack;
-    bool jumpPressed = false;
-    float timeHeld = 0;
-    float fuel;
+    [Header("----- Melee -----")]
+    [SerializeField] meleeStats meleeWeapon;
+    [SerializeField] GameObject melee;
+    public Collider[] meleeCol;
+    int melColPos;
 
-    [Header("----- Audio -----")]
-    [SerializeField] AudioClip[] audSteps;
-    [Range(0, 1)][SerializeField] float audStepsVol;
-    [SerializeField] AudioClip[] audHurt;
-    [Range(0, 1)][SerializeField] float audHurtVol;
-    [SerializeField] AudioClip[] audJump;
-    [Range(0, 1)][SerializeField] float audJumpVol;
-    [SerializeField] AudioClip[] audFly;
-    [Range(0, 1)][SerializeField] float audFlyVol;
+    int meleeDamage;
+    float meleeSpeed;
+    bool meleeSelected;
+    float playerSpeed;
 
     int jumpCount;
     int dashCount;
-    int HPOrig;
+    public int HPCurr;
 
     float shootTimer;
     float speedBoostTimer;
@@ -61,6 +67,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     Vector3 moveDir;
 
     Vector3 playerVel;
+
 
     bool isSprinting;
     bool isDashing;
@@ -77,10 +84,19 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        HPOrig = HP;
-        fuel = fuelMax;
+        playerModel.GetComponent<SkinnedMeshRenderer>().sharedMesh = player[listPos].model.GetComponent<SkinnedMeshRenderer>().sharedMesh;
+        HPCurr = player[listPos].HPMax;
         updatePlayerUI();
         isSlowed = false;
+        if (gunList.Count() > 0) {
+            meleeSelected = false;
+        }
+        else
+        {
+            meleeSelected = true;
+            changeGun();
+        }
+
     }
 
     // Update is called once per frame
@@ -99,6 +115,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     void movement()
     {
+
         if (controller.isGrounded)
         {
             if (moveDir.magnitude > 0.3f && !isPlayingSteps)
@@ -106,34 +123,46 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
                 StartCoroutine(playSteps());
             }
             jumpCount = 0;
-            if (isDashing == false) 
-            { 
-                dashCount = 0; 
+            if (isDashing == false)
+            {
+                dashCount = 0;
             }
             isFlying = false;
+            jumpCount = 0;
+            dashCount = 0;
             playerVel = Vector3.zero;
         }
 
         moveDir = (Input.GetAxis("Horizontal") * transform.right) +
             (Input.GetAxis("Vertical") * transform.forward);
-        controller.Move(moveDir * speed * Time.deltaTime);
+
+        controller.Move(moveDir * player[listPos].speed * Time.deltaTime);
         jump();
-        dash();
-        if (hasJetpack)
-        { 
-            fly(); 
-        }
         controller.Move(playerVel * Time.deltaTime);
+
         playerVel.y -= gravity * Time.deltaTime;
 
         shootTimer += Time.deltaTime;
         speedBoostTimer -= Time.deltaTime;
 
+        //cheks whick animation to play
+        playerSpeed = controller.velocity.magnitude;
+        getAnimDir();
+        float animCurSpeed = anim.GetFloat("Speed");
+        anim.SetBool("Melee", meleeSelected);
+        anim.SetFloat("Speed", Mathf.MoveTowards(animCurSpeed, playerSpeed, Time.deltaTime));
+        jump();
+        dash();
+        if (hasJetpack)
+        {
+            fly();
+        }
+
         //checks for speed boost, if there was a boost and it ended reverts speed back to original
-        if(isSpeedBoosted && speedBoostTimer <= 0)
+        if (isSpeedBoosted && speedBoostTimer <= 0)
         {
             isSpeedBoosted = false;
-            speed = speed / sprintMod;
+            player[listPos].speed = player[listPos].speed / player[listPos].sprintMod;
         }
 
         //checks for damage boost, if there was a boost and it ended reverts shoot damage back to original
@@ -142,15 +171,20 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
             isDamageBoosted = false;
             shootDamage = shootDamage - damageBoostAmount;
         }
-
+        if (Input.GetButton("Melee"))
+        {
+            selectMelee();
+        }
+        
         if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
         {
             if (!GameManager.instance.isPaused)
             {
                 shoot();
             }
-            
-
+        }
+        if (Input.GetButton("Melee") && meleeWeapon != null && shootTimer >= meleeSpeed){
+            swing();
         }
 
         selectGun();
@@ -160,12 +194,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         if (Input.GetButtonDown("Sprint"))
         {
-            speed *= sprintMod;
+            player[listPos].speed *= player[listPos].sprintMod;
             isSprinting = true;
         }
         else if (Input.GetButtonUp("Sprint") && isSprinting)
         {
-            speed /= sprintMod;
+            player[listPos].speed /= player[listPos].sprintMod;
             isSprinting = false;
         }
     }
@@ -174,7 +208,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         isPlayingSteps = true;
 
-        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+        aud.PlayOneShot(player[listPos].audSteps[Random.Range(0, player[listPos].audSteps.Length)], player[listPos].audStepsVol);
 
         if (!isSprinting)
         {
@@ -196,11 +230,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     }
     public void spawnPlayer()
     {
-        HP = HPOrig;
+        HPCurr = player[listPos].HPMax;
         updatePlayerUI();
         controller.transform.position = GameManager.instance.playerSpawnPos.transform.position;
-        HP = HPOrig;
-        fuel = fuelMax;
+        HPCurr = player[listPos].HPMax;
         updatePlayerUI();
 
 
@@ -208,13 +241,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     void jump()
     {
-        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        if (Input.GetButtonDown("Jump") && jumpCount < player[listPos].jumpMax)
         {
             jumpCount++;
-            playerVel.y = jumpSpeed;
-            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
-        }
+            playerVel.y = player[listPos].jumpSpeed;
+            aud.PlayOneShot(player[listPos].audJump[Random.Range(0, player[listPos].audJump.Length)], player[listPos].audJumpVol);
+        } 
     }
+
 
     void shoot()
     {
@@ -239,28 +273,65 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         }
     }
 
+    void swing()
+    {
+        shootTimer = 0;
+        gunModel.GetComponent<MeshFilter>().sharedMesh = null;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = null;
+
+        melee.GetComponent<MeshFilter>().sharedMesh = meleeWeapon.model.GetComponent<MeshFilter>().sharedMesh;
+        melee.GetComponent<MeshRenderer>().sharedMaterial = meleeWeapon.model.GetComponent<MeshRenderer>().sharedMaterial;
+ 
+        anim.SetTrigger("Swing 1");
+
+        changeGun();
+
+    }
+    void isTwoHanded()
+    {
+        if (meleeWeapon.twoHanded == true)
+        {
+            melColPos = 0;
+        }
+        else
+        {
+            melColPos = 1;
+        }
+    }
+
+    public void weaponColOn()
+    {
+        meleeCol[melColPos].enabled = true;  
+    }
+
+    public void weaponColOff()
+    {
+        meleeCol[melColPos].enabled = false;
+    }
+
+
     public void takeDamage(int amount)
     {
-        HP -= amount;
+        HPCurr -= amount;
         StartCoroutine(flashDamageScreen());
 
         updatePlayerUI();
-        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
+        aud.PlayOneShot(player[listPos].audHurt[Random.Range(0, player[listPos].audHurt.Length)], player[listPos].audHurtVol);
 
-        if (HP <= 0)
+        if (HPCurr <= 0)
         {
             GameManager.instance.youLose();
         }
     }
     public bool gainHealth(int amount)
     {
-        if (HP != HPOrig) 
+        if (HPCurr != player[listPos].HPMax) 
         {
-            HP += amount;
+             HPCurr += amount;
 
-            if (HP >= HPOrig)
+            if (HPCurr >= player[listPos].HPMax)
             {
-                HP = HPOrig;
+                HPCurr = player[listPos].HPMax;
             }
             
             StartCoroutine(flashHealthScreen());
@@ -290,7 +361,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     public void updatePlayerUI()
     {
-        GameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+        GameManager.instance.playerHPBar.fillAmount = (float)HPCurr / player[listPos].HPMax;
         GameManager.instance.playerFuelBar.fillAmount = (float)fuel / fuelMax;
     }
 
@@ -299,11 +370,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         if (Input.GetButtonDown("Dash") && dashCount < 1)
         {
             dashCount++;
-            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
+            aud.PlayOneShot(player[listPos].audJump[Random.Range(0, player[listPos].audJump.Length)], player[listPos].audJumpVol);
             StartCoroutine(dashCoroutine());
         }
     }
-
     IEnumerator dashCoroutine()
     {
         float startTime = Time.time;
@@ -323,13 +393,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     //used to fill HP to original
     public void fillHealth()
     {
-        HP = HPOrig;
+        HPCurr = player[listPos].HPMax;
     }
 
     //used to check if HP is full
     public bool isHPFull()
     {
-        if(HP == HPOrig)
+        if(HPCurr == player[listPos].HPMax)
         {
             return true;
         }
@@ -343,7 +413,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     public void speedBoost()
     {
         isSpeedBoosted = true;
-        speed = speed * sprintMod;
+        player[listPos].speed = player[listPos].speed * player[listPos].sprintMod;
         speedBoostTimer = speedBoostTime;
     }
 
@@ -368,14 +438,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         if (isSlowed != true)
         {
             slowDur = slow;
-            speed = speed / 2;
+            player[listPos].speed = player[listPos].speed / 2;
             isSlowed = true;
         }
     }
 
     public void normalSpeed()
     {
-        speed = speed * 2;
+        player[listPos].speed = player[listPos].speed * 2;
         isSlowed = false;
         slowDur = 0;
         slowTimer = 0;
@@ -391,27 +461,42 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     void selectGun()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
-        {
-            gunListPos++;
-            changeGun();
+        if (meleeSelected != true) {
+            if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
+            {
+                gunListPos++;
+                changeGun();
+            }
+            if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
+            {
+                gunListPos--;
+                changeGun();
+            } 
         }
-        if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
-        {
-            gunListPos--;
-            changeGun();
-        }
+    }
+    void selectMelee()
+    {
+        meleeSelected = !meleeSelected;
+        changeGun();
     }
 
     void changeGun()
     {
+        if (meleeSelected == true)
+        {
+            melee.GetComponent<MeshFilter>().sharedMesh = meleeWeapon.model.GetComponent<MeshFilter>().sharedMesh;
+            melee.GetComponent<MeshRenderer>().sharedMaterial = meleeWeapon.model.GetComponent<MeshRenderer>().sharedMaterial;
+        }
+        else {
+            if (gunList.Count > 0) {
+                shootDamage = gunList[gunListPos].shootDamage;
+                shootDist = gunList[gunListPos].shootDist;
+                shootRate = gunList[gunListPos].shootRate;
 
-        shootDamage = gunList[gunListPos].shootDamage;
-        shootDist = gunList[gunListPos].shootDist;
-        shootRate = gunList[gunListPos].shootRate;
-
-        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].model.GetComponent<MeshFilter>().sharedMesh;
-        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].model.GetComponent<MeshRenderer>().sharedMaterial;
+                gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].model.GetComponent<MeshFilter>().sharedMesh;
+                gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].model.GetComponent<MeshRenderer>().sharedMaterial;
+            } 
+        }
     }
 
     void gunReload()
@@ -430,6 +515,18 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         muzzleFlash.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.05f);
         muzzleFlash.gameObject.SetActive(false);
+    }
+
+    public void getMeleeStats(meleeStats melee)
+    {
+        meleeWeapon = melee;
+        meleeDamage = meleeWeapon.meleeDamage;
+        meleeSpeed = meleeWeapon.meleeSpeed;
+    }
+    void getAnimDir()
+    {
+        anim.SetFloat("Right", Input.GetAxis("Horizontal"));
+        anim.SetFloat("For", Input.GetAxis("Vertical"));
     }
 
     void fly()
@@ -452,13 +549,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         if (jumpPressed == true && timeHeld >= holdTime && fuel > 0)
         {
             aud.PlayOneShot(audFly[0], audFlyVol);
-            playerVel.y = 1 * flightSpeed; 
+            playerVel.y = 1 * flightSpeed;
             isFlying = true;
             fuel -= Time.deltaTime * (flightSpeed / 2);
             updatePlayerUI();
         }
     }
-
     public bool gainFuel(float amount)
     {
         bool fuelGained;
@@ -478,4 +574,5 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         updatePlayerUI();
         return fuelGained;
     }
+
 }
