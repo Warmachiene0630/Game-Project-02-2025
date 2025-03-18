@@ -66,7 +66,9 @@ public class GameManager : MonoBehaviour
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip backgroundMusic;
-    [Range(0, 1)][SerializeField] float musicVol;
+    public float musicVol;
+    public float sfxVol;
+    public float masterVol;
 
 
     public GameObject playerSpawnPos;

@@ -627,10 +627,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 488d702709d95bd4a9a1309d212e99fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: ebccedf70b82e4949ba455fe380d6d4d, type: 2}
-  musicSlider: {fileID: 7504068309279714055}
-  sfxSlider: {fileID: 364108701858680561}
-  masterSlider: {fileID: 2187592507301890018}
   sfxSource: {fileID: 319858361}
   sfxClip: {fileID: 8300000, guid: e83af5cf0e369ee41873fc539ad2d3c3, type: 3}
 --- !u!82 &319858361
@@ -2315,6 +2311,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1228450345}
   sfxSource: {fileID: 1228450344}
+  musicSlider: {fileID: 7504068309279714055}
+  sfxSlider: {fileID: 364108701858680561}
+  masterSlider: {fileID: 2187592507301890018}
+  mixer: {fileID: 24100000, guid: ebccedf70b82e4949ba455fe380d6d4d, type: 2}
   menuMusic: {fileID: 8300000, guid: 28677795e9a70f9418a5542482ccc13b, type: 3}
   sfxClip: {fileID: 8300000, guid: c034bbf22999348409b450d20ade3c34, type: 3}
   musicVol: 0.5

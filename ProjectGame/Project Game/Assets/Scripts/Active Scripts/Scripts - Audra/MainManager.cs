@@ -1,10 +1,17 @@
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
 {
     public static MainManager instance;
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource sfxSource;
+    [SerializeField] public Slider musicSlider;
+    [SerializeField] public Slider sfxSlider;
+    [SerializeField] public Slider masterSlider;
+    [SerializeField] public AudioMixer mixer;
 
     [SerializeField] AudioClip menuMusic;
     [SerializeField] AudioClip sfxClip;
