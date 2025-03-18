@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuSens;
     [SerializeField] GameObject menuMerchant;
+    public GameObject playerDashScreen;
     public bool isPaused;
 
     [Header("----- UI -----")]
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Slider sensSlider;
 
     public Image playerHPBar;
+    public Image playerFuelBar;
     public GameObject playerDamageScreen;
     public GameObject playerHealthScreen;
 

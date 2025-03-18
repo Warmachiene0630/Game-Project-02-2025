@@ -124,6 +124,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
                 StartCoroutine(playSteps());
             }
             jumpCount = 0;
+            if (isDashing == false)
+            {
+                dashCount = 0;
+            }
+            isFlying = false;
+            jumpCount = 0;
             dashCount = 0;
             playerVel = Vector3.zero;
         }
