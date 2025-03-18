@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour, IDamage, IPickUp
 {
@@ -17,16 +18,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     public int listPos;
 
     [Header("----- Jetpack -----")]
-    [Range(0, 1)][SerializeField] float holdTime;
-    [Range(10, 20)][SerializeField] float flightSpeed;
-    [Range(5, 20)][SerializeField] int fuelMax;
+    [Range(0, 1)] [SerializeField] float holdTime;
+    [Range(10, 20)] [SerializeField] float flightSpeed;
+    [Range(5, 20)] [SerializeField] int fuelMax;
     [SerializeField] bool hasJetpack;
     bool jumpPressed = false;
     float timeHeld = 0;
     float fuel;
-
-    [SerializeField] AudioClip[] audFly;
-    [Range(0, 1)][SerializeField] float audFlyVol;
+    int fuelZeroCount = 0;
 
     [Header("----- Stats -----")]
     [Range(15, 45)] [SerializeField] int gravity;
@@ -44,7 +43,19 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     float shootRate;
     int shootDist;
     int gunListPos;
-
+    
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audSteps;
+    [Range(0, 1)][SerializeField] float audStepsVol;
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0, 1)][SerializeField] float audHurtVol;
+    [SerializeField] AudioClip[] audJump;
+    [Range(0, 1)][SerializeField] float audJumpVol;
+    [SerializeField] AudioClip[] audFly;
+    [Range(0, 1)][SerializeField] float audFlyVol;
+    [SerializeField] AudioClip[] audIce;
+    [Range(0, 1)][SerializeField] float audIceVol;
+    
     [Header("----- Melee -----")]
     [SerializeField] meleeStats meleeWeapon;
     [SerializeField] GameObject melee;
@@ -59,6 +70,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     int dashCount;
     public int HPCurr;
     int lifeCount;
+    int gravityOrig;
 
     float shootTimer;
     float speedBoostTimer;
@@ -87,6 +99,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         playerModel.GetComponent<SkinnedMeshRenderer>().sharedMesh = player[listPos].model.GetComponent<SkinnedMeshRenderer>().sharedMesh;
         HPCurr = player[listPos].HPMax;
         lifeCount = 3;
+        HPOrig = HP;
+        fuel = fuelMax;
+        gravityOrig = gravity;
         updatePlayerUI();
         isSlowed = false;
 
@@ -520,11 +535,22 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
                 timeHeld = holdTime;
             }
         }
-        else if (Input.GetButtonUp("Jump") || jumpPressed == false || fuel <= 0)
+        else if (Input.GetButtonUp("Jump"))
         {
             jumpPressed = false;
             timeHeld = 0;
             aud.Stop();
+        }
+        else if (fuel <= 0 && fuelZeroCount == 0)
+        {
+            jumpPressed = false;
+            timeHeld = 0;
+            aud.Stop();
+            fuelZeroCount++;
+        }
+        else if (!jumpPressed)
+        {
+            timeHeld = 0;
         }
         timeHeld += Time.deltaTime;
         if (jumpPressed == true && timeHeld >= holdTime && fuel > 0)
@@ -547,6 +573,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
                 fuel = fuelMax;
             }
             fuelGained = true;
+            fuelZeroCount = 0;
         }
         else
         {
@@ -556,4 +583,45 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         return fuelGained;
     }
 
+    void increaseSpeed(int mod)
+    {
+        speed *= mod;
+        StartCoroutine(iceAud(true));
+    }
+
+    IEnumerator iceAud(bool on)
+    {
+        if (on)
+        {
+            yield return new WaitForSeconds(0.1f);
+            aud.PlayOneShot(audIce[Random.Range(0, audIce.Length)], audIceVol);
+        }
+        else
+        {
+            aud.Stop();
+            yield return null;
+        }
+    }
+
+    void decreaseSpeed(int mod)
+    {
+        speed /= mod;
+        StartCoroutine(iceAud(false));
+    }
+
+    void changeGravity(int newGrav)
+    {
+        gravity = newGrav;
+        speed /= 2;
+        jumpSpeed /= 2;
+        flightSpeed /= 2;
+    }
+
+    void revertGravity()
+    {
+        gravity = gravityOrig;
+        speed *= 2;
+        jumpSpeed *= 2;
+        flightSpeed *= 2;
+    }
 }

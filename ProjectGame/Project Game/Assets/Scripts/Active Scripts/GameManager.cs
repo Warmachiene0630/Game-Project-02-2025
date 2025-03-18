@@ -44,6 +44,9 @@ public class GameManager : MonoBehaviour
     public Image playerFuelBar;
     public GameObject playerDamageScreen;
     public GameObject playerHealthScreen;
+    public GameObject playerDashScreen;
+    public GameObject playerQuicksandScreen;
+    
     public Image life1;
     public Image life2;
     public Image life3;
