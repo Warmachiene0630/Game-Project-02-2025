@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     public Collider meleeCol;
 
     int meleeDamage;
+    float meleeTimer;
     float meleeSpeed;
     float playerSpeed;
 
@@ -133,6 +134,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         playerVel.y -= gravity * Time.deltaTime;
 
         shootTimer += Time.deltaTime;
+        meleeTimer += Time.deltaTime;
         speedBoostTimer -= Time.deltaTime;
 
         //cheks whick animation to play
@@ -166,7 +168,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
                 shoot();
             }
         }
-        if (Input.GetButton("Melee") && meleeWeapon != null && shootTimer >= meleeSpeed){
+        if (Input.GetButton("Melee") && meleeWeapon != null && meleeTimer >= meleeSpeed){
             swing();
         }
 
