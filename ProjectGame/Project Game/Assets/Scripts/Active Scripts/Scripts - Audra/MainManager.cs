@@ -20,7 +20,7 @@ public class MainManager : MonoBehaviour
     public float sfxVol;
     public float masterVol;
 
-    public int playerPos;
+    public int playerPos = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()

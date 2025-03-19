@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
     bool isSpeedBoosted = false;
     bool boughtDamageBoost;
     bool isDamageBoosted = false;
+    bool canGoNext = false;
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip backgroundMusic;
@@ -145,6 +147,14 @@ public class GameManager : MonoBehaviour
         goalCount += amount;
         goalCountText.text = goalCount.ToString("F0");
         if (goalCount <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
+
+    public void checkWinStatus()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 3)
         {
             statePause();
             menuActive = menuWin;
