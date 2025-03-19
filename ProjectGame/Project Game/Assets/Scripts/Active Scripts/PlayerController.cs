@@ -146,7 +146,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
         controller.Move(moveDir * player[listPos].speed * Time.deltaTime);
         //controller.Move(moveDir * 4 * Time.deltaTime);
-        jump();
         controller.Move(playerVel * Time.deltaTime);
 
         playerVel.y -= gravity * Time.deltaTime;
@@ -246,7 +245,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         if (Input.GetButtonDown("Jump") && jumpCount < player[listPos].jumpMax)
         {
-            jumpCount++;
+            jumpCount += 1;
             playerVel.y = player[listPos].jumpSpeed;
             aud.PlayOneShot(player[listPos].audJump[Random.Range(0, player[listPos].audJump.Length)], player[listPos].audJumpVol);
         } 
@@ -287,7 +286,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
  
         anim.SetTrigger("Swing 1");
 
+        weaponColOff();
         changeGun();
+
+
 
     }
 
@@ -299,6 +301,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     public void weaponColOff()
     {
         meleeCol.enabled = false;
+        melee.GetComponent<MeshFilter>().sharedMesh = null;
+        melee.GetComponent<MeshRenderer>().sharedMaterial = null;
     }
 
 
@@ -528,7 +532,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     void fly()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jet"))
         {
             jumpPressed = true;
             if (isFlying)
@@ -536,7 +540,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
                 timeHeld = holdTime;
             }
         }
-        else if (Input.GetButtonUp("Jump"))
+        else if (Input.GetButtonUp("Jet"))
         {
             jumpPressed = false;
             timeHeld = 0;

@@ -20,16 +20,13 @@ public class checkpoint : MonoBehaviour
             {
                 GameManager.instance.playerSpawnPos.transform.position = model.transform.position;
                 StartCoroutine(flashColor());
-                model = other.GetComponent<Renderer>();
             } 
     }
 
     IEnumerator flashColor()
     {
-        model.material.color = Color.red;
         GameManager.instance.checkpointPopup.SetActive(true);
         yield return new WaitForSeconds(0.5f);
-        model.material.color = Color.white;
         GameManager.instance.checkpointPopup.SetActive(false);
     }
 }
