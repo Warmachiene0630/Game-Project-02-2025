@@ -10,7 +10,7 @@ public class PlayerType : ScriptableObject
 
     [Header("----- Stats -----")]
     [Range(1, 10)] public int HPMax;
-    [Range(3, 10)]public float speed;
+    [Range(3, 10)]public float speedBase;
     [Range(2, 5)]public float sprintMod;
     [Range(5, 20)]public int jumpSpeed;
     [Range(1, 3)]public int jumpMax;

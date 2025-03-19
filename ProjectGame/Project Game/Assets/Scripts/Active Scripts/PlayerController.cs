@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     float meleeSpeed;
     float playerSpeed;
 
+    float speed;
     int jumpCount;
     int dashCount;
     public int HPCurr;
@@ -105,6 +106,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         gravityOrig = gravity;
         updatePlayerUI();
         isSlowed = false;
+        speed = player[listPos].speedBase;
     }
 
     // Update is called once per frame
@@ -144,7 +146,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         moveDir = (Input.GetAxis("Horizontal") * transform.right) +
             (Input.GetAxis("Vertical") * transform.forward);
 
-        controller.Move(moveDir * player[listPos].speed * Time.deltaTime);
+        controller.Move(moveDir * speed * Time.deltaTime);
         //controller.Move(moveDir * 4 * Time.deltaTime);
         controller.Move(playerVel * Time.deltaTime);
 
@@ -168,7 +170,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         if (isSpeedBoosted && speedBoostTimer <= 0)
         {
             isSpeedBoosted = false;
-            player[listPos].speed = player[listPos].speed / player[listPos].sprintMod;
+            speed = speed / player[listPos].sprintMod;
         }
 
         //checks for damage boost, if there was a boost and it ended reverts shoot damage back to original
@@ -196,12 +198,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         if (Input.GetButtonDown("Sprint"))
         {
-            player[listPos].speed *= player[listPos].sprintMod;
+            speed *= player[listPos].sprintMod;
             isSprinting = true;
         }
         else if (Input.GetButtonUp("Sprint") && isSprinting)
         {
-            player[listPos].speed /= player[listPos].sprintMod;
+            speed /= player[listPos].sprintMod;
             isSprinting = false;
         }
     }
@@ -429,7 +431,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     public void speedBoost()
     {
         isSpeedBoosted = true;
-        player[listPos].speed = player[listPos].speed * player[listPos].sprintMod;
+        speed = speed * player[listPos].sprintMod;
         speedBoostTimer = speedBoostTime;
     }
 
@@ -454,14 +456,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         if (isSlowed != true)
         {
             slowDur = slow;
-            player[listPos].speed = player[listPos].speed / 2;
+            speed = speed / 2;
             isSlowed = true;
         }
     }
 
     public void normalSpeed()
     {
-        player[listPos].speed = player[listPos].speed * 2;
+        speed = speed * 2;
         isSlowed = false;
         slowDur = 0;
         slowTimer = 0;
@@ -591,7 +593,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     void increaseSpeed(int mod)
     {
-        player[listPos].speed *= mod;
+        speed *= mod;
         StartCoroutine(iceAud(true));
     }
 
@@ -611,14 +613,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     void decreaseSpeed(int mod)
     {
-        player[listPos].speed /= mod;
+        speed /= mod;
         StartCoroutine(iceAud(false));
     }
 
     void changeGravity(int newGrav)
     {
         gravity = newGrav;
-        player[listPos].speed /= 2;
+        speed /= 2;
         player[listPos].jumpSpeed /= 2;
         flightSpeed /= 2;
     }
@@ -626,7 +628,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     void revertGravity()
     {
         gravity = gravityOrig;
-        player[listPos].speed *= 2;
+        speed *= 2;
         player[listPos].jumpSpeed *= 2;
         flightSpeed *= 2;
     }
