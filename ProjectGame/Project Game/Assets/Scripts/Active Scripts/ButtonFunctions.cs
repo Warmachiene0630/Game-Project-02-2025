@@ -13,6 +13,11 @@ public class ButtonFunctions : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.instance.stateUnpause();
     }
+
+    public void goMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
     public void respawnPlayer()
     {
         GameManager.instance.playerScript.spawnPlayer();
@@ -33,6 +38,7 @@ public class ButtonFunctions : MonoBehaviour
         {
             camScript.setSens(sensOrig);
         }
+        PlayerPrefs.SetInt("sens", camScript.getSens());
         //GameManager.instance.stateUnpause();
         GameManager.instance.resetMenu();
         GameManager.instance.openPauseMenu();

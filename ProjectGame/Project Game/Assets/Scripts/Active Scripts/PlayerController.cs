@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour, IDamage, IPickUp
 {
@@ -104,7 +105,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         gravityOrig = gravity;
         updatePlayerUI();
         isSlowed = false;
-
     }
 
     // Update is called once per frame
@@ -319,6 +319,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
             lifeCount = lifeCount - 1;
             HPCurr = player[listPos].HPMax;
             updatePlayerUI();
+            spawnPlayer();
         }
 
         if (lifeCount <= 0)
@@ -368,7 +369,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         GameManager.instance.playerFuelBar.fillAmount = (float)fuel / fuelMax;
         if (lifeCount == 2)
         {
-            GameManager.instance.life3.fillAmount = 0;
+            GameManager.instance.life3.fillAmount = 0; 
         }
         if (lifeCount == 1)
         {
@@ -629,4 +630,5 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         player[listPos].jumpSpeed *= 2;
         flightSpeed *= 2;
     }
+
 }

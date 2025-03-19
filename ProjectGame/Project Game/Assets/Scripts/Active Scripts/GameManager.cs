@@ -336,4 +336,9 @@ public class GameManager : MonoBehaviour
         boughtDamageBoost = false;
         stateUnpause();
     }
+
+    public int getCoins()
+    {
+        return coinCount;
+    }
 }
