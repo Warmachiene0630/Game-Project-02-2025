@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuMerchant;
     [SerializeField] GameObject menuMain;
     [SerializeField] GameObject menuAudio;
-    public GameObject playerDashScreen;
     public bool isPaused;
 
     [Header("----- UI -----")]

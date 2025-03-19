@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         playerModel.GetComponent<SkinnedMeshRenderer>().sharedMesh = player[listPos].model.GetComponent<SkinnedMeshRenderer>().sharedMesh;
         HPCurr = player[listPos].HPMax;
         lifeCount = 3;
-        HPOrig = HP;
+        //HPOrig = HP;
         fuel = fuelMax;
         gravityOrig = gravity;
         updatePlayerUI();
@@ -585,7 +585,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     void increaseSpeed(int mod)
     {
-        speed *= mod;
+        player[listPos].speed *= mod;
         StartCoroutine(iceAud(true));
     }
 
@@ -605,23 +605,23 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     void decreaseSpeed(int mod)
     {
-        speed /= mod;
+        player[listPos].speed /= mod;
         StartCoroutine(iceAud(false));
     }
 
     void changeGravity(int newGrav)
     {
         gravity = newGrav;
-        speed /= 2;
-        jumpSpeed /= 2;
+        player[listPos].speed /= 2;
+        player[listPos].jumpSpeed /= 2;
         flightSpeed /= 2;
     }
 
     void revertGravity()
     {
         gravity = gravityOrig;
-        speed *= 2;
-        jumpSpeed *= 2;
+        player[listPos].speed *= 2;
+        player[listPos].jumpSpeed *= 2;
         flightSpeed *= 2;
     }
 }
