@@ -145,6 +145,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
             (Input.GetAxis("Vertical") * transform.forward);
 
         controller.Move(moveDir * player[listPos].speed * Time.deltaTime);
+        //controller.Move(moveDir * 4 * Time.deltaTime);
         jump();
         controller.Move(playerVel * Time.deltaTime);
 

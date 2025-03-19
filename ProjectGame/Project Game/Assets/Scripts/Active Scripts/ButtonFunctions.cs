@@ -97,5 +97,15 @@ public class ButtonFunctions : MonoBehaviour
     {
         GameManager.instance.exitStore();
     }
+
+    public void choosePlayerOne()
+    {
+        MainManager.instance.playerPos = 0;
+    }
+
+    public void choosePlayerTwo()
+    {
+        MainManager.instance.playerPos = 1;
+    }
 }
 

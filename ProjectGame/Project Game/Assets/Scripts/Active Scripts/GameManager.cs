@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        instance.playerScript.listPos = MainManager.instance.playerPos;
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
         aud.PlayOneShot(backgroundMusic, musicVol);
     }
