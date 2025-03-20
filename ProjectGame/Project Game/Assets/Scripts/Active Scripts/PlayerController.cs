@@ -260,7 +260,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         gunList[gunListPos].ammoCur--;
         aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootVol);
 
-        StartCoroutine(flashMuzzle());
+        //StartCoroutine(flashMuzzle());
 
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
