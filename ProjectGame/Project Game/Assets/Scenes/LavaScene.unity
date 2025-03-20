@@ -32513,10 +32513,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3620010312941289790, guid: d37f51050dfecb645ad337a95a709f73, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -57
-      objectReference: {fileID: 0}
     - target: {fileID: 4611169653025919767, guid: d37f51050dfecb645ad337a95a709f73, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -32596,14 +32592,6 @@ PrefabInstance:
     - target: {fileID: 4611169653025919767, guid: d37f51050dfecb645ad337a95a709f73, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6078177295434627190, guid: d37f51050dfecb645ad337a95a709f73, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6862816888875233649, guid: d37f51050dfecb645ad337a95a709f73, type: 3}
-      propertyPath: m_text
-      value: Checkpoint Reached
       objectReference: {fileID: 0}
     - target: {fileID: 7545856620568305334, guid: d37f51050dfecb645ad337a95a709f73, type: 3}
       propertyPath: m_Name
