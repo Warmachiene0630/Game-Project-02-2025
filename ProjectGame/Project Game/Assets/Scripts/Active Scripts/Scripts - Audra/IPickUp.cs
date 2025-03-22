@@ -4,11 +4,16 @@ public interface IPickUp
 {
 
     bool gainHealth(int amount);
-
     public void getGunStats(GunStats gun)
     {
 
     }
+    public void getMeleeStats(meleeStats melee)
+    {
 
-    bool gainFuel(float amount);
+    }
+    public bool gainFuel(int fuel)
+    {
+        return false;
+    }
 }

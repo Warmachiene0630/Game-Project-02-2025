@@ -17,7 +17,7 @@ public class TrackingBulltet : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerDir = GameManager.instance.player.transform.position - transform.position;
+        playerDir = new Vector3(GameManager.instance.player.transform.position.x - transform.position.x , GameManager.instance.player.transform.position.y - transform.position.y + 1, GameManager.instance.player.transform.position.z - transform.position.z);
         Destroy(gameObject, destroyTime);
     }
 
@@ -31,7 +31,7 @@ public class TrackingBulltet : MonoBehaviour
 
     void trackPlayer()
     {
-        playerDir = GameManager.instance.player.transform.position - transform.position;
+        playerDir = new Vector3(GameManager.instance.player.transform.position.x - transform.position.x, GameManager.instance.player.transform.position.y - transform.position.y + 1, GameManager.instance.player.transform.position.z - transform.position.z);
         Quaternion rot = Quaternion.LookRotation(playerDir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * facePlayerSpeed);
     }

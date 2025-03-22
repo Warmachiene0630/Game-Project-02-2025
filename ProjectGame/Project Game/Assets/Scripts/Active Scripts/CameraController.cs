@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -21,11 +22,24 @@ public class CameraController : MonoBehaviour
         sens = newSens;
     }
 
+    //public void loadSens()
+    //{
+        //sens = PlayerPrefs.GetInt("sens");
+    //}
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+       //if (PlayerPrefs.HasKey("sens"))
+        //{
+        //    loadSens();
+        //}
+        //else
+        //{
+        //    setSens(sens);
+        //}
     }
 
     // Update is called once per frame

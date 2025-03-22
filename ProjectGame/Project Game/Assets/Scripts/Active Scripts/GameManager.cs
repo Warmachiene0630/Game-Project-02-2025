@@ -3,9 +3,13 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Levels")]
+    public GameObject[] sceneList;
+
     [Header("----- Components -----")]
     public static GameManager instance;
     public GameObject player;
@@ -24,6 +28,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuSens;
     [SerializeField] GameObject menuMerchant;
+    [SerializeField] GameObject menuMain;
+    [SerializeField] GameObject menuAudio;
     public bool isPaused;
 
     [Header("----- UI -----")]
@@ -40,6 +46,10 @@ public class GameManager : MonoBehaviour
     public GameObject playerHealthScreen;
     public GameObject playerDashScreen;
     public GameObject playerQuicksandScreen;
+    
+    public Image life1;
+    public Image life2;
+    public Image life3;
 
 
     [Header("----- Popups -----")]
@@ -49,9 +59,10 @@ public class GameManager : MonoBehaviour
     public GameObject purchaseSuccessfulPopup;
     public GameObject alreadyFullPopup;
     public GameObject alreadyAppliedPopup;
+    public GameObject doorPopUp;
 
     [Header("----- Stats -----")]
-    private int goalCount;
+    public int goalCount;
     private int coinCount;
 
     [Header("----- Boosts -----")]
@@ -59,6 +70,7 @@ public class GameManager : MonoBehaviour
     bool isSpeedBoosted = false;
     bool boughtDamageBoost;
     bool isDamageBoosted = false;
+    bool canGoNext = false;
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip backgroundMusic;
@@ -74,8 +86,10 @@ public class GameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        instance.playerScript.listPos = MainManager.instance.playerPos;
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
         aud.PlayOneShot(backgroundMusic, musicVol);
+        canGoNext = false;
     }
 
     // Update is called once per frame
@@ -85,15 +99,24 @@ public class GameManager : MonoBehaviour
         {
             if (menuActive == null)
             {
-                statePause();
-                menuActive = menuPause;
-                menuActive.SetActive(true);
+                //statePause();
+                //menuActive = menuPause;
+                //menuActive.SetActive(true);
+                openPauseMenu();
             }
             else if (menuActive == menuPause)
             {
                 stateUnpause();
             }
         }
+
+    }
+
+    public void openPauseMenu()
+    {
+        statePause();
+        menuActive = menuPause;
+        menuActive.SetActive(true);
     }
 
     public void statePause()
@@ -115,11 +138,24 @@ public class GameManager : MonoBehaviour
         resetStorePopups();
     }
 
+    public void resetMenu()
+    {
+        menuActive.SetActive(false);
+    }
+
     public void updateGameGoal(int amount)
     {
         goalCount += amount;
         goalCountText.text = goalCount.ToString("F0");
         if (goalCount <= 0)
+        {
+            canGoNext = true;
+        }
+    }
+
+    public void checkWinStatus()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 3)
         {
             statePause();
             menuActive = menuWin;
@@ -148,6 +184,14 @@ public class GameManager : MonoBehaviour
         menuActive.SetActive(false);
         statePause();
         menuActive = menuSens;
+        menuActive.SetActive(true);
+    }
+
+    public void audioMenu()
+    {
+        menuActive.SetActive(false);
+        statePause();
+        menuActive = menuAudio;
         menuActive.SetActive(true);
     }
 
@@ -292,5 +336,14 @@ public class GameManager : MonoBehaviour
         boughtSpeedBoost = false;
         boughtDamageBoost = false;
         stateUnpause();
+    }
+
+    public int getCoins()
+    {
+        return coinCount;
+    }
+    public void loadNextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
