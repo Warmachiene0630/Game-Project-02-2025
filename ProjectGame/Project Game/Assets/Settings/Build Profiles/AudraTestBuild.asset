@@ -26,6 +26,8 @@ MonoBehaviour:
     m_path: Assets/Scenes/LavaScene.unity
   - m_enabled: 1
     m_path: Assets/Scenes/CM.Scene Sand.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/End Scene.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings: []
