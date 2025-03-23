@@ -149,9 +149,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         controller.Move(moveDir * speed * Time.deltaTime);
         //controller.Move(moveDir * 4 * Time.deltaTime);
         controller.Move(playerVel * Time.deltaTime);
-
-        playerVel.y -= gravity * Time.deltaTime;
-
+        if (controller.isGrounded == false)
+        {
+            playerVel.y -= gravity * Time.deltaTime;
+        }
         shootTimer += Time.deltaTime;
         meleeTimer += Time.deltaTime;
         speedBoostTimer -= Time.deltaTime;
