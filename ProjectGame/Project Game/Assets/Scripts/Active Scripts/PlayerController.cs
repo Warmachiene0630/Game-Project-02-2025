@@ -148,7 +148,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
         controller.Move(moveDir * speed * Time.deltaTime);
         //controller.Move(moveDir * 4 * Time.deltaTime);
-        controller.Move(playerVel * Time.deltaTime);
 
         playerVel.y -= gravity * Time.deltaTime;
 
@@ -166,6 +165,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
             fly();
         }
 
+        controller.Move(playerVel * Time.deltaTime);
         //checks for speed boost, if there was a boost and it ended reverts speed back to original
         if (isSpeedBoosted && speedBoostTimer <= 0)
         {
@@ -570,7 +570,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
             updatePlayerUI();
         }
     }
-    public bool gainFuel(float amount)
+    public bool gainFuel(int amount)
     {
         bool fuelGained;
         if (fuel < fuelMax)
