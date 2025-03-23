@@ -153,6 +153,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         {
             playerVel.y -= gravity * Time.deltaTime;
         }
+        else
+        {
+            playerVel.y = 0;
+        }
+
         shootTimer += Time.deltaTime;
         meleeTimer += Time.deltaTime;
         speedBoostTimer -= Time.deltaTime;
@@ -262,6 +267,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootVol);
 
         StartCoroutine(flashMuzzle());
+        anim.SetTrigger("Shoot");
 
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
@@ -603,7 +609,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         if (on)
         {
             yield return new WaitForSeconds(0.1f);
-            aud.PlayOneShot(audIce[Random.Range(0, audIce.Length)], audIceVol);
+         //   aud.PlayOneShot(audIce[Random.Range(0, audIce.Length)], audIceVol);
         }
         else
         {
