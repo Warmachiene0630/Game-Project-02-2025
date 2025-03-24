@@ -4,6 +4,7 @@ using TMPro;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
+using UnityEngine.Assertions.Must;
 
 public class GameManager : MonoBehaviour
 {
@@ -90,6 +91,16 @@ public class GameManager : MonoBehaviour
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
         aud.PlayOneShot(backgroundMusic, musicVol);
         canGoNext = false;
+
+        if (playerScript.listPos == 1)
+        {
+            playerFuelBar.GameObject().SetActive(true);
+        }
+        else
+        {
+            playerFuelBar.GameObject().SetActive(false);
+
+        }
     }
 
     // Update is called once per frame
@@ -344,6 +355,10 @@ public class GameManager : MonoBehaviour
     }
     public void loadNextScene()
     {
+        playerScript.assignStats();
+
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
     }
 }
