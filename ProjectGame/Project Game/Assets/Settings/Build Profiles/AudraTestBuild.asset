@@ -23,6 +23,8 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/Scenes/MainMenu.unity
   - m_enabled: 1
+    m_path: Assets/Scenes/IntroScene.unity
+  - m_enabled: 1
     m_path: Assets/Scenes/LavaScene.unity
   - m_enabled: 1
     m_path: Assets/Scenes/CM.Scene Sand.unity
