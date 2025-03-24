@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 482e2db2cc780884390e71256c06ca82, type: 3}
-  m_Name: Sword - stats
+  m_Name: Sword 2 - stats 1
   m_EditorClassIdentifier: 
-  model: {fileID: 919132149155446097, guid: 1af6c9d4792b975498541f34267aefc6, type: 3}
-  meleeDamage: 3
-  meleeSpeed: 0.75
+  model: {fileID: 919132149155446097, guid: 3271cae2a4b914342a461c5ff92a3733, type: 3}
+  meleeDamage: 6
+  meleeSpeed: 1
   twoHanded: 0
   hitEffect: {fileID: 3836854531972415411, guid: 4790206eadc817b4196e071640e653af, type: 3}
   hitSound:

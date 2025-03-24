@@ -18,8 +18,9 @@ MonoBehaviour:
   sprintMod: 2
   jumpSpeed: 5
   jumpMax: 2
+  assignedWeapon: {fileID: 11400000, guid: db00924a86a0a5b4aa5828f1c5499225, type: 2}
+  assignedGun: {fileID: 11400000, guid: 39d58fd631eab3c42a70d717893843c6, type: 2}
   meleeBonus: 0
-  meleeSpeed: 1
   hpRecover: 0
   audSteps:
   - {fileID: 8300000, guid: d992e5ab97b9aa8409f83e26d07d76e6, type: 3}
@@ -33,3 +34,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1e9ecb3bd20906a4b829071ee879baa0, type: 3}
   - {fileID: 8300000, guid: 4819eca97b9cad8448674e6401b83768, type: 3}
   audJumpVol: 0.2
+  livesLeft: 0
+  totalGold: 0
+  healthRemaining: 0
+  remainigFuel: 0
+  firstScene: 0
+  guns: []
