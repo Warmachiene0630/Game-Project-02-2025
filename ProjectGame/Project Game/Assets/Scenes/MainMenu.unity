@@ -134,7 +134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3137070
 RectTransform:
   m_ObjectHideFlags: 0
@@ -679,7 +679,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &224384758
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3005,9 +3005,9 @@ MonoBehaviour:
   mixer: {fileID: 24100000, guid: ebccedf70b82e4949ba455fe380d6d4d, type: 2}
   menuMusic: {fileID: 8300000, guid: 28677795e9a70f9418a5542482ccc13b, type: 3}
   sfxClip: {fileID: 8300000, guid: c034bbf22999348409b450d20ade3c34, type: 3}
-  musicVol: 0.1
-  sfxVol: 0.1
-  masterVol: 0.1
+  musicVol: 1
+  sfxVol: 0.25
+  masterVol: 1
   playerPos: 0
 --- !u!82 &1228450344
 AudioSource:
@@ -6133,7 +6133,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1949230639}
         m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
         m_MethodName: confirmSens
         m_Mode: 1
