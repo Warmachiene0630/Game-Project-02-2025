@@ -391,14 +391,20 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         if (lifeCount == 2)
         {
             GameManager.instance.life3.fillAmount = 0;
+            GameManager.instance.life2.fillAmount = 100;
+            GameManager.instance.life1.fillAmount = 100;
         }
         if (lifeCount == 1)
         {
             GameManager.instance.life2.fillAmount = 0;
+            GameManager.instance.life3.fillAmount = 0;
+            GameManager.instance.life1.fillAmount = 100;
         }
         if (lifeCount == 0)
         {
             GameManager.instance.life1.fillAmount = 0;
+            GameManager.instance.life2.fillAmount = 0;
+            GameManager.instance.life3.fillAmount = 0;
         }
     }
 
