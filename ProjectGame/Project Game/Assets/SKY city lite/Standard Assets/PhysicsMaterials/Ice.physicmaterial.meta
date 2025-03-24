@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ba92fb44336020f40bdf294bb66bc9da
+timeCreated: 1427463081
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65679
+  packageName: Sky City Lite
+  packageVersion: 1.1
+  assetPath: Assets/SKY city lite/Standard Assets/PhysicsMaterials/Ice.physicmaterial
+  uploadId: 124899

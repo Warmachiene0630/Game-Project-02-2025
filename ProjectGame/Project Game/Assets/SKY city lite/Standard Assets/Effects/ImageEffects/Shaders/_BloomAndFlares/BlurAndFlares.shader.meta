@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: be6e39cf196f146d5be72fbefb18ed75
+ShaderImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65679
+  packageName: Sky City Lite
+  packageVersion: 1.1
+  assetPath: Assets/SKY city lite/Standard Assets/Effects/ImageEffects/Shaders/_BloomAndFlares/BlurAndFlares.shader
+  uploadId: 124899

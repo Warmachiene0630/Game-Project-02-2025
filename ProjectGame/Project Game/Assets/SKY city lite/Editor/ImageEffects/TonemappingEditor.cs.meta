@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0f7cab214f141f642b87a5bdbd14653e
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65679
+  packageName: Sky City Lite
+  packageVersion: 1.1
+  assetPath: Assets/SKY city lite/Editor/ImageEffects/TonemappingEditor.cs
+  uploadId: 124899

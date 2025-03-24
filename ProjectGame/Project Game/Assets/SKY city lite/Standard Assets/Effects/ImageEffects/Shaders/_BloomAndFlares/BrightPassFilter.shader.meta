@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 186c4c0d31e314f049595dcbaf4ca129
+ShaderImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65679
+  packageName: Sky City Lite
+  packageVersion: 1.1
+  assetPath: Assets/SKY city lite/Standard Assets/Effects/ImageEffects/Shaders/_BloomAndFlares/BrightPassFilter.shader
+  uploadId: 124899

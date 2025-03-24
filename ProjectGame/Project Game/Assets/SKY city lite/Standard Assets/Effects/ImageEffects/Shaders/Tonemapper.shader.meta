@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 003377fc2620a44939dadde6fe3f8190
+ShaderImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65679
+  packageName: Sky City Lite
+  packageVersion: 1.1
+  assetPath: Assets/SKY city lite/Standard Assets/Effects/ImageEffects/Shaders/Tonemapper.shader
+  uploadId: 124899

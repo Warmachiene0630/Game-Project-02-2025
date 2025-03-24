@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 48dca5b99d113b8d11006bab44295342
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65679
+  packageName: Sky City Lite
+  packageVersion: 1.1
+  assetPath: Assets/SKY city lite/Standard Assets/Effects/ToonShading/Shaders/ToonLit.shader
+  uploadId: 124899

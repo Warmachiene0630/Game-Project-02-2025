@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 52baaeb214519f347a35cf0edfd262ff
+timeCreated: 1427463081
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65679
+  packageName: Sky City Lite
+  packageVersion: 1.1
+  assetPath: Assets/SKY city lite/Standard Assets/PhysicsMaterials/Rubber.physicmaterial
+  uploadId: 124899

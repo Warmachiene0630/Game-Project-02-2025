@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ce7a80d520cacc042b5fe14f373d8173
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65679
+  packageName: Sky City Lite
+  packageVersion: 1.1
+  assetPath: Assets/SKY city lite/Standard Assets/Characters/ThirdPersonCharacter/Scripts/ThirdPersonCharacter.cs
+  uploadId: 124899

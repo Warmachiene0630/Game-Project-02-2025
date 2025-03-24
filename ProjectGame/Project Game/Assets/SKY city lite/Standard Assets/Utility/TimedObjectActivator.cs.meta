@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3a7cedf246fca744f90cbdc9dbe41166
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65679
+  packageName: Sky City Lite
+  packageVersion: 1.1
+  assetPath: Assets/SKY city lite/Standard Assets/Utility/TimedObjectActivator.cs
+  uploadId: 124899

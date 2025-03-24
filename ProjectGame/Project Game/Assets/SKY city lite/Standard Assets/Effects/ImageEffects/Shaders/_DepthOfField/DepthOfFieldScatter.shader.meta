@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: acd613035ff3e455e8abf23fdc8c8c24
+ShaderImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65679
+  packageName: Sky City Lite
+  packageVersion: 1.1
+  assetPath: Assets/SKY city lite/Standard Assets/Effects/ImageEffects/Shaders/_DepthOfField/DepthOfFieldScatter.shader
+  uploadId: 124899

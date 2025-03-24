@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e004fefca5c7ba44d9c5ffd46fdee2ed
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65679
+  packageName: Sky City Lite
+  packageVersion: 1.1
+  assetPath: Assets/SKY city lite/Standard Assets/Characters/RollerBall/Scripts/Ball.cs
+  uploadId: 124899

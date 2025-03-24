@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 0a4b0bce1e250a14bb534d70bce205fa
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 65679
+  packageName: Sky City Lite
+  packageVersion: 1.1
+  assetPath: Assets/SKY city lite/Standard Assets/Effects/TessellationShaders/Shaders/BumpedSpecularDisplacement.shader
+  uploadId: 124899
