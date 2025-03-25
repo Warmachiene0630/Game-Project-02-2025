@@ -124,6 +124,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         updatePlayerUI();
         isSlowed = false;
         speed = player[listPos].speedBase;
+        changeGun();
     }
 
     // Update is called once per frame

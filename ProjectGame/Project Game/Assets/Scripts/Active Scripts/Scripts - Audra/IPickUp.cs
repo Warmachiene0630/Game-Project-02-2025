@@ -12,5 +12,5 @@ public interface IPickUp
     {
 
     }
-    public bool gainFuel(int fuel);
+    public bool gainFuel(float fuel);
 }
