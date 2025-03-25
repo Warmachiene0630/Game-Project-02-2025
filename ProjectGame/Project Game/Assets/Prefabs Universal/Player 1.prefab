@@ -1866,8 +1866,8 @@ MonoBehaviour:
   fuelMax: 5
   hasJetpack: 0
   gravity: 15
-  dashSpeed: 0
-  dashTime: 0
+  dashSpeed: 20
+  dashTime: 1.5
   speedBoostTime: 5
   damageBoostTime: 5
   damageBoostAmount: 1
