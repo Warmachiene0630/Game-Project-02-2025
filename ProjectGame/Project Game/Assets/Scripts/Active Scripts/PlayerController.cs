@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     [SerializeField] meleeStats meleeWeapon;
     [SerializeField] GameObject melee;
     public Collider meleeCol;
+    private bool swinging;
 
     int meleeDamage;
     float meleeTimer;
@@ -118,7 +119,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         }
         //HPOrig = HP;
 
-        
+        swinging = false;
         gravityOrig = gravity;
         updatePlayerUI();
         isSlowed = false;
@@ -205,12 +206,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
                 shoot();
             }
         }
-        if (Input.GetButton("Melee") && meleeWeapon != null && meleeTimer >= meleeSpeed) {
+        if (Input.GetButton("Melee") && meleeWeapon != null && meleeTimer >= meleeSpeed && swinging == false)
+        {
             swing();
         }
 
         selectGun();
         gunReload();
+
     }
     void sprint()
     {
@@ -298,25 +301,18 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     void swing()
     {
-        shootTimer = 0;
+        meleeTimer = 0;
         gunModel.GetComponent<MeshFilter>().sharedMesh = null;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = null;
-
         melee.GetComponent<MeshFilter>().sharedMesh = meleeWeapon.model.GetComponent<MeshFilter>().sharedMesh;
         melee.GetComponent<MeshRenderer>().sharedMaterial = meleeWeapon.model.GetComponent<MeshRenderer>().sharedMaterial;
-
         anim.SetTrigger("Swing 1");
-
-        weaponColOff();
-        changeGun();
-
-
-
     }
 
     public void weaponColOn()
     {
         meleeCol.enabled = true;
+        swinging = true;
     }
 
     public void weaponColOff()
@@ -324,6 +320,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         meleeCol.enabled = false;
         melee.GetComponent<MeshFilter>().sharedMesh = null;
         melee.GetComponent<MeshRenderer>().sharedMaterial = null;
+       
+        changeGun();
+        swinging = false;
     }
 
 
@@ -410,7 +409,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     void dash()
     {
-        if (Input.GetButtonDown("Dash") && dashCount < 1)
+        if (Input.GetButtonDown("Ability") && dashCount < 1)
         {
             dashCount++;
             aud.PlayOneShot(player[listPos].audJump[Random.Range(0, player[listPos].audJump.Length)], player[listPos].audJumpVol);
