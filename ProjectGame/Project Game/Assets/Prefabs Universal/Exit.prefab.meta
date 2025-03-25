@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:ProjectGame/Project Game/Assets/Prefabs Universal/Exit.prefab.meta
 guid: ee1ee9692d61fe64183fca03c50c18be
 PrefabImporter:
+========
+guid: 8d7347ac319c5614cbe2392748116a4b
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> main:ProjectGame/Project Game/Assets/Scenes/CM.Scene Sand.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

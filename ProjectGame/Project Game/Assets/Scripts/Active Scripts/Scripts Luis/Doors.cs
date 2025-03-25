@@ -9,12 +9,28 @@ public class Doors : MonoBehaviour
     int sceneChoice;
 
     private bool open;
+    [SerializeField] GameObject Door;
+    [SerializeField] GameObject Text;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         keyCount = GameManager.instance.goalCount;
         open = false;
         sceneChoice = Random.Range(0, GameManager.instance.sceneList.Length);
+    }
+
+    private void Update()
+    {
+        keyCount = GameManager.instance.goalCount;
+        if (keyCount <= 0)
+        {
+            open = true;
+        }
+        if (Door != null && Text != null && open == true)
+        {
+            DestroyObject(Door);
+            Text.active = false;
+        }
     }
 
     // Update is called once per frame

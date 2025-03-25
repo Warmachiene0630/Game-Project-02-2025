@@ -55,7 +55,7 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
             roamTimer += Time.deltaTime;
         }
 
-        if (playerInRange && !canSeePlayer())
+        if (playerInRange && canSeePlayer())
         {
             checkRoam();
         }
@@ -110,6 +110,7 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
                 {
                     faceTarget();
                 }
+                agent.stoppingDistance = stoppingDistOrig;
                 return true;
             }
 
@@ -137,7 +138,7 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
 
     void faceTarget()
     {
-        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, playerDir.y, playerDir.z));
+        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
         shootPos.rotation = Quaternion.Lerp(headPos.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
@@ -166,7 +167,11 @@ public class FlyingEnemyAI : MonoBehaviour, IDamage
     {
         shootTimer = 0;
 
-        Instantiate(bullet, headPos.position,shootPos.rotation);
+
+        //Instantiate(bullet, headPos.position,shootPos.rotation);
+
+        Instantiate(bullet, shootPos.position, transform.rotation);
+
     }
 
     bool gainHealth(int amount)
