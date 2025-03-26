@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:ProjectGame/Project Game/Assets/Scenes/LavaScene/NavMesh-NavMesh Surface.asset.meta
 guid: 5c5609cb6ffb7534f96a21bb0ae88ec0
+========
+guid: 9285f32f39795534e94521a83ddbc08a
+>>>>>>>> 34b67ca (Sand Level Blockout):ProjectGame/Project Game/Assets/Scenes/CM.Scene/NavMesh-NavMesh Surface.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 23800000
