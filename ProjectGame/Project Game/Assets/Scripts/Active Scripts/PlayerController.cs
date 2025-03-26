@@ -101,14 +101,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     void Start()
     {
         playerModel.GetComponent<SkinnedMeshRenderer>().sharedMesh = player[listPos].model.GetComponent<SkinnedMeshRenderer>().sharedMesh;
-        if (player[listPos].firstScene == true)
+        if (player[listPos].start)
         {
             HPCurr = player[listPos].HPMax;
             lifeCount = 3;
             fuel = fuelMax;
             meleeWeapon = player[listPos].assignedWeapon;
             getGunStats(player[listPos].assignedGun);
-            player[listPos].firstScene = false;
+            player[listPos].start = false;
         }
         else
         {

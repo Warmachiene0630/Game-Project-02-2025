@@ -44,5 +44,5 @@ MonoBehaviour:
   totalGold: 0
   healthRemaining: 0
   remainigFuel: 0
-  firstScene: 1
+  start: 1
   guns: []

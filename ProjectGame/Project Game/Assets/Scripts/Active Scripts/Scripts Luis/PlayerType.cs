@@ -38,7 +38,7 @@ public class PlayerType : ScriptableObject
     public int totalGold;
     public int healthRemaining;
     public float remainigFuel;
-    public bool firstScene;
+    public bool start;
     public List<GunStats> guns = new List<GunStats>();
 
 }

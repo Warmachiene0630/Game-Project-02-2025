@@ -38,7 +38,7 @@ MonoBehaviour:
   totalGold: 0
   healthRemaining: 0
   remainigFuel: 0
-  firstScene: 0
+  start: 1
   guns:
   - {fileID: 11400000, guid: 39d58fd631eab3c42a70d717893843c6, type: 2}
   - {fileID: 11400000, guid: 39d58fd631eab3c42a70d717893843c6, type: 2}
