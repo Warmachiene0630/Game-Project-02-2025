@@ -29,6 +29,8 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/Scenes/CM.Scene Sand.unity
   - m_enabled: 1
+    m_path: Assets/Scenes/Ice Level.unity
+  - m_enabled: 1
     m_path: Assets/Scenes/End Scene.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
