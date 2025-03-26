@@ -119,6 +119,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
         }
         //HPOrig = HP;
+        if (listPos == 1)
+        {
+            hasJetpack = true;
+        }
 
         swinging = false;
         gravityOrig = gravity;
