@@ -6,13 +6,19 @@ public class Objective : MonoBehaviour
 {
     public int objectivesInRange = 0;
     public List<Vector3> objectiveDir;
+    Vector3 exitDir;
+    public static Objective instance;
+    Renderer model;
 
+    [SerializeField] GameObject exit;
     [SerializeField] int pointSpeed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        
+        instance = this;
+        exitDir = exit.transform.position;
+        model = gameObject.GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -20,43 +26,38 @@ public class Objective : MonoBehaviour
     {
         if (objectivesInRange > 0 && objectivesInRange < 2)
         {
-            gameObject.SetActive(true);
-            Quaternion rot = Quaternion.LookRotation(new Vector3(objectiveDir[0].x, 0, objectiveDir[0].z));
+            Quaternion rot = Quaternion.LookRotation(new Vector3(objectiveDir[0].x - transform.position.x, 0, objectiveDir[0].z - transform.position.z));
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * pointSpeed);
         }
         else if (objectivesInRange > 1)
         {
             gameObject.SetActive(true);
             Vector3 closestObj = compareDist(objectiveDir[0], objectiveDir[1]);
-            for (int i = 1; i < objectivesInRange; i++)
+            for (int i = 2; i < objectivesInRange; i++)
             {
                 closestObj = compareDist(objectiveDir[i], closestObj);
             }
-            Quaternion rot = Quaternion.LookRotation(new Vector3(closestObj.x, 0, closestObj.z));
+            Quaternion rot = Quaternion.LookRotation(new Vector3(closestObj.x - transform.position.x, 0, closestObj.z - transform.position.z));
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * pointSpeed);
         }
         else if (objectivesInRange <= 0)
         {
-            gameObject.SetActive(false);
+            model.material.color = Color.yellow;
+            Quaternion rot = Quaternion.LookRotation(new Vector3(exitDir.x - transform.position.x, 0, exitDir.z - transform.position.z));
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * pointSpeed);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void addDir(Vector3 dir)
     {
-        if (other.CompareTag("Objective"))
-        {
-            objectivesInRange++;
-            objectiveDir.Add(other.transform.position);
-        }
+        objectiveDir.Add(dir);
+        objectivesInRange++;
     }
 
-    private void OnTriggerExit(Collider other)
+    public void removeDir(Vector3 dir)
     {
-        if (other.CompareTag("Objective"))
-        {
-            objectivesInRange--;
-            objectiveDir.Remove(other.transform.position);
-        }
+        objectiveDir.Remove(dir);
+        objectivesInRange--;
     }
 
     Vector3 compareDist(Vector3 a, Vector3 b)

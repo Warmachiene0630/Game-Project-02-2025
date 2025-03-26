@@ -4,6 +4,7 @@ using TMPro;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
+using UnityEngine.Assertions.Must;
 
 public class GameManager : MonoBehaviour
 {
@@ -62,7 +63,7 @@ public class GameManager : MonoBehaviour
     public GameObject doorPopUp;
 
     [Header("----- Stats -----")]
-    private int goalCount;
+    public int goalCount;
     private int coinCount;
 
     [Header("----- Boosts -----")]
@@ -89,6 +90,17 @@ public class GameManager : MonoBehaviour
         instance.playerScript.listPos = MainManager.instance.playerPos;
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
         aud.PlayOneShot(backgroundMusic, musicVol);
+        canGoNext = false;
+
+        if (playerScript.listPos == 1)
+        {
+            playerFuelBar.GameObject().SetActive(true);
+        }
+        else
+        {
+            playerFuelBar.GameObject().SetActive(false);
+
+        }
     }
 
     // Update is called once per frame
@@ -148,7 +160,7 @@ public class GameManager : MonoBehaviour
         goalCountText.text = goalCount.ToString("F0");
         if (goalCount <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            canGoNext = true;
         }
     }
 
@@ -340,5 +352,13 @@ public class GameManager : MonoBehaviour
     public int getCoins()
     {
         return coinCount;
+    }
+    public void loadNextScene()
+    {
+        playerScript.assignStats();
+
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
     }
 }

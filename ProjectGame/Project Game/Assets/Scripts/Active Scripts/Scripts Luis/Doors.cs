@@ -1,31 +1,39 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class Doors : MonoBehaviour
 {
     public int keyCount;
-    [SerializeField] Key[] keys;
     int sceneChoice;
 
     private bool open;
+    [SerializeField] GameObject Door;
+    [SerializeField] GameObject Text;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        keyCount = keys.Length;
+        keyCount = GameManager.instance.goalCount;
         open = false;
         sceneChoice = Random.Range(0, GameManager.instance.sceneList.Length);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        keyCount = keys.Length;
-        if (keyCount == 0)
+        keyCount = GameManager.instance.goalCount;
+        if (keyCount <= 0)
         {
             open = true;
         }
+        if (Door != null && Text != null && open == true)
+        {
+            DestroyObject(Door);
+            Text.active = false;
+        }
     }
+
+    // Update is called once per frame
 
     private void OnTriggerEnter(Collider other)
     {
@@ -33,7 +41,7 @@ public class Doors : MonoBehaviour
         {
             if (open == true)
             {
-                loadNextLevel(GameManager.instance.sceneList[sceneChoice].name);
+                GameManager.instance.loadNextScene();
             }
             else
             {

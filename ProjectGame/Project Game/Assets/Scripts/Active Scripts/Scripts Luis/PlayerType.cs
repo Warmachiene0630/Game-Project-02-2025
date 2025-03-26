@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -15,10 +16,12 @@ public class PlayerType : ScriptableObject
     [Range(5, 20)]public int jumpSpeed;
     [Range(1, 3)]public int jumpMax;
 
+    [Header("----- Start Weapons -----")]
+    public meleeStats assignedWeapon;
+    public GunStats assignedGun;
 
     [Header("----- Bonuses -----")]
     public int meleeBonus;
-    public int meleeSpeed;
     public int hpRecover;
 
     [Header("----- Audio -----")]
@@ -28,4 +31,14 @@ public class PlayerType : ScriptableObject
     [Range(0, 1)]public float audHurtVol;
     public AudioClip[] audJump;
     [Range(0, 1)]public float audJumpVol;
+
+
+    [Header("------ Remaining Stats ------")]
+    public int livesLeft;
+    public int totalGold;
+    public int healthRemaining;
+    public float remainigFuel;
+    public bool firstScene;
+    public List<GunStats> guns = new List<GunStats>();
+
 }

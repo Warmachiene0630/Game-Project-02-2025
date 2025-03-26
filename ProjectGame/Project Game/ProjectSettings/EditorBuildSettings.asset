@@ -6,8 +6,29 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Unity Store DL/LowpolyCharacterRio/Scenes/DemoScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/MainMenu.unity
+    guid: 4dc60f542cf429e46bb0cb5ecec96333
+  - enabled: 1
+    path: Assets/Scenes/IntroScene.unity
+    guid: 44cb581bfa80be54e815d6c9608240d6
+  - enabled: 1
+    path: Assets/Scenes/Ice Level.unity
+    guid: d7dcd3bde6a294e4aa3e50946687a23d
+  - enabled: 1
+    path: Assets/Scenes/CM.Scene Sky.unity
+    guid: e4a60c60fd039914ab922c368c7a6760
+  - enabled: 1
+    path: Assets/Scenes/CM.Scene Sand.unity
+    guid: 5d7a455a6e8179045be76caa4d7f5ace
+  - enabled: 1
+    path: Assets/Scenes/LavaScene.unity
+    guid: 0e0a3fe4d8ad2e84a8d981f310fc69d7
+  - enabled: 1
+    path: Assets/Scenes/CM.Scene Final.unity
+    guid: 6243e4d5b78aee049ae39fa15d11c7de
+  - enabled: 1
+    path: Assets/Scenes/End Scene.unity
+    guid: 1ce267a003de78e459eadec72bf9a990
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

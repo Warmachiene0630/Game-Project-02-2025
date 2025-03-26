@@ -11,12 +11,16 @@ public class Key : MonoBehaviour
     private void Start()
     {
         GameManager.instance.updateGameGoal(1);
+        Objective.instance.addDir(transform.position);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        GameManager.instance.updateGameGoal(-1);
-        aud.PlayOneShot(keySound, keyVol);
-        Destroy(gameObject);
+        if (other.CompareTag("Player")) {
+            GameManager.instance.updateGameGoal(-1);
+            Objective.instance.removeDir(transform.position);
+            aud.PlayOneShot(keySound, keyVol);
+            Destroy(gameObject);
+        }
     }
 }
