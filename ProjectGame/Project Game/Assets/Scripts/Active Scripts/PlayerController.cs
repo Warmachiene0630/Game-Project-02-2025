@@ -100,24 +100,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        HPCurr = player[listPos].HPMax;
+        lifeCount = 3;
+        fuel = fuelMax;
+        meleeWeapon = player[listPos].assignedWeapon;
+        getGunStats(player[listPos].assignedGun);
+        player[listPos].start = false;
         playerModel.GetComponent<SkinnedMeshRenderer>().sharedMesh = player[listPos].model.GetComponent<SkinnedMeshRenderer>().sharedMesh;
-        if (player[listPos].start)
-        {
-            HPCurr = player[listPos].HPMax;
-            lifeCount = 3;
-            fuel = fuelMax;
-            meleeWeapon = player[listPos].assignedWeapon;
-            getGunStats(player[listPos].assignedGun);
-            player[listPos].start = false;
-        }
-        else
-        {
-            lifeCount = player[listPos].livesLeft;
-            HPCurr = player[listPos].healthRemaining;
-            GameManager.instance.updateCoinCount(player[listPos].totalGold);
-            gunList = player[listPos].guns;
-
-        }
         //HPOrig = HP;
         if (listPos == 1)
         {
@@ -287,7 +276,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         gunList[gunListPos].ammoCur--;
         aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootVol);
 
-        StartCoroutine(flashMuzzle());
+        //StartCoroutine(flashMuzzle());
         anim.SetTrigger("Shoot");
 
         RaycastHit hit;

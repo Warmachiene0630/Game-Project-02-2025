@@ -25,9 +25,11 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/Scenes/IntroScene.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/LavaScene.unity
+    m_path: Assets/Scenes/CM.Scene Sky.unity
   - m_enabled: 1
     m_path: Assets/Scenes/CM.Scene Sand.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/LavaScene.unity
   - m_enabled: 1
     m_path: Assets/Scenes/Ice Level.unity
   - m_enabled: 1
