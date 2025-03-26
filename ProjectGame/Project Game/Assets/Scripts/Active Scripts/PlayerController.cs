@@ -108,6 +108,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
             fuel = fuelMax;
             meleeWeapon = player[listPos].assignedWeapon;
             getGunStats(player[listPos].assignedGun);
+            player[listPos].firstScene = false;
         }
         else
         {
@@ -663,7 +664,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         player[listPos].healthRemaining = HPCurr;
         player[listPos].totalGold = GameManager.instance.getCoins();
         player[listPos].livesLeft = lifeCount;
-        player[listPos].firstScene = false;
         player[listPos].remainigFuel = fuel;
         player[listPos].guns = gunList;
     }
