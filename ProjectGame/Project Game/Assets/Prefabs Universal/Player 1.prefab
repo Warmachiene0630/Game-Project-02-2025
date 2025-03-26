@@ -1034,13 +1034,13 @@ GameObject:
   - component: {fileID: 1758870987737068082}
   - component: {fileID: 2031618757859225041}
   - component: {fileID: 5985382504492002975}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: muzzleFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &420667719440798940
 Transform:
   m_ObjectHideFlags: 0
