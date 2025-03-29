@@ -21,10 +21,14 @@ public class MainManager : MonoBehaviour
     public float masterVol;
 
     public int playerPos = 0;
+    public int sens;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        //GameObject cam = GameObject.FindWithTag("MainCamera");
+        //CameraController camScript = cam.GetComponent<CameraController>();
+        //sens = camScript.getSens();
         if (instance != null)
         {
             Destroy(gameObject);
@@ -32,8 +36,13 @@ public class MainManager : MonoBehaviour
         }
 
         instance = this;
-        if(menuMusic != null)
+
+        if (menuMusic != null)
         {
+            if (PlayerPrefs.HasKey("musicVol"))
+            {
+                musicVol = PlayerPrefs.GetFloat("musicVol");
+            }
             musicSource.PlayOneShot(menuMusic, musicVol);
         }
     }
