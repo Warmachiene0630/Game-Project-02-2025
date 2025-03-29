@@ -42,7 +42,7 @@ public class LavaPit : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy")) {
+        if (other.CompareTag("Enemy") && !other.isTrigger) {
             dmg = other.GetComponent<IDamage>();
         }
         if (dmg != null)
