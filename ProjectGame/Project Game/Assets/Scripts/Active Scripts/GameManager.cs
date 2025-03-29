@@ -91,6 +91,11 @@ public class GameManager : MonoBehaviour
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
         aud.PlayOneShot(backgroundMusic, musicVol);
         canGoNext = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
         if (playerScript.listPos == 1)
         {
@@ -101,11 +106,6 @@ public class GameManager : MonoBehaviour
             playerFuelBar.GameObject().SetActive(false);
 
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         if (Input.GetButtonDown("Cancel"))
         {
             if (menuActive == null)
@@ -356,7 +356,7 @@ public class GameManager : MonoBehaviour
     public void loadNextScene()
     {
         playerScript.assignStats();
-
+        
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         

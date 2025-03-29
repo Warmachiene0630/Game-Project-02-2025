@@ -39,6 +39,7 @@ public class PlayerType : ScriptableObject
     public int healthRemaining;
     public float remainigFuel;
     public bool start;
+    public int player;
     public List<GunStats> guns = new List<GunStats>();
 
 }

@@ -1,3 +1,4 @@
+using NUnit.Compatibility;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -100,14 +101,28 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        HPCurr = player[listPos].HPMax;
-        lifeCount = 3;
-        fuel = fuelMax;
-        meleeWeapon = player[listPos].assignedWeapon;
-        getGunStats(player[listPos].assignedGun);
-        player[listPos].start = false;
-        playerModel.GetComponent<SkinnedMeshRenderer>().sharedMesh = player[listPos].model.GetComponent<SkinnedMeshRenderer>().sharedMesh;
-        //HPOrig = HP;
+
+        if (SceneManager.GetActiveScene().buildIndex <= 3) {
+            HPCurr = player[listPos].HPMax;
+            lifeCount = 3;
+            fuel = fuelMax;
+            meleeWeapon = player[listPos].assignedWeapon;
+            getGunStats(player[listPos].assignedGun);
+            playerModel.GetComponent<SkinnedMeshRenderer>().sharedMesh = player[listPos].model.GetComponent<SkinnedMeshRenderer>().sharedMesh;
+            //HPOrig = HP;
+        }
+        else
+        {
+            HPCurr = player[listPos].healthRemaining;
+            lifeCount = player[listPos].livesLeft;
+            fuel = player[listPos].remainigFuel;
+            meleeWeapon = player[listPos].assignedWeapon;
+            getGunStats(player[listPos].assignedGun);
+            GameManager.instance.updateCoinCount(player[listPos].totalGold);
+            playerModel.GetComponent<SkinnedMeshRenderer>().sharedMesh = player[listPos].model.GetComponent<SkinnedMeshRenderer>().sharedMesh;
+            
+        }
+
         if (listPos == 1)
         {
             hasJetpack = true;
@@ -194,7 +209,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
             shootDamage = shootDamage - damageBoostAmount;
         }
 
-        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
+        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate && swinging == false)
         {
             if (!GameManager.instance.isPaused)
             {
@@ -659,6 +674,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         player[listPos].livesLeft = lifeCount;
         player[listPos].remainigFuel = fuel;
         player[listPos].guns = gunList;
+        player[listPos].player = listPos;
     }
 
     void playerAbility()
