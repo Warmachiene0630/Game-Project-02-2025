@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     [SerializeField] AudioSource aud;
     [SerializeField] GameObject playerModel;
     [SerializeField] List<PlayerType> player;
-    public int listPos;
 
     [Header("----- Jetpack -----")]
     [Range(0, 1)][SerializeField] float holdTime;
@@ -60,6 +59,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     [Range(0, 1)][SerializeField] float audIceVol;
 
     [Header("----- Melee -----")]
+    [SerializeField] Melee meleeDmg;
     [SerializeField] meleeStats meleeWeapon;
     [SerializeField] GameObject melee;
     public Collider meleeCol;
@@ -103,27 +103,27 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
 
         if (SceneManager.GetActiveScene().buildIndex <= 3) {
-            HPCurr = player[listPos].HPMax;
+            HPCurr = player[MainManager.instance.playerPos].HPMax;
             lifeCount = 3;
             fuel = fuelMax;
-            meleeWeapon = player[listPos].assignedWeapon;
-            getGunStats(player[listPos].assignedGun);
-            playerModel.GetComponent<SkinnedMeshRenderer>().sharedMesh = player[listPos].model.GetComponent<SkinnedMeshRenderer>().sharedMesh;
+            meleeWeapon = player[MainManager.instance.playerPos].assignedWeapon;
+            getGunStats(player[MainManager.instance.playerPos].assignedGun);
+            playerModel.GetComponent<SkinnedMeshRenderer>().sharedMesh = player[MainManager.instance.playerPos].model.GetComponent<SkinnedMeshRenderer>().sharedMesh;
             //HPOrig = HP;
         }
         else
         {
-            HPCurr = player[listPos].healthRemaining;
-            lifeCount = player[listPos].livesLeft;
-            fuel = player[listPos].remainigFuel;
-            meleeWeapon = player[listPos].assignedWeapon;
-            getGunStats(player[listPos].assignedGun);
-            GameManager.instance.updateCoinCount(player[listPos].totalGold);
-            playerModel.GetComponent<SkinnedMeshRenderer>().sharedMesh = player[listPos].model.GetComponent<SkinnedMeshRenderer>().sharedMesh;
+            HPCurr = player[MainManager.instance.playerPos].healthRemaining;
+            lifeCount = player[MainManager.instance.playerPos].livesLeft;
+            fuel = player[MainManager.instance.playerPos].remainigFuel;
+            meleeWeapon = player[MainManager.instance.playerPos].assignedWeapon;
+            getGunStats(player[MainManager.instance.playerPos].assignedGun);
+            GameManager.instance.updateCoinCount(player[MainManager.instance.playerPos].totalGold);
+            playerModel.GetComponent<SkinnedMeshRenderer>().sharedMesh = player[MainManager.instance.playerPos].model.GetComponent<SkinnedMeshRenderer>().sharedMesh;
             
         }
 
-        if (listPos == 1)
+        if (MainManager.instance.playerPos == 1)
         {
             hasJetpack = true;
         }
@@ -132,8 +132,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         gravityOrig = gravity;
         updatePlayerUI();
         isSlowed = false;
-        speed = player[listPos].speedBase;
+        speed = player[MainManager.instance.playerPos].speedBase;
         changeGun();
+        meleeDmg.damageAmount = meleeWeapon.meleeDamage;
     }
 
     // Update is called once per frame
@@ -199,7 +200,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         if (isSpeedBoosted && speedBoostTimer <= 0)
         {
             isSpeedBoosted = false;
-            speed = speed / player[listPos].sprintMod;
+            speed = speed / player[MainManager.instance.playerPos].sprintMod;
         }
 
         //checks for damage boost, if there was a boost and it ended reverts shoot damage back to original
@@ -229,12 +230,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         if (Input.GetButtonDown("Sprint"))
         {
-            speed *= player[listPos].sprintMod;
+            speed *= player[MainManager.instance.playerPos].sprintMod;
             isSprinting = true;
         }
         else if (Input.GetButtonUp("Sprint") && isSprinting)
         {
-            speed /= player[listPos].sprintMod;
+            speed /= player[MainManager.instance.playerPos].sprintMod;
             isSprinting = false;
         }
     }
@@ -243,7 +244,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         isPlayingSteps = true;
 
-        aud.PlayOneShot(player[listPos].audSteps[Random.Range(0, player[listPos].audSteps.Length)], player[listPos].audStepsVol);
+        aud.PlayOneShot(player[MainManager.instance.playerPos].audSteps[Random.Range(0, player[MainManager.instance.playerPos].audSteps.Length)], player[MainManager.instance.playerPos].audStepsVol);
 
         if (!isSprinting)
         {
@@ -265,10 +266,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     }
     public void spawnPlayer()
     {
-        HPCurr = player[listPos].HPMax;
+        HPCurr = player[MainManager.instance.playerPos].HPMax;
         updatePlayerUI();
         controller.transform.position = GameManager.instance.playerSpawnPos.transform.position;
-        HPCurr = player[listPos].HPMax;
+        HPCurr = player[MainManager.instance.playerPos].HPMax;
         updatePlayerUI();
 
 
@@ -276,11 +277,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     void jump()
     {
-        if (Input.GetButtonDown("Jump") && jumpCount < player[listPos].jumpMax)
+        if (Input.GetButtonDown("Jump") && jumpCount < player[MainManager.instance.playerPos].jumpMax)
         {
             jumpCount += 1;
-            playerVel.y = player[listPos].jumpSpeed;
-            aud.PlayOneShot(player[listPos].audJump[Random.Range(0, player[listPos].audJump.Length)], player[listPos].audJumpVol);
+            playerVel.y = player[MainManager.instance.playerPos].jumpSpeed;
+            aud.PlayOneShot(player[MainManager.instance.playerPos].audJump[Random.Range(0, player[MainManager.instance.playerPos].audJump.Length)], player[MainManager.instance.playerPos].audJumpVol);
         }
     }
 
@@ -342,12 +343,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         StartCoroutine(flashDamageScreen());
 
         updatePlayerUI();
-        aud.PlayOneShot(player[listPos].audHurt[Random.Range(0, player[listPos].audHurt.Length)], player[listPos].audHurtVol);
+        aud.PlayOneShot(player[MainManager.instance.playerPos].audHurt[Random.Range(0, player[MainManager.instance.playerPos].audHurt.Length)], player[MainManager.instance.playerPos].audHurtVol);
 
         if (HPCurr <= 0)
         {
             lifeCount = lifeCount - 1;
-            HPCurr = player[listPos].HPMax;
+            HPCurr = player[MainManager.instance.playerPos].HPMax;
             updatePlayerUI();
             spawnPlayer();
         }
@@ -359,13 +360,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     }
     public bool gainHealth(int amount)
     {
-        if (HPCurr != player[listPos].HPMax)
+        if (HPCurr != player[MainManager.instance.playerPos].HPMax)
         {
             HPCurr += amount;
 
-            if (HPCurr >= player[listPos].HPMax)
+            if (HPCurr >= player[MainManager.instance.playerPos].HPMax)
             {
-                HPCurr = player[listPos].HPMax;
+                HPCurr = player[MainManager.instance.playerPos].HPMax;
             }
 
             StartCoroutine(flashHealthScreen());
@@ -395,8 +396,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
 
     public void updatePlayerUI()
     {
-        GameManager.instance.playerHPBar.fillAmount = (float)HPCurr / player[listPos].HPMax;
-        GameManager.instance.playerFuelBar.fillAmount = (float)fuel / fuelMax;
+        GameManager.instance.playerHPBar.fillAmount = (float)HPCurr / player[MainManager.instance.playerPos].HPMax;
+
+        if (hasJetpack == true) {
+            GameManager.instance.playerFuelBar.fillAmount = (float)fuel / fuelMax;
+        }
+
         if (lifeCount == 2)
         {
             GameManager.instance.life3.fillAmount = 0;
@@ -422,7 +427,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
         if (Input.GetButtonDown("Ability") && dashCount < 1)
         {
             dashCount++;
-            aud.PlayOneShot(player[listPos].audJump[Random.Range(0, player[listPos].audJump.Length)], player[listPos].audJumpVol);
+            aud.PlayOneShot(player[MainManager.instance.playerPos].audJump[Random.Range(0, player[MainManager.instance.playerPos].audJump.Length)], player[MainManager.instance.playerPos].audJumpVol);
             StartCoroutine(dashCoroutine());
         }
     }
@@ -445,13 +450,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     //used to fill HP to original
     public void fillHealth()
     {
-        HPCurr = player[listPos].HPMax;
+        HPCurr = player[MainManager.instance.playerPos].HPMax;
     }
 
     //used to check if HP is full
     public bool isHPFull()
     {
-        if (HPCurr == player[listPos].HPMax)
+        if (HPCurr == player[MainManager.instance.playerPos].HPMax)
         {
             return true;
         }
@@ -465,7 +470,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     public void speedBoost()
     {
         isSpeedBoosted = true;
-        speed = speed * player[listPos].sprintMod;
+        speed = speed * player[MainManager.instance.playerPos].sprintMod;
         speedBoostTimer = speedBoostTime;
     }
 
@@ -655,7 +660,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         gravity = newGrav;
         speed /= 2;
-        player[listPos].jumpSpeed /= 2;
+        player[MainManager.instance.playerPos].jumpSpeed /= 2;
         flightSpeed /= 2;
     }
 
@@ -663,26 +668,26 @@ public class PlayerController : MonoBehaviour, IDamage, IPickUp
     {
         gravity = gravityOrig;
         speed *= 2;
-        player[listPos].jumpSpeed *= 2;
+        player[MainManager.instance.playerPos].jumpSpeed *= 2;
         flightSpeed *= 2;
     }
 
     public void assignStats()
     {
-        player[listPos].healthRemaining = HPCurr;
-        player[listPos].totalGold = GameManager.instance.getCoins();
-        player[listPos].livesLeft = lifeCount;
-        player[listPos].remainigFuel = fuel;
-        player[listPos].guns = gunList;
-        player[listPos].player = listPos;
+        player[MainManager.instance.playerPos].healthRemaining = HPCurr;
+        player[MainManager.instance.playerPos].totalGold = GameManager.instance.getCoins();
+        player[MainManager.instance.playerPos].livesLeft = lifeCount;
+        player[MainManager.instance.playerPos].remainigFuel = fuel;
+        player[MainManager.instance.playerPos].guns = gunList;
+        player[MainManager.instance.playerPos].player = MainManager.instance.playerPos;
     }
 
     void playerAbility()
     {
-        if (listPos == 0) {
+        if (MainManager.instance.playerPos == 0) {
             dash();
         }
-        else if (listPos == 1)
+        else if (MainManager.instance.playerPos == 1)
         {
             fly();
         }

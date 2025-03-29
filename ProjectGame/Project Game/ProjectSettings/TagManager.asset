@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Player Spawn Pos
   - HealthPack
+  - Enemy
   layers:
   - Default
   - TransparentFX

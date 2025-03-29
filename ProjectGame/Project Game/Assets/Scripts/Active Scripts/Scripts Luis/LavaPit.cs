@@ -22,21 +22,29 @@ public class LavaPit : MonoBehaviour
     }
     private void Update()
     {
-        trapTimer += Time.deltaTime;
-        if (takingDmg == true && (trapTimer >= 1))
-        {
-            dmg.takeDamage(damageAmount);
-            trapTimer = 0;
+
+        if (dmg != null) {
+            trapTimer += Time.deltaTime;
+            if (takingDmg == true && (trapTimer >= 1))
+            {
+                dmg.takeDamage(damageAmount);
+                trapTimer = 0;
+            }
         }
 
+        if (dmg == null)
+        {
+            takingDmg = false;
+        }
     }
 
 
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
-        dmg = other.GetComponent<IDamage>();
-
+        if (other.CompareTag("Enemy")) {
+            dmg = other.GetComponent<IDamage>();
+        }
         if (dmg != null)
         {
             dmg.takeDamage(damageAmount);
