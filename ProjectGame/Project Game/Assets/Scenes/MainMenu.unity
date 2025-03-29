@@ -3075,6 +3075,7 @@ MonoBehaviour:
   menuMusic: {fileID: 8300000, guid: 28677795e9a70f9418a5542482ccc13b, type: 3}
   sfxClip: {fileID: 8300000, guid: c034bbf22999348409b450d20ade3c34, type: 3}
   musicVol: 1
+  sceneMusicVol: 1
   sfxVol: 0.25
   masterVol: 1
   playerPos: 0

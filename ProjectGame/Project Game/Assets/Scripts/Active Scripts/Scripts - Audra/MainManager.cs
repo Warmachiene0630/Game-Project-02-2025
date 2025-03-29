@@ -17,18 +17,17 @@ public class MainManager : MonoBehaviour
     [SerializeField] AudioClip sfxClip;
 
     public float musicVol;
+    public float sceneMusicVol;
     public float sfxVol;
     public float masterVol;
 
     public int playerPos = 0;
     public int sens;
+    bool isPlaying;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        //GameObject cam = GameObject.FindWithTag("MainCamera");
-        //CameraController camScript = cam.GetComponent<CameraController>();
-        //sens = camScript.getSens();
         if (instance != null)
         {
             Destroy(gameObject);
@@ -36,15 +35,10 @@ public class MainManager : MonoBehaviour
         }
 
         instance = this;
-
-        if (menuMusic != null)
-        {
-            if (PlayerPrefs.HasKey("musicVol"))
-            {
-                musicVol = PlayerPrefs.GetFloat("musicVol");
-            }
-            musicSource.PlayOneShot(menuMusic, musicVol);
-        }
+        isPlaying = false;
+        //GameObject cam = GameObject.FindWithTag("MainCamera");
+        //CameraController camScript = cam.GetComponent<CameraController>();
+        //sens = camScript.getSens();
     }
 
     private void Update()
@@ -62,6 +56,11 @@ public class MainManager : MonoBehaviour
         if (sfxOrigVol != MainManager.instance.sfxVol)
         {
             MainManager.instance.playSFXClip();
+        }
+        if (menuMusic != null && isPlaying == false)
+        {
+            musicSource.PlayOneShot(menuMusic, sceneMusicVol);
+            isPlaying = true;
         }
     }
 
