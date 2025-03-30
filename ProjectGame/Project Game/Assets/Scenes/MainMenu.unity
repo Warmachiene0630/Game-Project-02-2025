@@ -2389,7 +2389,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -34}
+  m_AnchoredPosition: {x: 0, y: 39}
   m_SizeDelta: {x: 550, y: 275}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &805296956
@@ -2429,26 +2429,26 @@ MonoBehaviour:
 
     Unity Asset Store:
 
-    
 
-    FREE - Low
-    Poly Swords - RPG Weapons - and FREE - 32 RPG Animations By "Blink"
 
-    Fatty
-    Poly Turret Free - By "Fatty War"
+    FREE - Low Poly Swords
+    - RPG Weapons - and FREE - 32 RPG Animations By "Blink"
+
+    Fatty Poly Turret
+    Free - By "Fatty War"
 
     Simple Keys - By 3Digitalis
 
-    Lowpoly
-    BountyHunter RIO 2 & LowPoly Survival Character Rio - By "VertexModeler Team"
+    Lowpoly BountyHunter
+    RIO 2 & LowPoly Survival Character Rio - By "VertexModeler Team"
 
-    Free
-    UI Soundpack - By "Cyrex"
+    Free UI
+    Soundpack - By "Cyrex"
 
     Free Trees - By "Ada_King"
 
-    Toon Soldiers
-    WW2 demo - By "Polygon Blacksmith"
+    Toon Soldiers WW2
+    demo - By "Polygon Blacksmith"
 
     Stylized Low Poly Rocks - By "JustCreate"
 
@@ -2458,43 +2458,42 @@ MonoBehaviour:
     LowPoly - 3D Stylized
     Guns WW2 U.S. - By "sametsylmz3d"
 
-    Collectables Sound effects Pack - By
-    "HoveAudio"
+    Collectables Sound effects Pack - By "HoveAudio"
 
-    Free Dungeon Music Pack - By "Kounine"
+    Free
+    Dungeon Music Pack - By "Kounine"
 
-    Hit Effects FREE
-    - By "Matthew Guz"
+    Hit Effects FREE - By "Matthew Guz"
 
-    Worn wooden crate - By "Golden Pixel"
+    Worn
+    wooden crate - By "Golden Pixel"
 
-    CastlePack_3D
-    environment - By "Kinitia Studios"
+    CastlePack_3D environment - By "Kinitia
+    Studios"
 
-    Yughues Free Sand Materials - By "Nobiax
-    / Yughues"
+    Yughues Free Sand Materials - By "Nobiax / Yughues"
 
-    Free Cinematic Sound Effects - By "Gregor Quendel"
+    Free Cinematic
+    Sound Effects - By "Gregor Quendel"
 
-    
+
 
     Freepik:
 
-    
 
-    Dash
-    screen
 
-    Objective indicator arrow
+    Dash screen
 
-    
+    Objective
+    indicator arrow
+
+
 
     Copilot AI:
 
-    
 
-    Game
-    Icon'
+
+    Game Icon'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2607,7 +2606,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1191}
+  m_AnchoredPosition: {x: 0, y: 1363}
   m_SizeDelta: {x: 1000, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &829436697
@@ -3076,9 +3075,11 @@ MonoBehaviour:
   menuMusic: {fileID: 8300000, guid: 28677795e9a70f9418a5542482ccc13b, type: 3}
   sfxClip: {fileID: 8300000, guid: c034bbf22999348409b450d20ade3c34, type: 3}
   musicVol: 1
+  sceneMusicVol: 1
   sfxVol: 0.25
   masterVol: 1
   playerPos: 0
+  sens: 0
 --- !u!82 &1228450344
 AudioSource:
   m_ObjectHideFlags: 0
