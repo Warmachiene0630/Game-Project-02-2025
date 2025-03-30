@@ -164,7 +164,6 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-           
             //coin drop on defeat
             GameManager.instance.updateCoinCount(Random.Range(0, 50));
             Destroy(gameObject);
